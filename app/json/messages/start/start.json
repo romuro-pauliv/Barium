@@ -1,16 +1,42 @@
 {
     "response": {
         "welcome": [
-            ["Oi, <b>",  "</b>! 👋"]
+            ["Oi, <b>",  "</b>! 👋"],
+            ["Olá, <b>",  "</b>! 👋"],
+            ["Hello, <b>",  "</b>! 👋"],
+            ["Opa, <b>",  "</b>! 👋"]
         ],
         "myself": [
-            "🤗 Me chamo @Ayla! Tudo bem com você?"
+            "🤗 Me chamo @Ayla! Tudo bem com você?",
+            "🤗 Ei, sou a @Ayla! Como vc tá?",
+            "🤗 Falaê, meu nome é @Ayla. Tudo tranquilo contigo?",
+            "🤗 @Ayla aqui! Tudo bem com você?",
+            "🤗 Sou a @Ayla! tudo de boa?",
+            "🤗 sou a @Ayla! Tudo suave?",
+            "🤗 meu nome é @Ayla! Tudo tranquilo contigo?"
+
         ],
         "what_do_i_do": [
-            "😌 Sou uma não-humana que vai te ajudar a administrar seu dinheiro"
+            "😌 Sou uma não-humana que vai te ajudar a administrar seu dinheiro",
+            "😌 Sou uma não-humana pronta para te ajudar a gerenciar suas finanças",
+            "😌 Eu, como uma não-humana, posso te ajudar com a gestão das suas finanças",
+            "😌 Sou uma inteligência não-humana dedicada a ajudá-lo na gestão financeira",
+            "😌 Sou uma não-humana especializada em gerenciamento financeiro e estou aqui para ajudar",
+            "😌 Sou uma não-humana que pode te auxiliar na gestão financeira",
+            "😌 Eu, como uma inteligência não-humana, estou pronta para ajudá-lo na administração financeira",
+            "😌 Como uma não-humana especializada em finanças, posso ajudá-lo a administrar seus recursos de forma mais eficaz"
+
         ],
         "help": [
-            "🆘 Envie <b>/help</b> para aprender a falar comigo"
+            "🆘 Envie <b>/help</b> para aprender a falar comigo",
+            "🆘 Digite <b>/help</b> para descobrir como iniciar uma conversa comigo",
+            "🆘 Para começar a falar comigo, envie <b>/help</b> e eu te ajudarei",
+            "🆘 Para saber como se comunicar comigo, basta enviar <b>/help</b> que eu explico tudo",
+            "🆘 Envie <b>/help</b> para aprender a falar comigo e ter uma experiência incrível",
+            "🆘 Se quiser saber como trocar uma ideia comigo, é só enviar <b>/help</b> que eu te explico",
+            "🆘 Se quiser aprender a falar comigo e ter um bom papo, basta enviar <b>/help</b> que eu te ensino",
+            "🆘 Envie <b>/help</b> para descobrir como iniciar uma conversa comigo e ter um bate-papo legal",
+            "🆘 Para aprender a falar comigo e ter uma conversa descontraída, envie <b>/help</b> que eu te dou uma mão"
         ]
     }
 }
