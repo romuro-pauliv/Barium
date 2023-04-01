@@ -6,6 +6,7 @@
 # +--------------------------------------------------------------------------------------------------------------------|
 
 from typing import Any
+from core.tools.threading_mode import run_in_background
 
 from core.telegram import Telegram
 Telegram_ = Telegram()
@@ -21,5 +22,4 @@ while True:
             data: dict[str, str] = last_message[id_]
             data["chat_id"] = id_
             
-            
-            StartChatExec_.exec_(data)
+            run_in_background(StartChatExec_.exec_, (data,))
