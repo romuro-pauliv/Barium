@@ -1,0 +1,14 @@
+{
+    "start_commands": {
+        "start": "/start",
+        "help": "/ajuda",
+        "open_account": "/abrirConta",
+        "about_us": "/sobreNos"
+    },
+    "client_commands": {
+        "add_wallet": "/adicionarCarteira",
+        "add_credit": "/adicionarSaldo",
+        "add_debit": "/adicionarDebito",
+        "help": "/ajuda"
+    }
+}

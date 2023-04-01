@@ -1,0 +1,16 @@
+{
+    "response": {
+        "welcome": [
+            ["Oi, <b>",  "</b>! 👋"]
+        ],
+        "myself": [
+            "🤗 Me chamo @Ayla! Tudo bem com você?"
+        ],
+        "what_do_i_do": [
+            "😌 Sou uma não-humana que vai te ajudar a administrar seu dinheiro"
+        ],
+        "help": [
+            "🆘 Envie <b>/help</b> para aprender a falar comigo"
+        ]
+    }
+}
