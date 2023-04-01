@@ -28,15 +28,15 @@
 
         ],
         "help": [
-            "🆘 Envie <b>/help</b> para aprender a falar comigo",
-            "🆘 Digite <b>/help</b> para descobrir como iniciar uma conversa comigo",
-            "🆘 Para começar a falar comigo, envie <b>/help</b> e eu te ajudarei",
-            "🆘 Para saber como se comunicar comigo, basta enviar <b>/help</b> que eu explico tudo",
-            "🆘 Envie <b>/help</b> para aprender a falar comigo e ter uma experiência incrível",
-            "🆘 Se quiser saber como trocar uma ideia comigo, é só enviar <b>/help</b> que eu te explico",
-            "🆘 Se quiser aprender a falar comigo e ter um bom papo, basta enviar <b>/help</b> que eu te ensino",
-            "🆘 Envie <b>/help</b> para descobrir como iniciar uma conversa comigo e ter um bate-papo legal",
-            "🆘 Para aprender a falar comigo e ter uma conversa descontraída, envie <b>/help</b> que eu te dou uma mão"
+            ["🆘 Envie <b>", "</b> para aprender a falar comigo"],
+            ["🆘 Digite <b>", "</b> para descobrir como iniciar uma conversa comigo"],
+            ["🆘 Para começar a falar comigo, envie <b>", "</b> e eu te ajudarei"],
+            ["🆘 Para saber como se comunicar comigo, basta enviar <b>", "</b> que eu explico tudo"],
+            ["🆘 Envie <b>", "</b> para aprender a falar comigo e ter uma experiência incrível"],
+            ["🆘 Se quiser saber como trocar uma ideia comigo, é só enviar <b>", "</b> que eu te explico"],
+            ["🆘 Se quiser aprender a falar comigo e ter um bom papo, basta enviar <b>", "</b> que eu te ensino"],
+            ["🆘 Envie <b>", "</b> para descobrir como iniciar uma conversa comigo e ter um bate-papo legal"],
+            ["🆘 Para aprender a falar comigo e ter uma conversa descontraída, envie <b>", "</b> que eu te dou uma mão"]
         ]
     }
 }

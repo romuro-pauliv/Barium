@@ -7,6 +7,7 @@
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
 from config.paths import Tools, TelegramMessages
+from views.start.commands.commands import COMMANDS_LIST
 from core.telegram import Telegram
 from services.tools.tools import random_msg_from_list
 
@@ -33,12 +34,13 @@ class StartChat(object):
         
         # + factor_msg +
         welcome_msg: list[str] = random_msg_from_list(response["welcome"])
+        help_msg: list[str] = random_msg_from_list(response['help'])
         
         send_message: list[str] = [
             f"{welcome_msg[0]}{username}{welcome_msg[1]}",
             random_msg_from_list(response["myself"]),
             random_msg_from_list(response["what_do_i_do"]),
-            random_msg_from_list(response["help"])
+            f"{help_msg[0]}{COMMANDS_LIST['help']}{help_msg[1]}"
         ]
         
         for msg in send_message:
