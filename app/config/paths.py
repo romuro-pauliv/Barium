@@ -25,7 +25,9 @@ class TelegramMessages:
     
     class Client:
         HELP: PosixPath = Path("app", "json", "messages", "client", "help.json")
-        
+    
+    class Error:
+        ERROR: PosixPath = Path("app", "json", "errors", "responses.json")
 
 class Tools:
     @staticmethod

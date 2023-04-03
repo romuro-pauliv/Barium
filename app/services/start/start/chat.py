@@ -12,7 +12,6 @@ from core.telegram import Telegram
 from services.tools.tools import random_msg_from_list
 
 from typing import Any, Union
-import json
 # |--------------------------------------------------------------------------------------------------------------------|
 
 

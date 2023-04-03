@@ -1,0 +1,45 @@
+{
+    "response": {
+        "dialog": {
+            "open_first_wallet": [
+                "Oba! 🎉 Vamos abrir sua conta! 🎈",
+                "Legal! 🎉 Vamos dar início ao seu cadastro! 🎈",
+                "Ei! 🎉 Vamos começar seu cadastro agora mesmo 🎈",
+                "Vamos nessa! 🎉 Começando seu cadastro agora! 🎈",
+                "Tá pronto(a)? 🎉 Vamos começar seu cadastro juntos! 🎈",
+                "Hora de dar início ao seu cadastro! 🎉 Animado? 🎈",
+                "Perfeito! 🎉 Vou iniciar seu cadastro 🎈",
+                "Tudo certo para começar o cadastro? 🎉 Então, vamos lá 🎈"
+            ]
+        },
+        "quest": {
+            "open_first_wallet": [
+                "📒 Dê um nome legal para sua primeira carteira:",
+                "📒 E aí, qual vai ser o nome da sua primeira carteira?",
+                "📒 Bora escolher o nome da sua primeira carteira! Me fale aí",
+                "📒 Qual será o nome da sua primeira carteira? Estou curiosa...",
+                "📒 Vamos dar um nome legal para sua primeira carteira! Alguma ideia em mente?",
+                "📒 E aí, já pensou em um nome legal para sua primeira carteira? Me conta!"
+            ]
+        },
+        "info": {
+            "open_first_wallet": [
+                "📌 Minha sugestão:\n ('Minha Conta Digital', 'Minha Poupança', 'Meu Cartão de Crédito')"
+            ]
+        },
+        "confirmation": {
+            "open_first_wallet": [
+                ["✅ A carteira <b>", "</b> foi criada com sucesso!"],
+                ["✅ Feito! Sua carteira <b>", "</b> está pronta"],
+                ["✅ Beleza, acabei de criar sua carteira <b>", "</b>"],
+                ["✅ Oba! Sua carteira <b>", "</b> está pronta para ação!"],
+                ["✅ Bacana, agora você tem uma carteira chamada <b>", "</b>"],
+                ["✅ Uhuul, <b>", "</b> foi criada com sucesso!"],
+                ["✅ Sua carteira <b>", "</b> está prontinha para o que der e vier!"],
+                ["✅ Deu tudo certo, <b>", "</b> já está criada!"],
+                ["✅ Iupii! <b>", "</b> foi criada sem nenhum problema!"],
+                ["✅ Eba! <b>", "</b> está pronta para ser usada!"]
+            ]
+        }
+    }
+}

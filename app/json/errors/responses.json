@@ -1,0 +1,36 @@
+{
+    "response": {
+        "no_slash": [
+            "🚫 Vish! Não pode conter '/' nessa resposta. Tente outra vez sem '/'",
+            "🚫 Acho que nossa conversa não curte muito a barra '/'. Pode me dizer de novo, sem ela?",
+            "🚫 Opa, opa, opa! Parece que a barra '/' não é nossa amiga aqui. Será que você pode me passar seu nome de outra forma?", 
+            "🚫 Nada de barras '/' por aqui! Vamos tentar novamente sem ela?", 
+            "🚫 Ei, ei, ei! A barra '/' não é permitida por aqui. Dá pra tentar novamente sem ela?", 
+            "🚫 Ah, a barra '/' não é bem-vinda por aqui. Pode me dizer sua resposta sem ela?", 
+            "🚫 Ops! Não é possível usar a barra '/'. Que tal me contar seu nome sem ela?", 
+            "🚫 Poxa, a barra '/' não é bem aceita por aqui. Tem como você me falar sua resposta de outra forma?", 
+            "🚫 Barra '/' não vale aqui! Pode me dizer sua resposta de novo sem ela?", 
+            "🚫 Desculpa, parece que a barra '/' não está rolando. Tem como você me dizer sua resposta sem ela?" 
+        ],
+        "only_price": [
+            "🚫 Acho que você errou! Só é permitido valores dessa forma:\n💡 Ex.: 60.90"
+        ],
+        "only_text": [
+            "😭 Por enquanto eu só ser ler! Não consigo ver essa mensagem...",
+            "😅 Ops, só entendo palavras! Nada de imagens ou outros símbolos.",
+            "🫠 Ai ai, tô meio limitada! Só consigo entender palavras... sem fotos ou emojis!",
+            "🤨 Calma lá, eu sou boa, mas não sou uma máquina fotográfica! Só leio textos, beleza?",
+            "😕 Não sou muito boa com figuras, mas arraso no texto! O que você está tentando me dizer?",
+            "😮 Xiiii...não tô entendendo o que você quis dizer. Lembre-se, só entendo palavras!",
+            "🧐 Ei, essa é uma mensagem secreta? Porque não estou conseguindo ler...só sei ler texto!",
+            "😵 Sorry, só entendo texto! Nada de fotos ou outras coisas diferentes!",
+            "😐 Aiai, tô meio antiquada, só consigo entender palavras! Tá certo?",
+            "😵‍💫 Pode tentar me explicar novamente, mas só com palavras, por favor! Fotos e emojis ainda são complicados para mim...",
+            "🙃 Ei, ei, não precisa ficar triste! Eu sei que fotos e emojis são legais, mas por enquanto só entendo palavras. Me ajuda a te entender melhor?",
+            "😬 Uh oh, parece que eu não entendi essa mensagem! Lembre-se que só sou capaz de ler texto, nada de fotos ou símbolos diferentes, tá bom?"
+        ],
+        "yes_no_response": [
+            "😑 Não entendi. Responda com ✅ /yes ou 🟥 /no"
+        ]
+    }
+}

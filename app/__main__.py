@@ -6,16 +6,13 @@
 # +--------------------------------------------------------------------------------------------------------------------|
 
 from typing import Any
-from core.tools.threading_mode import run_in_background
+
+from cache.redis_connect import Cache
 
 from core.telegram import Telegram
 Telegram_ = Telegram()
 
-from views.start.start.exec_ import StartChatExec
-StartChatExec_ = StartChatExec()
-
-from views.start.help.exec_ import HelpChatExec
-HelpChatExec_ = HelpChatExec()
+from core.messages.schema import FIRST_EXEC
 
 while True:
     last_message: dict[str, dict[str, Any]] = Telegram_.last_message()
@@ -24,5 +21,8 @@ while True:
             data: dict[str, str] = last_message[id_]
             data["chat_id"] = id_
             
-            run_in_background(StartChatExec_.exec_, (data,))
-            run_in_background(HelpChatExec_.exec_, (data,))
+            if Cache.TalkMode.open_account_branch.get(str(id_)):
+                FIRST_EXEC.open_account_command(id_, data)
+                continue
+            
+            FIRST_EXEC.first_commands(data)
