@@ -21,25 +21,34 @@ class StartChat(object):
         self.messages: dict[str, Any] = Tools.read_json(TelegramMessages.Start.START)
         self.SendMessage: None = Telegram().send_message
         
-    def start_response(self, message: dict[str, str]) -> None:
+    def start_response(self, message: dict[str, Any]) -> None:
         """
         Firsts messages sended to /start in Telegram
 
         Args:
             message (dict[str, str]): Message from Core 
         """
-        response: dict[str, dict[str, list[Union[str, list]]]] = self.messages["response"]
+        response: dict[str, dict[str, list[Union[str, list[str]]]]] = self.messages["response"]
         chat_id: str = message["chat_id"]
         username: str = message["username"]
         
         # + factor_msg +
         welcome_msg: list[str] = random_msg_from_list(response["welcome"])
+        
+        function_msg: str = random_msg_from_list(response["what_do_i_do"])+random_msg_from_list(response["function_1"])\
+            +random_msg_from_list(response["function_2"])+random_msg_from_list(response["function_3"])\
+                +random_msg_from_list(response["free"])
+         
+        
         help_msg: list[str] = random_msg_from_list(response['help'])
+        
+        
         
         send_message: list[str] = [
             f"{welcome_msg[0]}{username}{welcome_msg[1]}",
             random_msg_from_list(response["myself"]),
-            random_msg_from_list(response["what_do_i_do"]),
+            random_msg_from_list(response["sheet"]),
+            function_msg,
             f"{help_msg[0]}{COMMANDS_LIST['help']}{help_msg[1]}"
         ]
         

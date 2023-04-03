@@ -14,6 +14,8 @@ Telegram_ = Telegram()
 from views.start.start.exec_ import StartChatExec
 StartChatExec_ = StartChatExec()
 
+from views.start.help.exec_ import HelpChatExec
+HelpChatExec_ = HelpChatExec()
 
 while True:
     last_message: dict[str, dict[str, Any]] = Telegram_.last_message()
@@ -23,3 +25,4 @@ while True:
             data["chat_id"] = id_
             
             run_in_background(StartChatExec_.exec_, (data,))
+            run_in_background(HelpChatExec_.exec_, (data,))

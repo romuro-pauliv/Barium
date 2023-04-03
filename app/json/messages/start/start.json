@@ -16,16 +16,48 @@
             "🤗 meu nome é @Ayla! Tudo tranquilo contigo?"
 
         ],
+        "sheet": [
+            "🙄 Gerenciar uma planilha de gastos é muito chato, né?",
+            "🙄 Pô, gerenciar essas planilhas de gastos é um saco, hein?",
+            "🙄 Ninguém merece ficar mexendo em planilha de gastos, né?",
+            "🙄 Essa história de gerenciar planilha de gastos é um tédio, não acha?",
+            "🙄 Cara, gerenciar essa planilha de gastos é chato demais, não concorda?",
+            "🙄 É uma chatice ter que ficar atualizando planilha de gastos, né?",
+            "🙄 Gerenciar essa planilha de gastos é uma das coisas mais chatas que tem, né?",
+            "🙄 Gerenciar essa planilha de gastos é um tédio sem fim, não acha?"
+        ],
         "what_do_i_do": [
-            "😌 Sou uma não-humana que vai te ajudar a administrar seu dinheiro",
-            "😌 Sou uma não-humana pronta para te ajudar a gerenciar suas finanças",
-            "😌 Eu, como uma não-humana, posso te ajudar com a gestão das suas finanças",
-            "😌 Sou uma inteligência não-humana dedicada a ajudá-lo na gestão financeira",
-            "😌 Sou uma não-humana especializada em gerenciamento financeiro e estou aqui para ajudar",
-            "😌 Sou uma não-humana que pode te auxiliar na gestão financeira",
-            "😌 Eu, como uma inteligência não-humana, estou pronta para ajudá-lo na administração financeira",
-            "😌 Como uma não-humana especializada em finanças, posso ajudá-lo a administrar seus recursos de forma mais eficaz"
-
+            "😌 Mas agora comigo você não precisa passar por essa chatice!\n\n",
+            "😌 Mas relaxa, comigo não tem essa chatice de gerenciar planilhas não!\n\n",
+            "😌 Comigo você não precisa se preocupar em ficar atualizando aquela planilha de gastos chata\n\n",
+            "😌 Pode ficar tranquilo que comigo você não precisa mais lidar com essa chatice de planilha de gastos\n\n",
+            "😌 Relaxa que agora você não precisa mais se preocupar em gerenciar aquela planilha de gastos chata\n\n",
+            "😌 Comigo você esquece essa chatice de planilha de gastos e pode focar em coisas mais legais\n\n",
+            "😌 Pode esquecer aquela planilha de gastos chata, comigo você não precisa mais lidar com isso\n\n",
+            "😌 Comigo você não precisa mais ficar perdendo tempo gerenciando aquela planilha de gastos\n\n",
+            "😌 Pode relaxar que agora você não precisa mais passar por essa chatice de atualizar a planilha de gastos\n\n",
+            "😌 Comigo você pode esquecer aquela chatice de gerenciar planilha de gastos e curtir mais a vida\n\n",
+            "😌 Pode esquecer aquela planilha de gastos, comigo você não precisa mais lidar com essa chatice\n\n"
+        ],
+        "function_1": [
+            "⏰ Serei sua ajudante para lembrar de todas as suas contas, nunca mais vai esquecer de pagar nada!\n\n",
+            "⏰ Não se preocupe mais em lembrar de todas as suas contas, eu estou aqui para isso!\n\n",
+            "⏰ Você pode confiar em mim para te ajudar a lembrar de todas as suas contas, nunca mais vai ter problemas.\n\n",
+            "⏰ Esqueça a preocupação de lembrar de todas as suas contas, eu estou aqui para te ajudar!\n\n",
+            "⏰ Comigo do seu lado, você nunca mais vai ter que se preocupar em lembrar de pagar suas contas.\n\n",
+            "⏰ Deixe as suas contas comigo, eu vou te lembrar sempre para que você não se preocupe.\n\n",
+            "⏰ Nunca mais perca o sono pensando em esquecer alguma conta, eu estou aqui para te ajudar\n\n",
+            "⏰ Vou ser sua ajudante pessoal para lembrar de todas as suas contas, pode confiar em mim!\n\n",
+            "⏰ Não precisa mais se preocupar em lembrar de todas as suas contas, eu vou te ajudar com isso.\n\n"
+        ],
+        "function_2": [
+            "💹 Irei gerenciar todos os seus gastos e gerar relatórios quando você pedir\n\n"
+        ],
+        "function_3": [
+            "🧠 E através de minha inteligência não-humana, irei analisar seus gastos para te ajudar a gastar menos\n\n"
+        ],
+        "free": [
+            "💚 E tudo isso gratuitamente 💚"
         ],
         "help": [
             ["🆘 Envie <b>", "</b> para aprender a falar comigo"],

@@ -3,6 +3,7 @@
         "start": "/start",
         "help": "/ajuda",
         "open_account": "/abrirConta",
+        "functions": "/OqVcFaz",
         "about_us": "/sobreNos"
     },
     "client_commands": {
@@ -10,5 +11,29 @@
         "add_credit": "/adicionarSaldo",
         "add_debit": "/adicionarDebito",
         "help": "/ajuda"
+    },
+    "about_commands": {
+        "start_commands": {
+            "open_account": [
+                ["📍 <b>", "</b>:\n✅ Cadastra-se para gerenciar seu dinheirinho\n\n"],
+                ["📍 <b>", "</b>:\n✅ Cadastre-se e juntos vamos cuidar das suas finanças\n\n"],
+                ["📍 <b>", "</b>:\n✅ Que tal se cadastrar para gerenciar melhor o seu money?\n\n"],
+                ["📍 <b>", "</b>:\n✅ Vamos se cadastrar para gerenciar seu dinheirinho?\n\n"]
+            ],
+            "functions": [
+                ["📍 <b>", "</b>:\n💡 Sobre minhas habilidades\n\n"],
+                ["📍 <b>", "</b>:\n💡 O que eu posso fazer\n\n"],
+                ["📍 <b>", "</b>:\n💡 Minhas habilidades técnicas\n\n"],
+                ["📍 <b>", "</b>:\n💡 O que eu sou capaz de fazer\n\n"],
+                ["📍 <b>", "</b>:\n💡 Minhas habilidades e competências\n\n"]
+            ],
+            "about_us": [
+                ["📍 <b>", "</b>:\n🎈 Sobre os criadores da Ayla"],
+                ["📍 <b>", "</b>:\n🎈 Ayla foi criada por quem?"],
+                ["📍 <b>", "</b>:\n🎈 Quem são os criadores da Ayla?"],
+                ["📍 <b>", "</b>:\n🎈 Quem está por trás do desenvolvimento da Ayla?"],
+                ["📍 <b>", "</b>:\n🎈 Os criadores da Ayla"]
+            ]
+        }
     }
 }
