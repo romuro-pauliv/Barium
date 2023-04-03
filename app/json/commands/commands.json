@@ -3,7 +3,7 @@
         "start": "/start",
         "help": "/ajuda",
         "open_account": "/abrirConta",
-        "functions": "/OqVcFaz",
+        "functions": "/minhasFuncoes",
         "about_us": "/sobreNos"
     },
     "client_commands": {
@@ -22,7 +22,7 @@
             ],
             "functions": [
                 ["📍 <b>", "</b>:\n💡 Sobre minhas habilidades\n\n"],
-                ["📍 <b>", "</b>:\n💡 O que eu posso fazer\n\n"],
+                ["📍 <b>", "</b>:\n💡 lista do que eu posso fazer por você\n\n"],
                 ["📍 <b>", "</b>:\n💡 Minhas habilidades técnicas\n\n"],
                 ["📍 <b>", "</b>:\n💡 O que eu sou capaz de fazer\n\n"],
                 ["📍 <b>", "</b>:\n💡 Minhas habilidades e competências\n\n"]
