@@ -9,5 +9,7 @@
 from config.paths import TelegramConfig, Tools
 # |--------------------------------------------------------------------------------------------------------------------|
 
-COMMANDS_LIST: dict[str, str] = Tools.read_json(TelegramConfig.COMMANDS)["start_commands"]
-ABOUT_COMMANDS: dict[str, dict] = Tools.read_json(TelegramConfig.COMMANDS)["about_commands"]["start_commands"]
+commands_json: dict[str, dict[str]] = Tools.read_json(TelegramConfig.COMMANDS)
+
+COMMANDS_LIST: dict[str, str] = commands_json["start_commands"]
+ABOUT_COMMANDS: dict[str, dict] = commands_json["about_commands"]["start_commands"]

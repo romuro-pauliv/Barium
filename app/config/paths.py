@@ -30,6 +30,7 @@ class TelegramMessages:
 class Tools:
     @staticmethod
     def read_json(path_: PosixPath) -> dict[str, Any]:
+        print(path_)
         with open(path_, 'r+') as file:
             data: dict[str, Any] = json.load(file)
             file.close()
