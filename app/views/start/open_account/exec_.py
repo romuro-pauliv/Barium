@@ -35,7 +35,7 @@ class OpenAccountChatExec(object):
         ]
         
         for n, cache_mode in enumerate(cache_mode_list):
-            if int(Cache.TalkMode.open_account_branch.get(str(chat_id))) == n:
+            if int(Cache.TalkMode.open_account_branch.get(chat_id)) == n:
                 self.in_execution.append(chat_id)
                 cache_mode(message)
                 self.in_execution.remove(chat_id)

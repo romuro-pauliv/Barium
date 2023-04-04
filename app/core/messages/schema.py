@@ -34,8 +34,6 @@ class FIRST_EXEC:
     
     @staticmethod
     def open_account_command(chat_id: int, data: dict[str, Any]) -> None:
-        chat_id: str = str(chat_id)
-        
         run_in_background(OpenAccountChatExec_.exec_in_cache, (data,))
         if Cache.TalkMode.log_in_branch.get(chat_id):
             Cache.TalkMode.open_account_branch.delete(chat_id)
