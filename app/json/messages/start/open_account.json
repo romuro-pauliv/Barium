@@ -20,6 +20,9 @@
                 "📒 Qual será o nome da sua primeira carteira? Estou curiosa...",
                 "📒 Vamos dar um nome legal para sua primeira carteira! Alguma ideia em mente?",
                 "📒 E aí, já pensou em um nome legal para sua primeira carteira? Me conta!"
+            ],
+            "amount_in_first_wallet": [
+                "Quanto você tem nessa sua carteira?"
             ]
         },
         "info": {

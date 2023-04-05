@@ -67,10 +67,22 @@ class OpenAccountChat(object):
         confirmation_msg_schema: list[str] = random_msg_from_list(self.response["confirmation"]["open_first_wallet"])
         
         send_messages: list[str] = [
-            f"{confirmation_msg_schema[0]}{received_message}{confirmation_msg_schema[1]}"
+            f"{confirmation_msg_schema[0]}{received_message}{confirmation_msg_schema[1]}",
+            self.response["quest"]["amount_in_first_wallet"]
         ]
         
         for msg in send_messages:
             self.SendMessage(chat_id, msg)
         
         return True
+    
+    def amount_in_wallet_valid_and_wallet_obs(self, message: dict[str, Any]) -> bool:
+        """
+        Send the message to request the value wallet and valid the wallet anem
+
+        Args:
+            message (dict[str, str]): Message from Core
+
+        Returns:
+            bool: Boolean response to admnistrate cache storage
+        """
