@@ -12,9 +12,30 @@
             "🚫 Barra '/' não vale aqui! Pode me dizer sua resposta de novo sem ela?", 
             "🚫 Desculpa, parece que a barra '/' não está rolando. Tem como você me dizer sua resposta sem ela?" 
         ],
-        "only_price": [
-            "🚫 Acho que você errou! Só é permitido valores dessa forma:\n💡 Ex.: 60.90"
+        "count_character": [
+            "Many character"
         ],
+        "only_price": {
+            "forbidden_character": [
+                "It is allowed digits"
+            ],
+            "many_numbers": [
+                "Many numbers"
+            ],
+            "many_punct": [
+                "Many punctuation"
+            ],
+            "missing_info": [
+                "missing information"
+            ],
+            "negative_value": [
+                "the '-' must be in first character"
+            ],
+            "many_decimals": [
+                "Many decimals"
+            ]
+
+        },
         "only_text": [
             "😭 Por enquanto eu só ser ler! Não consigo ver essa mensagem...",
             "😅 Ops, só entendo palavras! Nada de imagens ou outros símbolos.",

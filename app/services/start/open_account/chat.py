@@ -9,7 +9,7 @@
 from config.paths import Tools, TelegramMessages
 from core.telegram import Telegram
 from services.tools.tools import random_msg_from_list
-from models.models import TextValidation
+from models.models import TextValidation, ValueValidation
 from cache.schema.internal_cache import Schema
 
 from typing import Any, Union
@@ -22,6 +22,7 @@ class OpenAccountChat(object):
         self.SendMessage = Telegram().send_message
         
         self.text_validation = TextValidation()
+        self.value_validation = ValueValidation()
         
         self.cache: dict[str, dict[str, str | float]] = {}
     
@@ -62,6 +63,9 @@ class OpenAccountChat(object):
         if self.text_validation.no_slash(message) == False:
             return False
         
+        if self.text_validation.count_character(message) == False:
+            return False
+        
         self.cache[chat_id] = {Schema.InternalCache.OPEN_ACCOUNT[0]: received_message}
         
         confirmation_msg_schema: list[str] = random_msg_from_list(self.response["confirmation"]["open_first_wallet"])
@@ -86,3 +90,21 @@ class OpenAccountChat(object):
         Returns:
             bool: Boolean response to admnistrate cache storage
         """
+        chat_id: str = message["chat_id"]
+        received_message: Union[str, list[str, bool]] = message["text"]
+        
+        price_validation: dict[str, Union[bool, float]] = self.value_validation.price(chat_id, received_message)
+        if price_validation["status"] == False:
+            return False
+        
+        self.cache[chat_id][Schema.InternalCache.OPEN_ACCOUNT[1]] = price_validation["value"]
+        
+        send_messages: list[str] = [
+            random_msg_from_list(self.response["confirmation"]["amount_in_first_wallet"]),
+            random_msg_from_list(self.response["quest"]["wallet_obs"])
+        ]
+        
+        for msg in send_messages:
+            self.SendMessage(chat_id, msg)
+        
+        return True

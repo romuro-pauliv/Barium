@@ -1,6 +1,6 @@
 from string import digits
 
-def amount_validation(value: str) -> bool | str:
+def amount_validation(value: str, mode: str) -> bool | str:
     new_value: str = ""
     add_characters: str = ".,-"
     char_status: dict[str, dict[str, int]] = {
@@ -42,8 +42,4 @@ def amount_validation(value: str) -> bool | str:
       if len(terms[1]) > 2:
           return False
     
-    return float(new_value)
-
-while True:
-    value: str = input("Enter your value: ")
-    print(amount_validation(value))
+    return True if mode == "validation" else float(new_value)

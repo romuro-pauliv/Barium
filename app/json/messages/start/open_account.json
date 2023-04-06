@@ -23,6 +23,9 @@
             ],
             "amount_in_first_wallet": [
                 "Quanto você tem nessa sua carteira?"
+            ],
+            "wallet_obs": [
+                "Defina um resumo do que é essa carteira:"
             ]
         },
         "info": {
@@ -42,6 +45,9 @@
                 ["✅ Deu tudo certo, <b>", "</b> já está criada!"],
                 ["✅ Iupii! <b>", "</b> foi criada sem nenhum problema!"],
                 ["✅ Eba! <b>", "</b> está pronta para ser usada!"]
+            ],
+            "amount_in_first_wallet": [
+                "Ual! você tem tudo isso?"
             ]
         }
     }
