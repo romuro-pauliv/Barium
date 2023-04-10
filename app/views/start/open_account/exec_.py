@@ -40,9 +40,6 @@ class OpenAccountChatExec(object):
     
     def cache_3_mode(self, message: dict[str, Any]) -> None:
         response: bool = self.open_account.verify_response_and_create_account(message)
-        chat_id: str = message["chat_id"]
-        if response == True:
-            Cache.TalkMode.open_account_branch.delete(chat_id)
     
     def exec_in_cache(self, message: dict[str, Any]) -> None:
         chat_id: str = message["chat_id"]

@@ -37,3 +37,9 @@ class FIRST_EXEC:
         run_in_background(OpenAccountChatExec_.exec_in_cache, (data,))
         if Cache.TalkMode.log_in_branch.get(chat_id):
             Cache.TalkMode.open_account_branch.delete(chat_id)
+
+
+class LOGIN_EXEC:
+    @staticmethod
+    def first_commands(chat_id: str, data: dict[str, Any]) -> None:
+        pass

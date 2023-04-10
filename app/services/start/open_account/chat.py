@@ -11,6 +11,7 @@ from core.telegram import Telegram
 from services.tools.tools import random_msg_from_list
 from models.models import TextValidation, ValueValidation, ConditionValidation
 from cache.schema.internal_cache import Schema
+from cache.redis_connect import Cache
 
 from database.services.open_account import MongoOpenAccount
 
@@ -171,12 +172,16 @@ class OpenAccountChat(object):
             self.MongoOpenAccount.init_account(message, self.cache[chat_id])
             del self.cache[chat_id]
             
+            Cache.TalkMode.open_account_branch.delete(chat_id)
+            Cache.TalkMode.log_in_branch.mset({chat_id: "active"})
+            
             self.SendMessage(chat_id, random_msg_from_list(self.response["confirmation"]["yes_conclusion"]))
             
             return True
         
         elif received_message == self.config_commands["yn_response"][1]:
             del self.cache[chat_id]
+            Cache.TalkMode.open_account_branch.delete(chat_id)
             
             msg: str = random_msg_from_list(self.response["confirmation"]["no_conclusion"])
             self.SendMessage(chat_id, f"{msg}{self.open_account_command}")
