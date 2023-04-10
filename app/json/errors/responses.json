@@ -57,8 +57,10 @@
                 "🤯 Wow, você realmente gosta de precisão, hein... Mas meu cérebro tá implorando pra você reduzir pra duas casas, pode ser?",
                 "🤯 Com tantas casas decimais, meu cérebro tá tentando lidar com um verdadeiro desafio olímpico... Que tal simplificar pra só duas casas, pra facilitar a vida de todo mundo?"
             ]
-
         },
+        "yn_response": [
+            "🚫 Ei! Só responda com <b>", "</b> ou <b>", "</b> para que eu possa concluir!"
+        ],
         "only_text": [
             "😭 Por enquanto eu só ser ler! Não consigo ver essa mensagem...",
             "😅 Ops, só entendo palavras! Nada de imagens ou outros símbolos.",

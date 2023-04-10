@@ -12,6 +12,9 @@
         "add_debit": "/adicionarDebito",
         "help": "/ajuda"
     },
+    "config_commands": {
+        "yn_response": ["/sim", "/nao"]
+    },
     "about_commands": {
         "start_commands": {
             "open_account": [

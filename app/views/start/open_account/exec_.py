@@ -38,13 +38,20 @@ class OpenAccountChatExec(object):
         if response == True:
             Cache.TalkMode.open_account_branch.mset({chat_id: 3})
     
+    def cache_3_mode(self, message: dict[str, Any]) -> None:
+        response: bool = self.open_account.verify_response_and_create_account(message)
+        chat_id: str = message["chat_id"]
+        if response == True:
+            Cache.TalkMode.open_account_branch.delete(chat_id)
+    
     def exec_in_cache(self, message: dict[str, Any]) -> None:
         chat_id: str = message["chat_id"]
         
         cache_mode_list: list[Callable[[dict[str, Any]], None]] = [
             self.cache_0_mode,
             self.cache_1_mode,
-            self.cache_2_mode
+            self.cache_2_mode,
+            self.cache_3_mode
         ]
         
         for n, cache_mode in enumerate(cache_mode_list):

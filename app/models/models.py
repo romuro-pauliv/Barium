@@ -11,7 +11,7 @@ from core.telegram import Telegram
 from services.tools.tools import random_msg_from_list
 
 from string import digits
-from typing import Union
+from typing import Union, Any
 # |--------------------------------------------------------------------------------------------------------------------|
 
 
@@ -42,6 +42,28 @@ class TextValidation(object):
                 self.SendMessage(chat_id, random_msg_from_list(self.response["count_character"]))
                 return False
             return True
+        else:
+            self.SendMessage(chat_id, random_msg_from_list(self.response["only_text"]))
+            return False
+    
+
+class ConditionValidation(object):
+    def __init__(self) -> None:
+        self.response: dict[str, dict[str, list[str]]] = Tools.read_json(TelegramMessages.Error.ERROR)["response"]
+        self.SendMessage = Telegram().send_message
+    
+    def yn_response(self, message: dict[str, Any], two_commands: list[str, str]) -> bool:
+        chat_id: str = message["chat_id"]
+        received_message: str = message["text"]
+        
+        if isinstance(received_message, str):
+            if received_message in two_commands:
+                return True
+            else:
+                msg_schema: list[str] = self.response["yn_response"]
+                msg: str = f"{msg_schema[0]}{two_commands[0]}{msg_schema[1]}{two_commands[1]}{msg_schema[2]}"
+                self.SendMessage(chat_id, msg)
+                return False
         else:
             self.SendMessage(chat_id, random_msg_from_list(self.response["only_text"]))
             return False

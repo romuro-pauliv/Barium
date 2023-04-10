@@ -6,10 +6,10 @@
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from config.paths import Tools, TelegramMessages
+from config.paths import Tools, TelegramMessages, TelegramConfig
 from core.telegram import Telegram
 from services.tools.tools import random_msg_from_list
-from models.models import TextValidation, ValueValidation
+from models.models import TextValidation, ValueValidation, ConditionValidation
 from cache.schema.internal_cache import Schema
 
 from typing import Any, Union
@@ -19,10 +19,13 @@ from typing import Any, Union
 class OpenAccountChat(object):
     def __init__(self) -> None:
         self.response: dict[str, Any] = Tools.read_json(TelegramMessages.Start.OPEN_ACCOUNT)["response"]
+        self.config_commands = Tools.read_json(TelegramConfig.COMMANDS)["config_commands"]
+        
         self.SendMessage = Telegram().send_message
         
         self.text_validation = TextValidation()
         self.value_validation = ValueValidation()
+        self.condition_validation = ConditionValidation()
         
         self.cache: dict[str, dict[str, str | float]] = {}
     
@@ -142,10 +145,20 @@ class OpenAccountChat(object):
         
         send_messages: list[str] = [
             msg1_schema,
-            self.response["quest"]["verify_data"]
+            random_msg_from_list(self.response["quest"]["verify_data"])
         ]
         
         for msg in send_messages:
             self.SendMessage(chat_id, msg)
         
+        return True
+    
+    def verify_response_and_create_account(self, message: dict[str, Any]) -> bool:
+        chat_id: str = message["chat_id"]
+        received_message: Union[str, list[str, bool]] = message["text"]
+        
+        if self.condition_validation.yn_response(message, self.config_commands["yn_response"]) == False:
+            return False
+        
+        self.SendMessage(chat_id, "Tudo OK")
         return True
