@@ -12,6 +12,8 @@ from services.tools.tools import random_msg_from_list
 from models.models import TextValidation, ValueValidation, ConditionValidation
 from cache.schema.internal_cache import Schema
 
+from database.services.open_account import MongoOpenAccount
+
 from typing import Any, Union
 # |--------------------------------------------------------------------------------------------------------------------|
 
@@ -20,12 +22,15 @@ class OpenAccountChat(object):
     def __init__(self) -> None:
         self.response: dict[str, Any] = Tools.read_json(TelegramMessages.Start.OPEN_ACCOUNT)["response"]
         self.config_commands = Tools.read_json(TelegramConfig.COMMANDS)["config_commands"]
+        self.open_account_command: str = Tools.read_json(TelegramConfig.COMMANDS)["start_commands"]["open_account"]
         
         self.SendMessage = Telegram().send_message
         
         self.text_validation = TextValidation()
         self.value_validation = ValueValidation()
         self.condition_validation = ConditionValidation()
+        
+        self.MongoOpenAccount = MongoOpenAccount()
         
         self.cache: dict[str, dict[str, str | float]] = {}
     
@@ -160,5 +165,20 @@ class OpenAccountChat(object):
         if self.condition_validation.yn_response(message, self.config_commands["yn_response"]) == False:
             return False
         
-        self.SendMessage(chat_id, "Tudo OK")
-        return True
+        if received_message == self.config_commands["yn_response"][0]:
+            self.SendMessage(chat_id, random_msg_from_list(self.response["info"]["yes_conclusion"]))
+            
+            self.MongoOpenAccount.init_account(message, self.cache[chat_id])
+            del self.cache[chat_id]
+            
+            self.SendMessage(chat_id, random_msg_from_list(self.response["confirmation"]["yes_conclusion"]))
+            
+            return True
+        
+        elif received_message == self.config_commands["yn_response"][1]:
+            del self.cache[chat_id]
+            
+            msg: str = random_msg_from_list(self.response["confirmation"]["no_conclusion"])
+            self.SendMessage(chat_id, f"{msg}{self.open_account_command}")
+            
+            return True
