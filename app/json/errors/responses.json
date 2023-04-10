@@ -3,36 +3,59 @@
         "no_slash": [
             "🚫 Vish! Não pode conter '/' nessa resposta. Tente outra vez sem '/'",
             "🚫 Acho que nossa conversa não curte muito a barra '/'. Pode me dizer de novo, sem ela?",
-            "🚫 Opa, opa, opa! Parece que a barra '/' não é nossa amiga aqui. Será que você pode me passar seu nome de outra forma?", 
+            "🚫 Opa, opa, opa! Parece que a barra '/' não é nossa amiga aqui. Será que você pode me responder de outra forma?", 
             "🚫 Nada de barras '/' por aqui! Vamos tentar novamente sem ela?", 
             "🚫 Ei, ei, ei! A barra '/' não é permitida por aqui. Dá pra tentar novamente sem ela?", 
             "🚫 Ah, a barra '/' não é bem-vinda por aqui. Pode me dizer sua resposta sem ela?", 
-            "🚫 Ops! Não é possível usar a barra '/'. Que tal me contar seu nome sem ela?", 
+            "🚫 Ops! Não é possível usar a barra '/'. Que tal me contar sua resposta sem ela?", 
             "🚫 Poxa, a barra '/' não é bem aceita por aqui. Tem como você me falar sua resposta de outra forma?", 
             "🚫 Barra '/' não vale aqui! Pode me dizer sua resposta de novo sem ela?", 
             "🚫 Desculpa, parece que a barra '/' não está rolando. Tem como você me dizer sua resposta sem ela?" 
         ],
         "count_character": [
-            "Many character"
+            "😑 Tô com preguiça de ler esse texto enorme! Diminua sua resposta 💅",
+            "🤯 Calma aí Sua resposta tá maior que a minha fome de pizza. Diminui ela um pouquinho, vai?",
+            "😵‍💫 Eu adoro um textão, mas dessa vez acho que vou pedir pra você diminuir um pouco. Beleza?",
+            "🙂 Vamos fazer assim: diminui a resposta e eu te prometo que a gente continua amigos.",
+            "😮 Essa sua resposta tá maior que o meu problema com o Netflix. Será que dá pra diminuir um pouco?",
+            "😮 Uau! Sua resposta tá tão grande que até fiquei com inveja. Mas pode diminuir um pouco, por favor?",
+            "😉 Fale menos, escreva menos, erre menos... brincadeira! Mas falando sério, dá uma diminuída na resposta aí, por favor.",
+            "😮 Nossa, essa resposta tá tão grande que até deu preguiça de ler! Pode cortar um pedacinho dela?",
+            "🙂 Não quero ser chata, mas essa resposta tá grande demais. Será que dá pra reduzir um pouco?",
+            "🙂 Vamos fazer assim: diminui a resposta e eu te ajudo a cuidar da carteira. Que tal?",
+            "🤯 Sua resposta tá maior que a minha vontade de trabalhar. Mas podemos resolver isso, só diminuir um pouco, por favor.",
+            "😮 Calma aí, não precisa escrever a dissertação inteira! Dá uma resumida na resposta, por favor."
         ],
         "only_price": {
             "forbidden_character": [
-                "It is allowed digits"
+                "🚫 Uh-oh! Não entendi o que você quis dizer. Será que é porque tem letras no meio? Só aceito números, beleza?",
+                "🚫 Eita, acho que digitou algo errado. Só são permitidos números aqui. Tenta de novo?",
+                "🚫 Xiiii, acho que digitou algo errado. Aqui só vale números, blz? Tenta de novo pra mim?",
+                "🚫 Ei, ei, ei! Só vale números aqui, beleza? O que você quis dizer com isso?"
             ],
             "many_numbers": [
-                "Many numbers"
+                "🤯 Elon Musk é você? Me perdoa mas eu não especializada em gerenciar tanto dinheiro assim!",
+                "🤯 Caraca! O trilhão tá batendo na porta! Mas infelizmente meu limite é até bilhões no seu saldo.",
+                "🤯 Ai ai, querendo ser o mais rico do mundo, né? Mas infelizmente só suporto até um bilhão no seu saldo."
             ],
             "many_punct": [
-                "Many punctuation"
+                "🚫 Ops! Tô meio confusa com essa puntação aí... Tente novamente!\nEx.: 123.12 ou -45",
+                "🚫 Eita! Essa pontuação tá me deixando tonta... Vamos tentar sem ela, tá bom?\nEx.: 123.12 ou -45",
+                "🚫 Caramba, essa pontuação tá fazendo meu cérebro fritar... Será que você pode escrever o saldo corretamente, por favor?\nEx.: 123.12 ou -45",
+                "🚫 Poxa, essa pontuação tá complicando um pouco as coisas... Tente escrever o saldo sem usar esses pontos e vírgulas, beleza?\nEx.: 123.12 ou -45",
+                "🚫 Vixi, essa pontuação tá me deixando meio zonza... Tenta escrever o saldo só com números, sem usar tantos pontos ou vírgulas, ok?\nEx.: 123.12 ou -45"
             ],
             "missing_info": [
-                "missing information"
+                "😉 Acho que você não quer me contar seu saldo... Dessa forma eu não consigo administrar seu dinheiro!"
             ],
             "negative_value": [
-                "the '-' must be in first character"
+                "🙂 Hey, se o seu saldo é negativo, informe o hifen '-' no início do saldo.\nEx.: -251,10"
             ],
             "many_decimals": [
-                "Many decimals"
+                "🤯 Puts, é muita precisão aí pro meu cérebro... Vamos simplificar um pouco, pode informar só duas casas decimais?",
+                "🤯 Nossa, esse saldo tá com mais casas decimais do que minha calculadora consegue lidar... Tente informar só até duas, por favor!",
+                "🤯 Wow, você realmente gosta de precisão, hein... Mas meu cérebro tá implorando pra você reduzir pra duas casas, pode ser?",
+                "🤯 Com tantas casas decimais, meu cérebro tá tentando lidar com um verdadeiro desafio olímpico... Que tal simplificar pra só duas casas, pra facilitar a vida de todo mundo?"
             ]
 
         },

@@ -99,9 +99,50 @@ class OpenAccountChat(object):
         
         self.cache[chat_id][Schema.InternalCache.OPEN_ACCOUNT[1]] = price_validation["value"]
         
+        msg1: str = random_msg_from_list(self.response["confirmation"]["amount_in_first_wallet"])
+        
         send_messages: list[str] = [
-            random_msg_from_list(self.response["confirmation"]["amount_in_first_wallet"]),
-            random_msg_from_list(self.response["quest"]["wallet_obs"])
+            f"{msg1[0]}{price_validation['value']}{msg1[1]}",
+            random_msg_from_list(self.response["quest"]["wallet_obs"]),
+            random_msg_from_list(self.response["info"]["wallet_obs"])
+        ]
+        
+        for msg in send_messages:
+            self.SendMessage(chat_id, msg)
+        
+        return True
+    
+    def wallet_obs_valid_and_verify_info(self, message: dict[str, Any]) -> bool:
+        """
+        Wallet obs validation and send a message with wallet info
+
+        Args:
+            message (dict[str, str]): Message from Core
+
+        Returns:
+            bool: Boolean response to admnistrate cache storage
+        """
+        
+        chat_id: str = message["chat_id"]
+        received_message: Union[str, list[str, bool]] = message["text"]
+        
+        if self.text_validation.no_slash(message) == False:
+            return False
+        
+        if self.text_validation.count_character(message, 100) == False:
+            return False
+        
+        self.cache[chat_id][Schema.InternalCache.OPEN_ACCOUNT[2]] = received_message
+        
+        msg1: list[str] = random_msg_from_list(self.response["confirmation"]["verify_data"])
+        
+        msg1_schema: str = f"{msg1[0]}{msg1[1]}{self.cache[chat_id][Schema.InternalCache.OPEN_ACCOUNT[0]]}"\
+            f"\n{msg1[2]}{self.cache[chat_id][Schema.InternalCache.OPEN_ACCOUNT[1]]}"\
+                f"\n{msg1[3]}{self.cache[chat_id][Schema.InternalCache.OPEN_ACCOUNT[2]]}"
+        
+        send_messages: list[str] = [
+            msg1_schema,
+            self.response["quest"]["verify_data"]
         ]
         
         for msg in send_messages:
