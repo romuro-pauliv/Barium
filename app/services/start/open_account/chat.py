@@ -12,6 +12,8 @@ from services.tools.tools import random_msg_from_list
 from models.models import TextValidation, ValueValidation, ConditionValidation
 from cache.schema.internal_cache import Schema
 from cache.redis_connect import Cache
+from views.start.commands.commands import COMMANDS_LIST
+
 
 from database.services.open_account import MongoOpenAccount
 
@@ -23,7 +25,7 @@ class OpenAccountChat(object):
     def __init__(self) -> None:
         self.response: dict[str, Any] = TelegramMessages.Start.OPEN_ACCOUNT["response"]
         self.config_commands: dict[str, Any] = TelegramConfig.COMMANDS["config_commands"]
-        self.open_account_command: str = TelegramConfig.COMMANDS["start_commands"]["open_account"]
+        self.open_account_command: str = COMMANDS_LIST["open_account"]
         
         self.SendMessage = Telegram().send_message
         

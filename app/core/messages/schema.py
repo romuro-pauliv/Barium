@@ -24,6 +24,9 @@ OpenAccountChatExec_ = OpenAccountChatExec()
 # | Client Method |----------------------------------------------------------------------------------------------------|
 from views.client.start.exec_ import StartChatExec as ClientStartChatExec
 ClientStartChatExec_ = ClientStartChatExec()
+
+from views.client.help.exec_ import HelpChatExec as ClientHelpChatExec
+ClientHelpChatExec_ = ClientHelpChatExec()
 # |--------------------------------------------------------------------------------------------------------------------|
 
 
@@ -50,8 +53,10 @@ class LOGIN_EXEC:
     @staticmethod
     def first_commands(data: dict[str, Any]) -> None:
         commands_function: list[Callable[[dict[str, Any]], None]] = [
-            ClientStartChatExec_.exec_
+            ClientStartChatExec_.exec_,
+            ClientHelpChatExec_.exec_,
+            
         ]
         
         for execute_ in commands_function:
-            run_in_background(execute_, (data, ))
+            run_in_background(execute_, (data,))

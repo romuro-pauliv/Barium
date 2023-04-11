@@ -7,9 +7,9 @@
         "about_us": "/sobreNos"
     },
     "client_commands": {
-        "add_wallet": "/adicionarCarteira",
-        "add_credit": "/adicionarSaldo",
-        "add_debit": "/adicionarDebito",
+        "add_wallet": "/+Carteira",
+        "add_movement": "/Movimentar",
+        "my_balance": "/meuSaldo",
         "help": "/ajuda"
     },
     "config_commands": {
@@ -36,6 +36,17 @@
                 ["📍 <b>", "</b>:\n🎈 Quem são os criadores da Ayla?"],
                 ["📍 <b>", "</b>:\n🎈 Quem está por trás do desenvolvimento da Ayla?"],
                 ["📍 <b>", "</b>:\n🎈 Os criadores da Ayla"]
+            ]
+        },
+        "client_commands": {
+            "add_wallet": [
+                ["📍 <b>", "</b>:\n✅ Adicionar mais uma carteira\n\n"]
+            ],
+            "add_movement": [
+                ["📍 <b>", "</b>:\n✅ Adicionar um gasto ou crédito a uma carteira\n\n"]
+            ],
+            "my_balance": [
+                ["📍 <b>", "</b>:\n✅ Ver relatório de todas as suas movimentações ou de uma carteira"]
             ]
         }
     }
