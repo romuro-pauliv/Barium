@@ -11,24 +11,6 @@ from typing import Any
 import json
 # |--------------------------------------------------------------------------------------------------------------------|
 
-
-class TelegramConfig:
-    COMMANDS: PosixPath = Path("app", "json", "commands", "commands.json")
-    API: PosixPath = Path("app", "json", "api", "telegram.json")
-
-
-class TelegramMessages:
-    class Start:
-        START: PosixPath = Path("app", "json", "messages", "start", "start.json")
-        HELP: PosixPath = Path("app", "json", "messages", "start", "help.json")
-        OPEN_ACCOUNT: PosixPath = Path("app", "json", "messages", "start", "open_account.json")
-    
-    class Client:
-        HELP: PosixPath = Path("app", "json", "messages", "client", "help.json")
-    
-    class Error:
-        ERROR: PosixPath = Path("app", "json", "errors", "responses.json")
-
 class Tools:
     @staticmethod
     def read_json(path_: PosixPath) -> dict[str, Any]:
@@ -38,3 +20,30 @@ class Tools:
             file.close()
             
         return data
+
+class TelegramConfig:
+    commands_path: PosixPath = Path("app", "json", "commands", "commands.json")
+    api_path: PosixPath = Path("app", "json", "api", "telegram.json")
+    
+    COMMANDS: dict[str, Any] = Tools.read_json(commands_path)
+    API: dict[str, Any] = Tools.read_json(api_path)
+
+class TelegramMessages:
+    class Start:
+        start_path: PosixPath = Path("app", "json", "messages", "start", "start.json")
+        help_path: PosixPath = Path("app", "json", "messages", "start", "help.json")
+        open_account_path: PosixPath = Path("app", "json", "messages", "start", "open_account.json")
+        
+        START: dict[str, Any] = Tools.read_json(start_path)
+        HELP: dict[str, Any] = Tools.read_json(help_path)
+        OPEN_ACCOUNT: dict[str, Any] = Tools.read_json(open_account_path)
+    
+    class Client:
+        help_path: PosixPath = Path("app", "json", "messages", "client", "help.json")
+        
+        HELP: dict[str, Any] = Tools.read_json(help_path)
+    
+    class Error:
+        error_path: PosixPath = Path("app", "json", "errors", "responses.json")
+        
+        ERROR: dict[str, Any] = Tools.read_json(error_path)

@@ -62,6 +62,7 @@ class MongoOpenAccount(object):
     def init_account(self, message: dict[str, str], in_cache: dict[str, Union[str, float]]) -> None:
         chat_id: str = message["chat_id"]
         username: str = message["username"]
+        
         wallet_name: str = in_cache[Schema.InternalCache.OPEN_ACCOUNT[0]]
         amount: float = in_cache[Schema.InternalCache.OPEN_ACCOUNT[1]]
         obs: str = in_cache[Schema.InternalCache.OPEN_ACCOUNT[2]]

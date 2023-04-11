@@ -6,7 +6,7 @@
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from config.paths import TelegramConfig, Tools
+from config.paths import TelegramConfig
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -19,7 +19,7 @@ import os
 
 class Telegram(object):
     def __init__(self) -> None:
-        data: dict[str, Any] = Tools.read_json(TelegramConfig.API)
+        data: dict[str, Any] = TelegramConfig.API
         
         self.api: str = f"{data['uri']}{os.getenv('TOKEN')}"
         self.endpoint: dict[str, str] = data["endpoint"]

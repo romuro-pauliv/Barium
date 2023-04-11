@@ -6,7 +6,7 @@
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from config.paths import Tools, TelegramMessages, TelegramConfig
+from config.paths import TelegramMessages, TelegramConfig
 from core.telegram import Telegram
 from services.tools.tools import random_msg_from_list
 from models.models import TextValidation, ValueValidation, ConditionValidation
@@ -21,9 +21,9 @@ from typing import Any, Union
 
 class OpenAccountChat(object):
     def __init__(self) -> None:
-        self.response: dict[str, Any] = Tools.read_json(TelegramMessages.Start.OPEN_ACCOUNT)["response"]
-        self.config_commands = Tools.read_json(TelegramConfig.COMMANDS)["config_commands"]
-        self.open_account_command: str = Tools.read_json(TelegramConfig.COMMANDS)["start_commands"]["open_account"]
+        self.response: dict[str, Any] = TelegramMessages.Start.OPEN_ACCOUNT["response"]
+        self.config_commands: dict[str, Any] = TelegramConfig.COMMANDS["config_commands"]
+        self.open_account_command: str = TelegramConfig.COMMANDS["start_commands"]["open_account"]
         
         self.SendMessage = Telegram().send_message
         

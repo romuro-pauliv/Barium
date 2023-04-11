@@ -6,7 +6,7 @@
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from config.paths import TelegramMessages, Tools
+from config.paths import TelegramMessages
 from core.telegram import Telegram
 from services.tools.tools import random_msg_from_list
 
@@ -17,7 +17,7 @@ from typing import Union, Any
 
 class TextValidation(object):
     def __init__(self) -> None:
-        self.response: dict[str, dict[str, list[str]]] = Tools.read_json(TelegramMessages.Error.ERROR)["response"]
+        self.response: dict[str, dict[str, list[str]]] = TelegramMessages.Error.ERROR["response"]
         self.SendMessage = Telegram().send_message
     
     def no_slash(self, message: dict[str, str]) -> bool:
@@ -49,7 +49,7 @@ class TextValidation(object):
 
 class ConditionValidation(object):
     def __init__(self) -> None:
-        self.response: dict[str, dict[str, list[str]]] = Tools.read_json(TelegramMessages.Error.ERROR)["response"]
+        self.response: dict[str, dict[str, list[str]]] = TelegramMessages.Error.ERROR["response"]
         self.SendMessage = Telegram().send_message
     
     def yn_response(self, message: dict[str, Any], two_commands: list[str, str]) -> bool:
@@ -71,7 +71,7 @@ class ConditionValidation(object):
 
 class ValueValidation(object):
     def __init__(self) -> None:
-        self.response: dict[str, dict[str, list[str]]] = Tools.read_json(TelegramMessages.Error.ERROR)["response"]
+        self.response: dict[str, dict[str, list[str]]] = TelegramMessages.Error.ERROR["response"]
         self.SendMessage = Telegram().send_message
         
     def price(self, chat_id: str, value: str) -> dict[str, Union[str, float]]:   

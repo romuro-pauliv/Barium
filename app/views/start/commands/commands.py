@@ -6,10 +6,10 @@
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from config.paths import TelegramConfig, Tools
+from config.paths import TelegramConfig
 # |--------------------------------------------------------------------------------------------------------------------|
 
-commands_json: dict[str, dict[str]] = Tools.read_json(TelegramConfig.COMMANDS)
+commands_json: dict[str, dict[str]] = TelegramConfig.COMMANDS
 
 COMMANDS_LIST: dict[str, str] = commands_json["start_commands"]
 ABOUT_COMMANDS: dict[str, dict] = commands_json["about_commands"]["start_commands"]

@@ -6,7 +6,7 @@
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from config.paths import Tools, TelegramConfig, TelegramMessages
+from config.paths import TelegramMessages
 from views.start.commands.commands import COMMANDS_LIST, ABOUT_COMMANDS
 from core.telegram import Telegram
 from services.tools.tools import random_msg_from_list
@@ -18,7 +18,7 @@ import json
 
 class HelpChat(object):
     def __init__(self) -> None:
-        self.messages: dict[str, dict[str, Union[str, list[str]]]] = Tools.read_json(TelegramMessages.Start.HELP)
+        self.messages: dict[str, dict[str, Union[str, list[str]]]] = TelegramMessages.Start.HELP
         self.SendMessage: None = Telegram().send_message
     
     def help_response(self, message: dict[str, Any]) -> None:

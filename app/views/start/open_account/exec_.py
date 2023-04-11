@@ -10,7 +10,7 @@ from views.start.commands.commands import COMMANDS_LIST
 from services.start.open_account.chat import OpenAccountChat
 from cache.redis_connect import Cache
 
-from typing import Any, Callable, Union
+from typing import Any, Callable
 # |--------------------------------------------------------------------------------------------------------------------|
 
 
