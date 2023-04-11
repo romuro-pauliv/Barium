@@ -39,8 +39,10 @@ class TelegramMessages:
         OPEN_ACCOUNT: dict[str, Any] = Tools.read_json(open_account_path)
     
     class Client:
+        start_path: PosixPath = Path("app", "json", "messages", "client", "start.json")
         help_path: PosixPath = Path("app", "json", "messages", "client", "help.json")
         
+        START: dict[str, Any] = Tools.read_json(start_path)
         HELP: dict[str, Any] = Tools.read_json(help_path)
     
     class Error:

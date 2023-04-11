@@ -10,6 +10,7 @@ from typing import Any, Callable
 
 from cache.redis_connect import Cache
 
+# | Start Method |-----------------------------------------------------------------------------------------------------|
 from views.start.start.exec_ import StartChatExec
 StartChatExec_ = StartChatExec()
 
@@ -18,6 +19,12 @@ HelpChatExec_ = HelpChatExec()
 
 from views.start.open_account.exec_ import OpenAccountChatExec
 OpenAccountChatExec_ = OpenAccountChatExec()
+# |--------------------------------------------------------------------------------------------------------------------|
+
+# | Client Method |----------------------------------------------------------------------------------------------------|
+from views.client.start.exec_ import StartChatExec as ClientStartChatExec
+ClientStartChatExec_ = ClientStartChatExec()
+# |--------------------------------------------------------------------------------------------------------------------|
 
 
 class FIRST_EXEC:
@@ -41,5 +48,10 @@ class FIRST_EXEC:
 
 class LOGIN_EXEC:
     @staticmethod
-    def first_commands(chat_id: str, data: dict[str, Any]) -> None:
-        pass
+    def first_commands(data: dict[str, Any]) -> None:
+        commands_function: list[Callable[[dict[str, Any]], None]] = [
+            ClientStartChatExec_.exec_
+        ]
+        
+        for execute_ in commands_function:
+            run_in_background(execute_, (data, ))

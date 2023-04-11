@@ -25,7 +25,7 @@ while True:
             data["chat_id"] = str(id_)
             
             if Cache.TalkMode.log_in_branch.get(str(id_)):
-                LOGIN_EXEC.first_commands(str(id_), data)
+                LOGIN_EXEC.first_commands(data)
                 continue
             
             if Cache.TalkMode.open_account_branch.get(str(id_)):
