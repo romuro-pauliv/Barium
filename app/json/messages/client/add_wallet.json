@@ -1,0 +1,16 @@
+{
+    "response": {
+        "dialog": {
+            "open_new_wallet": ["dialog"]
+        },
+        "quest": {
+            "open_new_wallet": ["quest"]
+        },
+        "info": {
+            "open_new_wallet": ["info"]
+        },
+        "confirmation": {
+            "open_new_wallet": ["confirmation"]
+        }
+    }
+}

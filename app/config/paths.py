@@ -41,9 +41,11 @@ class TelegramMessages:
     class Client:
         start_path: PosixPath = Path("app", "json", "messages", "client", "start.json")
         help_path: PosixPath = Path("app", "json", "messages", "client", "help.json")
+        add_wallet_path: PosixPath = Path("app", "json", "messages", "client", "add_wallet.json")
         
         START: dict[str, Any] = Tools.read_json(start_path)
         HELP: dict[str, Any] = Tools.read_json(help_path)
+        ADD_WALLET: dict[str, Any] = Tools.read_json(add_wallet_path)
     
     class Error:
         error_path: PosixPath = Path("app", "json", "errors", "responses.json")

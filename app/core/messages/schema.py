@@ -27,6 +27,9 @@ ClientStartChatExec_ = ClientStartChatExec()
 
 from views.client.help.exec_ import HelpChatExec as ClientHelpChatExec
 ClientHelpChatExec_ = ClientHelpChatExec()
+
+from views.client.add_wallet.exec_ import AddWalletChatExec as ClientAddWalletChatExec
+ClientAddWalletChatExec_ = ClientAddWalletChatExec()
 # |--------------------------------------------------------------------------------------------------------------------|
 
 
@@ -55,8 +58,12 @@ class LOGIN_EXEC:
         commands_function: list[Callable[[dict[str, Any]], None]] = [
             ClientStartChatExec_.exec_,
             ClientHelpChatExec_.exec_,
-            
+            ClientAddWalletChatExec_.exec_
         ]
         
         for execute_ in commands_function:
             run_in_background(execute_, (data,))
+    
+    @staticmethod
+    def add_wallet_command(data: dict[str, Any]) -> None:
+        pass

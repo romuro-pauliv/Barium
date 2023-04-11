@@ -21,7 +21,7 @@ class Cache:
         open_account_branch: client.Redis = Redis(HOST, PORT, db=0)
         
         log_in_branch: client.Redis = Redis(HOST, PORT, db=1)
-        new_wallet_branch: client.Redis = Redis(HOST, PORT, db=2)
+        add_wallet_branch: client.Redis = Redis(HOST, PORT, db=2)
         
     class DataOtimization:
         HOST: str = str(os.getenv("REDIS_HOST"))
