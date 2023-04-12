@@ -26,6 +26,7 @@ while True:
             
             if Cache.TalkMode.log_in_branch.get(str(id_)):
                 if Cache.TalkMode.add_wallet_branch.get(str(id_)):
+                    LOGIN_EXEC.add_wallet_command(data)
                     continue
                 LOGIN_EXEC.first_commands(data)
                 continue

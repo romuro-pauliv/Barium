@@ -19,7 +19,26 @@ class AddWalletChatExec(object):
         self.init_command: str = COMMANDS_LIST["add_wallet"]
         self.add_wallet = AddWalletChat()
         self.in_execution: list[str] = []
+    
+    def cache_0_mode(self, message: dict[str, Any]) -> None:
+        response: bool = self.add_wallet.wallet_name_valid_and_request_amount(message)
+        chat_id: str = message["chat_id"]
+        if response == True:
+            Cache.TalkMode.add_wallet_branch.mset({chat_id: 1})
+    
+    def exec_in_cache(self, message: dict[str, Any]) -> None:
+        chat_id: str = message["chat_id"]
         
+        cache_mode_list: list[Callable[[dict[str, Any]], None]] = [
+            self.cache_0_mode
+        ]
+        
+        for n, cache_mode in enumerate(cache_mode_list):
+            if int(Cache.TalkMode.add_wallet_branch.get(chat_id)) == n:
+                self.in_execution.append(chat_id)
+                cache_mode(message)
+                self.in_execution.remove(chat_id)
+    
     def exec_(self, message: dict[str, Any]) -> None:
         received_message: str = message["text"]
         chat_id: str = message["chat_id"]

@@ -66,4 +66,4 @@ class LOGIN_EXEC:
     
     @staticmethod
     def add_wallet_command(data: dict[str, Any]) -> None:
-        pass
+        run_in_background(ClientAddWalletChatExec_.exec_in_cache, (data, ))

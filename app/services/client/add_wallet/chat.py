@@ -9,6 +9,8 @@
 from core.telegram import Telegram
 from config.paths import TelegramMessages
 from services.tools.tools import random_msg_from_list
+from models.models import TextValidation
+
 
 from typing import Any
 # |--------------------------------------------------------------------------------------------------------------------|
@@ -19,6 +21,8 @@ class AddWalletChat(object):
         self.SendMessage: None = Telegram().send_message
         self.messages: dict[str, dict] = TelegramMessages.Client.ADD_WALLET
 
+        self.text_validation = TextValidation()
+        
         self.wallet_name_cache: dict[str, Any] = {}
         
     def open_new_wallet(self, message: dict[str, Any]) -> None:
@@ -58,4 +62,8 @@ class AddWalletChat(object):
         chat_id: str = message["chat_id"]
         response: dict[str, list[str]] = self.messages["response"]
         
+        if self.text_validation.count_character(message) == False:
+            return False
         
+        self.SendMessage(chat_id, "testing")
+        return True

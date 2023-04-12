@@ -30,14 +30,14 @@ class MongoOpenAccount(object):
     def open_database(self, chat_id: str, username: str) -> None:
         database_name: str = f"AYLA_{chat_id}"
         
-        self.mongo[database_name]["LOG"].insert_one(self.log(chat_id, username, "open account"))
+        self.mongo[database_name]["/LOG"].insert_one(self.log(chat_id, username, "open account"))
         self.mongo.AYLA_LOG.MAINLOG.insert_one(self.log(chat_id, username, "open account"))
         
         
     def open_wallet_list(self, chat_id: str, username: str, wallet_name: str, amount: str, wallet_obs: str) -> None:
         database_name: str = f"AYLA_{chat_id}"
         
-        self.mongo[database_name].WALLETS.insert_one(
+        self.mongo[database_name]["/WALLETS"].insert_one(
             {
                 "datetime": datetime.datetime.utcnow(),
                 "wallet": wallet_name,
@@ -46,7 +46,7 @@ class MongoOpenAccount(object):
             }
         )
         
-        self.mongo[database_name]["LOG"].insert_one(self.log(chat_id, username, "open wallet list"))
+        self.mongo[database_name]["/LOG"].insert_one(self.log(chat_id, username, "open wallet list"))
         self.mongo.AYLA_LOG.MAINLOG.insert_one(self.log(chat_id, username, "open wallet list"))
     
     def open_wallet_collection(self, chat_id: str, username: str, wallet_name: str) -> None:
@@ -56,7 +56,7 @@ class MongoOpenAccount(object):
             {"datetime": datetime.datetime.utcnow(), "log": f"hello, {wallet_name}"}
         )
         
-        self.mongo[database_name]["LOG"].insert_one(self.log(chat_id, username, f"open wallet {wallet_name}"))
+        self.mongo[database_name]["/LOG"].insert_one(self.log(chat_id, username, f"open wallet {wallet_name}"))
         self.mongo.AYLA_LOG.MAINLOG.insert_one(self.log(chat_id, username, f"open wallet {wallet_name}"))
     
     def init_account(self, message: dict[str, str], in_cache: dict[str, Union[str, float]]) -> None:
