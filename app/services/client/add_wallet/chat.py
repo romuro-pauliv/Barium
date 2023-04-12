@@ -9,10 +9,11 @@
 from core.telegram import Telegram
 from config.paths import TelegramMessages
 from services.tools.tools import random_msg_from_list
-from models.models import TextValidation
+from models.models import TextValidation, DatabaseValidation, ValueValidation
+from cache.schema.internal_cache import Schema
+from views.client.commands.commands import COMMANDS_LIST
 
-
-from typing import Any
+from typing import Any, Union
 # |--------------------------------------------------------------------------------------------------------------------|
 
 
@@ -22,8 +23,10 @@ class AddWalletChat(object):
         self.messages: dict[str, dict] = TelegramMessages.Client.ADD_WALLET
 
         self.text_validation = TextValidation()
+        self.database_validation = DatabaseValidation()
+        self.value_validation = ValueValidation()
         
-        self.wallet_name_cache: dict[str, Any] = {}
+        self.cache: dict[str, Any] = {}
         
     def open_new_wallet(self, message: dict[str, Any]) -> None:
         """
@@ -39,9 +42,11 @@ class AddWalletChat(object):
         chat_id: str = message["chat_id"]
         response: dict[str, list[str]] = self.messages["response"]
         
+        msg2_schema: str = random_msg_from_list(response["info"]["open_new_wallet"])
+        
         messages_list: list[str] = [
             random_msg_from_list(response["dialog"]["open_new_wallet"]),
-            random_msg_from_list(response["info"]["open_new_wallet"]),
+            f"{msg2_schema[0]}{COMMANDS_LIST['cancel']}{msg2_schema[1]}",
             random_msg_from_list(response["quest"]["open_new_wallet"])
         ]
         
@@ -61,9 +66,96 @@ class AddWalletChat(object):
         
         chat_id: str = message["chat_id"]
         response: dict[str, list[str]] = self.messages["response"]
+        received_message: str = message["text"]
+        
+        if self.text_validation.no_slash(message) == False:
+            return False
         
         if self.text_validation.count_character(message) == False:
             return False
         
-        self.SendMessage(chat_id, "testing")
+        if self.database_validation.wallet_name(message) == False:
+            return False
+        
+        self.cache[chat_id] = {Schema.InternalCache.NEW_WALLET[0]: received_message}
+        
+        msg1_schema: str = random_msg_from_list(response["confirmation"]["open_new_wallet"])
+        
+        messages_list: list[str] = [
+            f"{msg1_schema[0]}{received_message}{msg1_schema[1]}",
+            random_msg_from_list(response["quest"]["amount_in_new_wallet"])
+        ]
+        
+        for msg in messages_list:
+            self.SendMessage(chat_id, msg)
+        
+        return True
+    
+    def wallet_amount_valid_and_request_obs(self, message: dict[str, Any]) -> bool:
+        """
+        Send message request a obs for wallet and validate the wallet amount
+
+        Args:
+            message (dict[str, Any]): Message from Core
+
+        Returns:
+            bool: Boolean response to administrate cache storage
+        """
+        
+        chat_id: str = message["chat_id"]
+        response: dict[str, list[str]] = self.messages["response"]
+        received_message: str = message["text"]
+        
+        new_value: dict[str, Union[str, float]] = self.value_validation.price(chat_id, received_message)
+        if new_value["status"] == False:
+            return False
+        
+        self.cache[chat_id][Schema.InternalCache.NEW_WALLET[1]] = new_value["value"]
+        
+        msg1_schema: str = random_msg_from_list(response["confirmation"]["amount_in_new_wallet"])
+        
+        messages_list: list[str] = [
+            f"{msg1_schema[0]}{str(new_value['value'])}{msg1_schema[1]}",
+            random_msg_from_list(response["quest"]["new_wallet_obs"])
+        ]
+        
+        for msg in messages_list:
+            self.SendMessage(chat_id, msg)
+        
+        return True
+    
+    def obs_valid_and_request_verify_data(self, message: dict[str, Any]) -> bool:
+        """
+        Send message to user verify the wallet data and validade obs wallet text
+
+        Args:
+            message (dict[str, Any]): Message from Core
+
+        Returns:
+            bool: Boolean response to administrate cache storage
+        """
+        
+        chat_id: str = message["chat_id"]
+        response: dict[str, list[str]] = self.messages["response"]
+        received_message: str = message["text"]
+        
+        if self.text_validation.count_character(message, 100) == False:
+            return False
+        
+        self.cache[chat_id][Schema.InternalCache.NEW_WALLET[2]] = received_message
+        
+        msg1_schema: list[str] = random_msg_from_list(response["confirmation"]["verify_data"])
+        msg1: str = f"{msg1_schema[0]}{msg1_schema[1]}{self.cache[chat_id][Schema.InternalCache.NEW_WALLET[0]]}\n"
+        msg1 += f"{msg1_schema[2]}{self.cache[chat_id][Schema.InternalCache.NEW_WALLET[1]]}\n"
+        msg1 += f"{msg1_schema[3]}{self.cache[chat_id][Schema.InternalCache.NEW_WALLET[2]]}"
+        
+        
+        send_messages: list[str] = [
+            msg1,
+            random_msg_from_list(response["quest"]["verify_data"])
+        ]
+        
+        for msg in send_messages:
+            self.SendMessage(chat_id, msg)
+        
         return True

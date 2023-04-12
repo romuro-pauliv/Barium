@@ -9,6 +9,7 @@
 from config.paths import TelegramMessages
 from core.telegram import Telegram
 from services.tools.tools import random_msg_from_list
+from database.functions.db_func import GET
 
 from string import digits
 from typing import Union, Any
@@ -140,3 +141,19 @@ class ValueValidation(object):
                 return {"status": False}
         
         return {"status": True, "value": float(new_value)}
+
+
+class DatabaseValidation(object):
+    def __init__(self) -> None:
+        self.response: dict[str, dict[str, list[str]]] = TelegramMessages.Error.ERROR["response"]
+        self.SendMessage = Telegram().send_message
+    
+    def wallet_name(self, message: dict[str, str]) -> bool:
+        chat_id: str = message["chat_id"]
+        received_message: str = message["text"]
+        
+        if received_message in GET.wallet_list(chat_id):
+            self.SendMessage(chat_id, random_msg_from_list(self.response["forbidden_wallet_name"]))
+            return False
+        return True
+        

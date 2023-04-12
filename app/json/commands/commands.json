@@ -10,7 +10,8 @@
         "add_wallet": "/+Carteira",
         "add_movement": "/Movimentar",
         "my_balance": "/meuSaldo",
-        "help": "/ajuda"
+        "help": "/ajuda",
+        "cancel": "/stop"
     },
     "config_commands": {
         "yn_response": ["/sim", "/nao"]

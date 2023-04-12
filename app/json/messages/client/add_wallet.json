@@ -1,16 +1,82 @@
 {
     "response": {
         "dialog": {
-            "open_new_wallet": ["dialog"]
+            "open_new_wallet": [
+                "Oba! 🎉 Vamos abrir sua conta! 🎈",
+                "Legal! 🎉 Vamos dar início ao seu cadastro! 🎈",
+                "Ei! 🎉 Vamos começar seu cadastro agora mesmo 🎈",
+                "Vamos nessa! 🎉 Começando seu cadastro agora! 🎈",
+                "Tá pronto(a)? 🎉 Vamos começar seu cadastro juntos! 🎈",
+                "Hora de dar início ao seu cadastro! 🎉 Animado? 🎈",
+                "Perfeito! 🎉 Vou iniciar seu cadastro 🎈",
+                "Tudo certo para começar o cadastro? 🎉 Então, vamos lá 🎈"
+            ]
         },
         "quest": {
-            "open_new_wallet": ["quest"]
+            "open_new_wallet": [
+                "📒 Dê um nome legal para sua primeira carteira:",
+                "📒 E aí, qual vai ser o nome da sua primeira carteira?",
+                "📒 Bora escolher o nome da sua primeira carteira! Me fale aí",
+                "📒 Qual será o nome da sua primeira carteira? Estou curiosa...",
+                "📒 Vamos dar um nome legal para sua primeira carteira! Alguma ideia em mente?",
+                "📒 E aí, já pensou em um nome legal para sua primeira carteira? Me conta!"
+            ],
+            "amount_in_new_wallet": [
+                "💵 E aí, quanto de grana você informa para sua carteira?",
+                "💵 Me conta, qual é o saldo da sua carteira nesse momento?",
+                "💵 Me fala, quanto de grana que você tem nessa carteira aí?",
+                "💵 Me diz aí, qual é o saldo atual da sua carteira?",
+                "💵 Tá com quantos contos na carteira?"
+            ],
+            "new_wallet_obs": [
+                "📚 Pra que você tá criando essa carteira, me conta?",
+                "📚 Qual o motivo da criação da sua carteira?",
+                "📚 Essa carteira tem um propósito especial, certo? Qual é?",
+                "📚 E aí, qual é o objetivo da sua carteira?",
+                "📚 Essa carteira é para um objetivo específico, né? Me conta!"
+            ],
+            "verify_data": [
+                "🟩 /sim se estiver tudo certinho\n🟥 /nao se quiser cancelar"
+            ]
         },
         "info": {
-            "open_new_wallet": ["info"]
+            "open_new_wallet": [
+                ["📌 Você pode cancelar essa conversa utilizando o comando <b>", "</b>"]
+            ]
         },
         "confirmation": {
-            "open_new_wallet": ["confirmation"]
+            "open_new_wallet": [
+                ["✅ A carteira <b>", "</b> foi criada com sucesso!"],
+                ["✅ Feito! Sua carteira <b>", "</b> está pronta"],
+                ["✅ Beleza, acabei de criar sua carteira <b>", "</b>"],
+                ["✅ Oba! Sua carteira <b>", "</b> está pronta para ação!"],
+                ["✅ Bacana, agora você tem uma carteira chamada <b>", "</b>"],
+                ["✅ Uhuul, <b>", "</b> foi criada com sucesso!"],
+                ["✅ Sua carteira <b>", "</b> está prontinha para o que der e vier!"],
+                ["✅ Deu tudo certo, <b>", "</b> já está criada!"],
+                ["✅ Iupii! <b>", "</b> foi criada sem nenhum problema!"],
+                ["✅ Eba! <b>", "</b> está pronta para ser usada!"]
+            ],
+            "amount_in_new_wallet": [
+                ["✅ Boa, agora você tem <b>R$ ", "</b> a mais na carteira!"],
+                ["✅ Eba, mais dinheiro na carteira! Agora tem <b>R$ ", "</b>"],
+                ["✅ Show de bola! A carteira agora tem <b>R$ ", "</b>"],
+                ["✅ Massa demais! <b>R$ ", "</b> adicionados à carteira"],
+                ["✅ Maneiro! Você agora tem <b>R$ ", "</b> na sua carteira"],
+                ["✅ Legal! Agora a carteira tem <b>R$ ", "</b>"],
+                ["✅ Top! Adicionados <b>R$ ", "</b> à carteira com sucesso"],
+                ["✅ Demais! Agora você tem <b>R$ ", "</b> na carteira"],
+                ["✅ Muito bom! <b>R$ ", "</b> adicionados à carteira com sucesso"],
+                ["✅ Sensacional! Agora a carteira tem <b>R$ ", "</b>"],
+                ["✅ Beleza! Você agora tem <b>R$ ", "</b> na sua carteira"],
+                ["✅ Incrível! A carteira agora tem <b>R$ ", "</b> adicionados"],
+                ["✅ Perfeito! Adicionados <b>R$ ", "</b> à carteira com sucesso"],
+                ["✅ Irado! Agora você tem <b>R$ ", "</b> na sua carteira"],
+                ["✅ Maravilha! <b>R$ ", "</b> adicionados à carteira com sucesso"]
+            ],
+            "verify_data": [
+                ["📊 Aqui estão os dados que você me passou:\n\n", "<b>👜 Carteira</b>: ", "<b>💵     Saldo</b>: ", "<b>📝  Função</b>: "]
+            ]
         }
     }
 }

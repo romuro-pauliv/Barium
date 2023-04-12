@@ -7,6 +7,7 @@
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
 from typing import Any
+from time import sleep
 from cache.redis_connect import Cache
 from cache.load.login_db import loading_user_in_cache
 from core.messages.schema import FIRST_EXEC, LOGIN_EXEC
@@ -36,3 +37,4 @@ while True:
                 continue
             
             FIRST_EXEC.first_commands(data)
+            sleep(0.1)
