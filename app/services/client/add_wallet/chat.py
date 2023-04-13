@@ -8,10 +8,12 @@
 # | Imports |----------------------------------------------------------------------------------------------------------|
 from core.telegram import Telegram
 from config.paths import TelegramMessages
+from config.paths import TelegramConfig
 from services.tools.tools import random_msg_from_list
-from models.models import TextValidation, DatabaseValidation, ValueValidation
+from models.models import TextValidation, DatabaseValidation, ValueValidation, ConditionValidation
 from cache.schema.internal_cache import Schema
 from views.client.commands.commands import COMMANDS_LIST
+from database.functions.db_func import POST
 
 from typing import Any, Union
 # |--------------------------------------------------------------------------------------------------------------------|
@@ -25,6 +27,9 @@ class AddWalletChat(object):
         self.text_validation = TextValidation()
         self.database_validation = DatabaseValidation()
         self.value_validation = ValueValidation()
+        self.condition_validation = ConditionValidation()
+        
+        self.config_commands: list[str] = TelegramConfig.COMMANDS["config_commands"]["yn_response"]
         
         self.cache: dict[str, Any] = {}
         
@@ -159,3 +164,36 @@ class AddWalletChat(object):
             self.SendMessage(chat_id, msg)
         
         return True
+
+    def verify_data_valid_and_conclusion(self, message: dict[str, Any]) -> bool:
+        """
+        Verify /yes or /no response and confirm new wallet
+        Args:
+            message (dict[str, Any]): Message from Core
+
+        Returns:
+            bool: Boolean response to administrate cache storage
+        """
+        
+        chat_id: str = message["chat_id"]
+        response: dict[str, list[str]] = self.messages["response"]
+        username: str = message["username"]
+        received_message: str = message["text"]
+        
+        
+        if self.condition_validation.yn_response(message, self.config_commands) == False:
+            return False
+        
+        if received_message == self.config_commands[0]:
+            self.SendMessage(chat_id, random_msg_from_list(response["info"]["yes_conclusion"]))
+            
+            POST.add_wallet(chat_id, username, self.cache[chat_id])
+            del self.cache[chat_id]
+            
+            self.SendMessage(chat_id, random_msg_from_list(response["confirmation"]["yes_conclusion"]))
+            return True
+        
+        elif received_message == self.config_commands[1]:
+            del self.cache[chat_id]
+            self.SendMessage(chat_id, random_msg_from_list(response["confirmation"]["no_conclusion"]))
+            return True

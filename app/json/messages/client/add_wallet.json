@@ -42,6 +42,9 @@
         "info": {
             "open_new_wallet": [
                 ["📌 Você pode cancelar essa conversa utilizando o comando <b>", "</b>"]
+            ],
+            "yes_conclusion": [
+                "📚 Espere um poquinho, estou terminando de anotar todos os seus dados..."
             ]
         },
         "confirmation": {
@@ -76,6 +79,12 @@
             ],
             "verify_data": [
                 ["📊 Aqui estão os dados que você me passou:\n\n", "<b>👜 Carteira</b>: ", "<b>💵     Saldo</b>: ", "<b>📝  Função</b>: "]
+            ],
+            "yes_conclusion": [
+                "🎈 Tudo certinho! Agora eu posso te ajudar a administrar seus gastos!"
+            ],
+            "no_conclusion": [
+                "😔 Você cancelou... Podemos ter essa conversa novamente se você utilzar o comando "
             ]
         }
     }
