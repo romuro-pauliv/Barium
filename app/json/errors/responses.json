@@ -96,6 +96,9 @@
             "🚫 Infelizmente, esse nome já foi usado em outra carteira. Por favor, escolha um nome diferente",
             "🚫 Esse nome está sendo utilizado em outra carteira. Por favor, escolha outro nome disponível",
             "🚫 Já existe uma carteira com o mesmo nome. Por favor, escolha um nome exclusivo"
+        ],
+        "cancel": [
+            ["🙂 Você cancelou nossa conversa. Utilize o comando ", " para conversar outro assunto!"]
         ]
     }
 }

@@ -10,6 +10,7 @@ from config.paths import TelegramMessages
 from core.telegram import Telegram
 from services.tools.tools import random_msg_from_list
 from database.functions.db_func import GET
+from views.client.commands.commands import COMMANDS_LIST
 
 from string import digits
 from typing import Union, Any
@@ -68,6 +69,17 @@ class ConditionValidation(object):
         else:
             self.SendMessage(chat_id, random_msg_from_list(self.response["only_text"]))
             return False
+    
+    def stop_response(self, message: dict[str, Any]) -> bool:
+        chat_id: str = message["chat_id"]
+        received_message: str = message["text"]
+        
+        if isinstance(received_message, str):
+            if received_message == COMMANDS_LIST["cancel"]:
+                msg_schema: list[str] = random_msg_from_list(self.response["cancel"])
+                self.SendMessage(chat_id, f"{msg_schema[0]}{COMMANDS_LIST['help']}{msg_schema[1]}")
+                return False
+            return True
     
 
 class ValueValidation(object):

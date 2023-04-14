@@ -12,6 +12,7 @@ from config.paths import TelegramConfig
 from services.tools.tools import random_msg_from_list
 from models.models import TextValidation, DatabaseValidation, ValueValidation, ConditionValidation
 from cache.schema.internal_cache import Schema
+from cache.redis_connect import Cache
 from views.client.commands.commands import COMMANDS_LIST
 from database.functions.db_func import POST
 
@@ -73,6 +74,10 @@ class AddWalletChat(object):
         response: dict[str, list[str]] = self.messages["response"]
         received_message: str = message["text"]
         
+        if self.condition_validation.stop_response(message) == False:
+            Cache.TalkMode.add_wallet_branch.delete(chat_id)
+            return False
+        
         if self.text_validation.no_slash(message) == False:
             return False
         
@@ -111,6 +116,11 @@ class AddWalletChat(object):
         response: dict[str, list[str]] = self.messages["response"]
         received_message: str = message["text"]
         
+        if self.condition_validation.stop_response(message) == False:
+            Cache.TalkMode.add_wallet_branch.delete(chat_id)
+            del self.cache[chat_id]
+            return False
+        
         new_value: dict[str, Union[str, float]] = self.value_validation.price(chat_id, received_message)
         if new_value["status"] == False:
             return False
@@ -143,6 +153,11 @@ class AddWalletChat(object):
         chat_id: str = message["chat_id"]
         response: dict[str, list[str]] = self.messages["response"]
         received_message: str = message["text"]
+        
+        if self.condition_validation.stop_response(message) == False:
+            Cache.TalkMode.add_wallet_branch.delete(chat_id)
+            del self.cache[chat_id]
+            return False
         
         if self.text_validation.count_character(message, 100) == False:
             return False
@@ -197,6 +212,6 @@ class AddWalletChat(object):
         
         elif received_message == self.config_commands[1]:
             del self.cache[chat_id]
-            msg1: list[str] = random_msg_from_list(response["confirmation"]["no_conclusion"])
+            msg1: str = random_msg_from_list(response["confirmation"]["no_conclusion"])
             self.SendMessage(chat_id, f"{msg1}{COMMANDS_LIST['add_wallet']}")
             return True
