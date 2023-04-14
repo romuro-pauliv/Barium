@@ -2,24 +2,24 @@
     "response": {
         "dialog": {
             "open_new_wallet": [
-                "Oba! 🎉 Vamos abrir sua conta! 🎈",
-                "Legal! 🎉 Vamos dar início ao seu cadastro! 🎈",
-                "Ei! 🎉 Vamos começar seu cadastro agora mesmo 🎈",
-                "Vamos nessa! 🎉 Começando seu cadastro agora! 🎈",
-                "Tá pronto(a)? 🎉 Vamos começar seu cadastro juntos! 🎈",
-                "Hora de dar início ao seu cadastro! 🎉 Animado? 🎈",
-                "Perfeito! 🎉 Vou iniciar seu cadastro 🎈",
-                "Tudo certo para começar o cadastro? 🎉 Então, vamos lá 🎈"
+                "💼 Ótimo! Vamos começar criando uma nova carteira",
+                "💼 Que legal! Vamos criar uma carteira novinha em folha",
+                "💼 Adorei! Vamos criar uma nova carteira juntos",
+                "💼 Incrível! Vamos dar início à criação de uma nova carteira",
+                "💼 Que bacana! Vamos começar a criar uma nova carteira agora mesmo",
+                "💼 Maravilhoso! Vamos criar uma nova carteira e organizar suas finanças",
+                "💼 Fantástico! Vamos criar uma nova carteira para você controlar suas despesas",
+                "💼 Ótima ideia! Vamos criar uma nova carteira e organizar suas receitas e despesas"
             ]
         },
         "quest": {
             "open_new_wallet": [
-                "📒 Dê um nome legal para sua primeira carteira:",
-                "📒 E aí, qual vai ser o nome da sua primeira carteira?",
-                "📒 Bora escolher o nome da sua primeira carteira! Me fale aí",
-                "📒 Qual será o nome da sua primeira carteira? Estou curiosa...",
-                "📒 Vamos dar um nome legal para sua primeira carteira! Alguma ideia em mente?",
-                "📒 E aí, já pensou em um nome legal para sua primeira carteira? Me conta!"
+                "📒 Dê um nome legal para sua nova carteira:",
+                "📒 E aí, qual vai ser o nome da sua nova carteira?",
+                "📒 Bora escolher o nome pra sua nova carteira! Me fale aí",
+                "📒 Qual será o nome da sua nova carteira? Estou curiosa!",
+                "📒 Vamos dar um nome legal para sua nova carteira! Alguma ideia em mente?",
+                "📒 E aí, já pensou em um nome legal para sua nova carteira? Me conta!"
             ],
             "amount_in_new_wallet": [
                 "💵 E aí, quanto de grana você informa para sua carteira?",
@@ -36,7 +36,9 @@
                 "📚 Essa carteira é para um objetivo específico, né? Me conta!"
             ],
             "verify_data": [
-                "🟩 /sim se estiver tudo certinho\n🟥 /nao se quiser cancelar"
+                ["Digite 🟩 ", " se estiver tudo certo e 🟥 ", " se quiser cancelar."],
+                ["🟩 ", " se estiver tudo correto ou se quiser cancelar 🟥 ", "."],
+                ["Para confirmar, digite 🟩 ", " ou se quiser cancelar 🟥 ", "."]
             ]
         },
         "info": {
@@ -44,7 +46,14 @@
                 ["📌 Você pode cancelar essa conversa utilizando o comando <b>", "</b>"]
             ],
             "yes_conclusion": [
-                "📚 Espere um poquinho, estou terminando de anotar todos os seus dados..."
+                "📝 Espere um poquinho, estou terminando de anotar todos os seus dados...",
+                "📝 Só mais um instante, estou finalizando a anotação dos seus dados...",
+                "📝 Só mais um tempinho, estou quase terminando de anotar seus dados...",
+                "📝 Só mais um pouquinho, estou terminando de anotar tudo certinho.",
+                "📝 Não saia daí ainda, estou finalizando o cadastro das suas informações.",
+                "📝 Um momento, por favor! Estou terminando de anotar todos os seus dados.",
+                "📝 Só mais um momento! Estou terminando de registrar suas informações.",
+                "📝 Aguarde só um pouquinho! Estou finalizando a anotação dos seus dados."
             ]
         },
         "confirmation": {
@@ -78,10 +87,10 @@
                 ["✅ Maravilha! <b>R$ ", "</b> adicionados à carteira com sucesso"]
             ],
             "verify_data": [
-                ["📊 Aqui estão os dados que você me passou:\n\n", "<b>👜 Carteira</b>: ", "<b>💵     Saldo</b>: ", "<b>📝  Função</b>: "]
+                ["📊 Aqui estão os dados que você me passou:\n\n", "<b>👜 Carteira</b>: ", "<b>💵     Saldo</b>: R$ ", "<b>📝  Função</b>: "]
             ],
             "yes_conclusion": [
-                "🎈 Tudo certinho! Agora eu posso te ajudar a administrar seus gastos!"
+                "✅ Tudo certinho! Agora você tem uma nova carteira a sua disposição!"
             ],
             "no_conclusion": [
                 "😔 Você cancelou... Podemos ter essa conversa novamente se você utilzar o comando "

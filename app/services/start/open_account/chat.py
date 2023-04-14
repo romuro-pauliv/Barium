@@ -151,9 +151,11 @@ class OpenAccountChat(object):
             f"\n{msg1[2]}{self.cache[chat_id][Schema.InternalCache.OPEN_ACCOUNT[1]]}"\
                 f"\n{msg1[3]}{self.cache[chat_id][Schema.InternalCache.OPEN_ACCOUNT[2]]}"
         
+        msg2_schema: list[str] = random_msg_from_list(self.response["quest"]["verify_data"])
+        
         send_messages: list[str] = [
             msg1_schema,
-            random_msg_from_list(self.response["quest"]["verify_data"])
+            f"{msg2_schema[0]}{self.config_commands['yn_response'][0]}{msg2_schema[1]}{self.config_commands['yn_response'][1]}{msg2_schema[2]}"
         ]
         
         for msg in send_messages:

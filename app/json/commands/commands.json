@@ -7,7 +7,7 @@
         "about_us": "/sobreNos"
     },
     "client_commands": {
-        "add_wallet": "/+Carteira",
+        "add_wallet": "/addCarteira",
         "add_movement": "/Movimentar",
         "my_balance": "/meuSaldo",
         "help": "/ajuda",
@@ -41,13 +41,31 @@
         },
         "client_commands": {
             "add_wallet": [
-                ["📍 <b>", "</b>:\n✅ Adicionar mais uma carteira\n\n"]
+                ["📍 <b>", "</b>:\n👜 Adicionar mais uma carteira\n\n"],
+                ["📍 <b>", "</b>:\n👜 Adicionar mais um lugar para guardar suas economias\n\n"],
+                ["📍 <b>", "</b>:\n👜 Incluir uma nova carteira na sua conta\n\n"],
+                ["📍 <b>", "</b>:\n👜 Criar um novo espaço para o seu dinheiro\n\n"],
+                ["📍 <b>", "</b>:\n👜 Colocar mais um cofrinho digital na sua lista\n\n"],
+                ["📍 <b>", "</b>:\n👜 Adicionar uma nova carteira\n\n"]
             ],
             "add_movement": [
-                ["📍 <b>", "</b>:\n✅ Adicionar um gasto ou crédito a uma carteira\n\n"]
+                ["📍 <b>", "</b>:\n📊 Adicionar um gasto ou crédito em uma carteira\n\n"],
+                ["📍 <b>", "</b>:\n📊 Registrar uma despesa ou crédito na carteira\n\n"],
+                ["📍 <b>", "</b>:\n📊 Inserir um gasto ou crédito na carteira\n\n"],
+                ["📍 <b>", "</b>:\n📊 Adicionar uma transação de débito ou crédito na carteira\n\n"],
+                ["📍 <b>", "</b>:\n📊 Adicionar um registro de gasto ou crédito na carteira\n\n"],
+                ["📍 <b>", "</b>:\n📊 Inserir uma transação de débito ou crédito na carteira\n\n"],
+                ["📍 <b>", "</b>:\n📊 Incluir um lançamento de despesa ou crédito na carteira\n\n"]
             ],
             "my_balance": [
-                ["📍 <b>", "</b>:\n✅ Ver relatório de todas as suas movimentações ou de uma carteira"]
+                ["📍 <b>", "</b>:\n📑 Ver relatório de todas as suas movimentações ou de uma carteira"],
+                ["📍 <b>", "</b>:\n📑 Visualizar o relatório de todas as movimentações ou de uma carteira"],
+                ["📍 <b>", "</b>:\n📑 Ver o resumo de todas as suas transações ou de uma carteira específica"],
+                ["📍 <b>", "</b>:\n📑 Acessar um resumo completo de todas as transações ou de uma carteira selecionada"],
+                ["📍 <b>", "</b>:\n📑 Analisar um relatório completo de todas as transações ou de uma carteira escolhida"],
+                ["📍 <b>", "</b>:\n📑 Checar o balanço completo de todas as movimentações ou de uma carteira selecionada"],
+                ["📍 <b>", "</b>:\n📑 Ver um relatório abrangente de todas as transações ou de uma carteira em específico"],
+                ["📍 <b>", "</b>:\n📑 Acompanhar todas as movimentações financeiras ou de uma carteira em particular"]
             ]
         }
     }

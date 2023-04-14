@@ -154,10 +154,12 @@ class AddWalletChat(object):
         msg1 += f"{msg1_schema[2]}{self.cache[chat_id][Schema.InternalCache.NEW_WALLET[1]]}\n"
         msg1 += f"{msg1_schema[3]}{self.cache[chat_id][Schema.InternalCache.NEW_WALLET[2]]}"
         
+        msg2_schema: list[str] = random_msg_from_list(response["quest"]["verify_data"])
+        msg2: str = f"{msg2_schema[0]}{self.config_commands[0]}{msg2_schema[1]}{self.config_commands[1]}{msg2_schema[2]}"
         
         send_messages: list[str] = [
             msg1,
-            random_msg_from_list(response["quest"]["verify_data"])
+            msg2
         ]
         
         for msg in send_messages:
@@ -195,5 +197,6 @@ class AddWalletChat(object):
         
         elif received_message == self.config_commands[1]:
             del self.cache[chat_id]
-            self.SendMessage(chat_id, random_msg_from_list(response["confirmation"]["no_conclusion"]))
+            msg1: list[str] = random_msg_from_list(response["confirmation"]["no_conclusion"])
+            self.SendMessage(chat_id, f"{msg1}{COMMANDS_LIST['add_wallet']}")
             return True

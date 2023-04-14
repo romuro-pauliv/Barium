@@ -46,10 +46,22 @@
                 "🚫 Vixi, essa pontuação tá me deixando meio zonza... Tenta escrever o saldo só com números, sem usar tantos pontos ou vírgulas, ok?\nEx.: 123.12 ou -45"
             ],
             "missing_info": [
-                "😉 Acho que você não quer me contar seu saldo... Dessa forma eu não consigo administrar seu dinheiro!"
+                "😑 Acho que você não quer me contar seu saldo... Dessa forma eu não consigo administrar seu dinheiro!",
+                "😑 Parece que você não quer compartilhar seu saldo comigo. Isso dificulta a minha capacidade de gerenciar seu dinheiro",
+                "😑 Acredito que você não queira me informar sobre o seu saldo. Assim, fica mais difícil eu administrar seu dinheiro",
+                "😑 Tenho a impressão de que você não quer me dizer seu saldo. Isso torna difícil eu cuidar do seu dinheiro adequadamente",
+                "😑 Me parece que você prefere não compartilhar seu saldo comigo. Isso pode tornar mais difícil eu administrar seu dinheiro de maneira correta",
+                "😑 Me parece que você não quer que eu saiba qual é o seu saldo. Infelizmente, isso pode afetar minha capacidade de gerenciar seu dinheiro de forma eficiente",
+                "😑 Acredito que você não queira me contar qual é o seu saldo. Infelizmente, isso pode atrapalhar minha habilidade em gerenciar seu dinheiro"
             ],
             "negative_value": [
-                "🙂 Hey, se o seu saldo é negativo, informe o hifen '-' no início do saldo.\nEx.: -251,10"
+                "🙂 Hey, se o seu saldo é negativo, informe o hifen '-' no início do saldo.\nExemplo: -251,10",
+                "🙂 Caso seu saldo esteja negativo, por favor coloque um hífen '-' no início.\nExemplo: -251,10",
+                "🙂 Caso seu saldo esteja no vermelho, informe um hífen '-' no início.\nExemplo: -251,10",
+                "🙂 Se o seu saldo estiver negativo, inclua um hífen '-' no início do valor.\nPor exemplo: -251,10",
+                "🙂 Se o seu saldo está no vermelho, coloque um hífen '-' no início do saldo.\nExemplo: -251,10",
+                "🙂 Caso o seu saldo esteja no vermelho, adicione um hífen '-' no começo.\nExemplo: -251,10",
+                "🙂 Caso seu saldo esteja negativo, por favor insira um hífen '-' no início do valor.\nExemplo: -251,10"
             ],
             "many_decimals": [
                 "🤯 Puts, é muita precisão aí pro meu cérebro... Vamos simplificar um pouco, pode informar só duas casas decimais?",
@@ -75,11 +87,15 @@
             "🙃 Ei, ei, não precisa ficar triste! Eu sei que fotos e emojis são legais, mas por enquanto só entendo palavras. Me ajuda a te entender melhor?",
             "😬 Uh oh, parece que eu não entendi essa mensagem! Lembre-se que só sou capaz de ler texto, nada de fotos ou símbolos diferentes, tá bom?"
         ],
-        "yes_no_response": [
-            "😑 Não entendi. Responda com ✅ /yes ou 🟥 /no"
-        ],
         "forbidden_wallet_name": [
-            "🚫 Você já utiliza esse nome em outra carteira! Por favor, utilize outro"
+            "🚫 Você já utiliza esse nome em outra carteira! Por favor, utilize outro",
+            "🚫 O nome que você escolheu já está em uso em outra carteira. Por favor, escolha outro nome",
+            "🚫 Esse nome já foi utilizado em outra carteira. Por favor, selecione outro nome",
+            "🚫 Desculpe, mas esse nome já está registrado em outra carteira. Por favor, selecione outro nome",
+            "🚫 Já existe uma carteira com esse nome. Por favor, escolha outro nome",
+            "🚫 Infelizmente, esse nome já foi usado em outra carteira. Por favor, escolha um nome diferente",
+            "🚫 Esse nome está sendo utilizado em outra carteira. Por favor, escolha outro nome disponível",
+            "🚫 Já existe uma carteira com o mesmo nome. Por favor, escolha um nome exclusivo"
         ]
     }
 }
