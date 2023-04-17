@@ -1,18 +1,18 @@
 # +--------------------------------------------------------------------------------------------------------------------|
-# |                                                                                            app.database.connect.py |
+# |                                                                               app.log.terminal.database.connect.py |
 # |                                                                                             Author: Pauliv, Rômulo |
 # |                                                                                          email: romulopauliv@bk.ru |
 # |                                                                                                    encoding: UTF-8 |
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from pymongo import MongoClient
-from dotenv import load_dotenv
-load_dotenv()
-import os
-
-from log.terminal.database.connect import DBConnectLog
+from colorama import Fore, Style
 # |--------------------------------------------------------------------------------------------------------------------|
 
-mongo_init: MongoClient = MongoClient(os.getenv("MONGO"))
-DBConnectLog.show(os.getenv("MONGO"))
+
+class DBConnectLog(object):
+    @staticmethod
+    def show(uri: str) -> None:
+        print(f"{Fore.MAGENTA}||| ")
+        print(f"{Fore.MAGENTA}||| MONGODB CONNECT: {Fore.CYAN}{uri}{Style.RESET_ALL}")
+        print(f"{Fore.MAGENTA}||| {Style.RESET_ALL}")

@@ -9,15 +9,16 @@
 from pathlib import Path, PosixPath
 from typing import Any
 import json
+from log.terminal.paths import PathsLog
 # |--------------------------------------------------------------------------------------------------------------------|
 
 class Tools:
     @staticmethod
     def read_json(path_: PosixPath) -> dict[str, Any]:
-        print(path_)
+        PathsLog.show(path_)
         with open(path_, 'r+') as file:
             data: dict[str, Any] = json.load(file)
-            file.close()
+            file.close(), PathsLog.close()
             
         return data
 

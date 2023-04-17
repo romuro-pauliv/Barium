@@ -1,18 +1,16 @@
 # +--------------------------------------------------------------------------------------------------------------------|
-# |                                                                                            app.database.connect.py |
+# |                                                                                  app.log.terminal.redis_connect.py |
 # |                                                                                             Author: Pauliv, Rômulo |
 # |                                                                                          email: romulopauliv@bk.ru |
 # |                                                                                                    encoding: UTF-8 |
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from pymongo import MongoClient
-from dotenv import load_dotenv
-load_dotenv()
-import os
-
-from log.terminal.database.connect import DBConnectLog
+from colorama import Fore, Style
 # |--------------------------------------------------------------------------------------------------------------------|
 
-mongo_init: MongoClient = MongoClient(os.getenv("MONGO"))
-DBConnectLog.show(os.getenv("MONGO"))
+
+class RedisConnectLog(object):
+    @staticmethod
+    def show(host: str, port: str, db: int) -> None:
+        print(f"{Fore.CYAN}REDIS{Style.RESET_ALL}: {host}:{Fore.CYAN}{port}{Fore.YELLOW} DB({db}){Style.RESET_ALL}")
