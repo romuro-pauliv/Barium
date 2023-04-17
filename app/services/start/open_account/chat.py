@@ -83,7 +83,7 @@ class OpenAccountChat(object):
         
         send_messages: list[str] = [
             f"{confirmation_msg_schema[0]}{received_message}{confirmation_msg_schema[1]}",
-            self.response["quest"]["amount_in_first_wallet"]
+            random_msg_from_list(self.response["quest"]["amount_in_first_wallet"])
         ]
         
         for msg in send_messages:

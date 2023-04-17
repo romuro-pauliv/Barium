@@ -7,6 +7,10 @@
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
 from config.paths import TelegramConfig
+from core.tools.threading_mode import run_in_background
+
+from log.terminal.messages import MessagesLog
+
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -49,6 +53,8 @@ class Telegram(object):
             message (str): sended message
         """
         params: dict[str, str] = {"chat_id": chat_id, "text": message, "parse_mode": "html"}
+        
+        run_in_background(MessagesLog.send_message, (chat_id, message,))
         
         try:
             self.request(self.endpoint['send_message'], "post", params)
