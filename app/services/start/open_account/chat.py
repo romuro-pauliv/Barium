@@ -14,7 +14,8 @@ from cache.schema.internal_cache import Schema
 from cache.redis_connect import Cache
 from views.start.commands.commands import COMMANDS_LIST
 
-from log.terminal.cache.internal.cache_variable import InternalCacheLog
+from log.terminal.cache.internal.methods import InternalCacheLog
+from log.terminal.cache.redis.methods import RedisCacheLog
 from database.services.open_account import MongoOpenAccount
 
 from typing import Any, Union
@@ -78,7 +79,7 @@ class OpenAccountChat(object):
             return False
         
         self.cache[chat_id] = {Schema.InternalCache.OPEN_ACCOUNT[0]: received_message}
-        InternalCacheLog.show_cache_input(chat_id, "OpenAccountChat", self.cache)
+        InternalCacheLog.post(chat_id, "OpenAccountChat", self.cache)
         
         confirmation_msg_schema: list[str] = random_msg_from_list(self.response["confirmation"]["open_first_wallet"])
         
@@ -110,7 +111,7 @@ class OpenAccountChat(object):
             return False
         
         self.cache[chat_id][Schema.InternalCache.OPEN_ACCOUNT[1]] = price_validation["value"]
-        InternalCacheLog.show_cache_input(chat_id, "OpenAccountChat", self.cache)
+        InternalCacheLog.post(chat_id, "OpenAccountChat", self.cache)
         
         msg1: str = random_msg_from_list(self.response["confirmation"]["amount_in_first_wallet"])
         
@@ -146,7 +147,7 @@ class OpenAccountChat(object):
             return False
         
         self.cache[chat_id][Schema.InternalCache.OPEN_ACCOUNT[2]] = received_message
-        InternalCacheLog.show_cache_input(chat_id, "OpenAccountChat", self.cache)
+        InternalCacheLog.post(chat_id, "OpenAccountChat", self.cache)
         
         msg1: list[str] = random_msg_from_list(self.response["confirmation"]["verify_data"])
         
@@ -176,12 +177,14 @@ class OpenAccountChat(object):
         if received_message == self.config_commands["yn_response"][0]:
             self.SendMessage(chat_id, random_msg_from_list(self.response["info"]["yes_conclusion"]))
             
+            InternalCacheLog.get(chat_id, "OpenAccountChat", self.cache)
             self.MongoOpenAccount.init_account(message, self.cache[chat_id])
+
             del self.cache[chat_id]
-            InternalCacheLog.show_cache_delete(chat_id, "OpenAccountChat", self.cache)
+            InternalCacheLog.delete(chat_id, "OpenAccountChat", self.cache)
             
-            Cache.TalkMode.open_account_branch.delete(chat_id)
-            Cache.TalkMode.log_in_branch.mset({chat_id: "active"})
+            Cache.TalkMode.open_account_branch.delete(chat_id), RedisCacheLog.delete(chat_id, "open_account_branch")
+            Cache.TalkMode.log_in_branch.mset({chat_id: "active"}), RedisCacheLog.post(chat_id, "log_in_branch")
             
             self.SendMessage(chat_id, random_msg_from_list(self.response["confirmation"]["yes_conclusion"]))
             
@@ -189,9 +192,9 @@ class OpenAccountChat(object):
         
         elif received_message == self.config_commands["yn_response"][1]:
             del self.cache[chat_id]
-            InternalCacheLog.show_cache_delete(chat_id, "OpenAccountChat", self.cache)
+            InternalCacheLog.delete(chat_id, "OpenAccountChat", self.cache)
             
-            Cache.TalkMode.open_account_branch.delete(chat_id)
+            Cache.TalkMode.open_account_branch.delete(chat_id), RedisCacheLog.delete(chat_id, "open_account_branch")
             
             msg: str = random_msg_from_list(self.response["confirmation"]["no_conclusion"])
             self.SendMessage(chat_id, f"{msg}{self.open_account_command}")

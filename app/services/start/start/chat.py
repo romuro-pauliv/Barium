@@ -41,8 +41,6 @@ class StartChat(object):
         
         help_msg: list[str] = random_msg_from_list(response['help'])
         
-        
-        
         send_message: list[str] = [
             f"{welcome_msg[0]}{username}{welcome_msg[1]}",
             random_msg_from_list(response["myself"]),

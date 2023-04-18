@@ -10,7 +10,7 @@ from redis import Redis, client
 from dotenv import load_dotenv
 load_dotenv()
 import os
-from log.terminal.cache.redis_connect import RedisConnectLog
+from log.terminal.cache.redis.redis_connect import RedisConnectLog
 # |--------------------------------------------------------------------------------------------------------------------|
 
 

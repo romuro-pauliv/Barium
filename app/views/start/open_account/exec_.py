@@ -10,6 +10,8 @@ from views.start.commands.commands import COMMANDS_LIST
 from services.start.open_account.chat import OpenAccountChat
 from cache.redis_connect import Cache
 
+from log.terminal.cache.redis.methods import RedisCacheLog
+
 from typing import Any, Callable
 # |--------------------------------------------------------------------------------------------------------------------|
 
@@ -24,19 +26,19 @@ class OpenAccountChatExec(object):
         response: bool = self.open_account.wallet_name_valid_and_amount_in_wallet(message)
         chat_id: str = message["chat_id"]
         if response == True:
-            Cache.TalkMode.open_account_branch.mset({chat_id: 1})
+            Cache.TalkMode.open_account_branch.mset({chat_id: 1}), RedisCacheLog.post(chat_id, "open_account_branch")
     
     def cache_1_mode(self, message: dict[str, Any]) -> None:
         response: bool = self.open_account.amount_in_wallet_valid_and_wallet_obs(message)
         chat_id: str = message["chat_id"]
         if response == True:
-            Cache.TalkMode.open_account_branch.mset({chat_id: 2})
+            Cache.TalkMode.open_account_branch.mset({chat_id: 2}), RedisCacheLog.post(chat_id, "open_account_branch")
     
     def cache_2_mode(self, message: dict[str, Any]) -> None:
         response: bool = self.open_account.wallet_obs_valid_and_verify_info(message)
         chat_id: str = message["chat_id"]
         if response == True:
-            Cache.TalkMode.open_account_branch.mset({chat_id: 3})
+            Cache.TalkMode.open_account_branch.mset({chat_id: 3}), RedisCacheLog.post(chat_id, "open_account_branch")
     
     def cache_3_mode(self, message: dict[str, Any]) -> None:
         response: bool = self.open_account.verify_response_and_create_account(message)
@@ -66,4 +68,4 @@ class OpenAccountChatExec(object):
             self.in_execution.append(chat_id)
             self.open_account.open_first_wallet(message)
             self.in_execution.remove(chat_id)
-            Cache.TalkMode.open_account_branch.mset({chat_id: 0})
+            Cache.TalkMode.open_account_branch.mset({chat_id: 0}), RedisCacheLog.post(chat_id, "open_account_branch")

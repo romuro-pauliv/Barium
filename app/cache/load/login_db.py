@@ -9,7 +9,7 @@
 from cache.redis_connect import Cache
 from database.connect import mongo_init
 
-from log.terminal.cache.login_cached import LoginCachedLog
+from log.terminal.cache.redis.login_cached import LoginCachedLog
 # |--------------------------------------------------------------------------------------------------------------------|
 
 
