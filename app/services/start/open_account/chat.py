@@ -72,6 +72,12 @@ class OpenAccountChat(object):
         chat_id: str = message["chat_id"]
         received_message: Union[str, list[str, bool]] = message["text"]
         
+        if self.text_validation.no_dot(message) == False:
+            return False
+        
+        if self.text_validation.no_cash(message) == False:
+            return False
+        
         if self.text_validation.no_slash(message) == False:
             return False
         

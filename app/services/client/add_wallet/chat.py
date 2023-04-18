@@ -80,6 +80,12 @@ class AddWalletChat(object):
             RedisCacheLog.delete(chat_id, 'add_wallet_branch')
             return False
         
+        if self.text_validation.no_dot(message) == False:
+            return False
+
+        if self.text_validation.no_cash(message) == False:
+            return False
+        
         if self.text_validation.no_slash(message) == False:
             return False
         

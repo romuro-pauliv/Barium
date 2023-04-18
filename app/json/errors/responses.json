@@ -12,6 +12,30 @@
             "🚫 Barra '/' não vale aqui! Pode me dizer sua resposta de novo sem ela?", 
             "🚫 Desculpa, parece que a barra '/' não está rolando. Tem como você me dizer sua resposta sem ela?" 
         ],
+        "no_dot": [
+            "🚫 Vish! Não pode conter '.' nessa resposta. Tente outra vez sem '.'",
+            "🚫 Acho que nossa conversa não curte muito um ponto '.'. Pode me dizer de novo, sem ele?",
+            "🚫 Opa, opa, opa! Parece que o ponto '.' não é nosso amigo aqui. Será que você pode me responder de outra forma?", 
+            "🚫 Nada de pontos '.' por aqui! Vamos tentar novamente sem ele?", 
+            "🚫 Ei, ei, ei! O ponto '.' não é permitido por aqui. Dá pra tentar novamente sem ele?", 
+            "🚫 Ah, o ponto '.' não é bem-vindo por aqui. Pode me dizer sua resposta sem ele?", 
+            "🚫 Ops! Não é possível usar o ponto '.'. Que tal me contar sua resposta sem ele?", 
+            "🚫 Poxa, o ponto '.' não é bem aceito por aqui. Tem como você me falar sua resposta de outra forma?", 
+            "🚫 Ponto '.' não vale aqui! Pode me dizer sua resposta de novo sem ele?", 
+            "🚫 Desculpa, parece que o ponto '.' não está rolando. Tem como você me dizer sua resposta sem ele?" 
+        ],
+        "no_cash": [
+            "🚫 Vish! Não pode conter '$' nessa resposta. Tente outra vez sem '$'",
+            "🚫 Acho que nossa conversa não curte muito um cifrão '$'. Pode me dizer de novo, sem ele?",
+            "🚫 Opa, opa, opa! Parece que '$' não é nosso amigo aqui. Será que você pode me responder de outra forma?", 
+            "🚫 Nada de '$' por aqui! Vamos tentar novamente sem ele?", 
+            "🚫 Ei, ei, ei! '$' não é permitido por aqui. Dá pra tentar novamente sem ele?", 
+            "🚫 Ah, '$' não é bem-vindo por aqui. Pode me dizer sua resposta sem ele?", 
+            "🚫 Ops! Não é possível usar '$'. Que tal me contar sua resposta sem ele?", 
+            "🚫 Poxa, '$' não é bem aceito por aqui. Tem como você me falar sua resposta de outra forma?", 
+            "🚫 '$' não vale aqui! Pode me dizer sua resposta de novo sem ele?", 
+            "🚫 Desculpa, parece que '$' não está rolando. Tem como você me dizer sua resposta sem ele?" 
+        ],
         "count_character": [
             "😑 Tô com preguiça de ler esse texto enorme! Diminua sua resposta 💅",
             "🤯 Calma aí Sua resposta tá maior que a minha fome de pizza. Diminui ela um pouquinho, vai?",

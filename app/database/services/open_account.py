@@ -22,6 +22,7 @@ from log.database.model import log
 class MongoOpenAccount(object):
     def __init__(self) -> None:
         self.mongo: MongoClient = mongo_init
+        self.log = log
     
     def open_database(self, chat_id: str, username: str) -> None:
         database_name: str = f"AYLA_{chat_id}"

@@ -35,6 +35,30 @@ class TextValidation(object):
             self.SendMessage(chat_id, random_msg_from_list(self.response["only_text"]))
             return False
     
+    def no_dot(self, message: dict[str, str]) -> bool:
+        chat_id: str = message["chat_id"]
+        received_message: str = message["text"]
+        
+        if isinstance(received_message, str):
+            if "." in received_message:
+                self.SendMessage(chat_id, random_msg_from_list(self.response["no_dot"]))
+                return False
+            return True
+        else:
+            self.SendMessage(chat_id, random_msg_from_list(self.response["only_text"]))
+    
+    def no_cash(self, message: dict[str, str]) -> bool:
+        chat_id: str = message["chat_id"]
+        received_message: str = message["text"]
+        
+        if isinstance(received_message, str):
+            if "$" in received_message:
+                self.SendMessage(chat_id, random_msg_from_list(self.response["no_cash"]))
+                return False
+            return True
+        else:
+            self.SendMessage(chat_id, random_msg_from_list(self.response["only_text"]))
+    
     def count_character(self, message: dict[str, str], n_char: int = 30) -> bool:
         chat_id: str = message["chat_id"]
         received_message: str = message["text"]
