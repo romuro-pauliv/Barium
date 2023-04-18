@@ -15,20 +15,13 @@ from cache.schema.internal_cache import Schema
 
 from log.terminal.database.open_account.show import OpenAccountLog
 from log.terminal.database.log.show import LogDBLog
+from log.database.model import log
 # |--------------------------------------------------------------------------------------------------------------------|
 
 
 class MongoOpenAccount(object):
     def __init__(self) -> None:
         self.mongo: MongoClient = mongo_init
-    
-    def log(self, chat_id: str, username: str, log_key: str) -> dict[str, Union[str, datetime.datetime]]:
-        return {
-            "datetime": datetime.datetime.utcnow(),
-            "chat_id": chat_id,
-            "username":  username,
-            "log": log_key
-        }
     
     def open_database(self, chat_id: str, username: str) -> None:
         database_name: str = f"AYLA_{chat_id}"
