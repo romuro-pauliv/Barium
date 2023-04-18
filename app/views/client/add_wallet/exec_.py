@@ -9,6 +9,7 @@
 from views.client.commands.commands import COMMANDS_LIST
 from services.client.add_wallet.chat import AddWalletChat
 from cache.redis_connect import Cache
+from log.terminal.cache.redis.methods import RedisCacheLog
 
 from typing import Any, Callable
 # |--------------------------------------------------------------------------------------------------------------------|
@@ -24,25 +25,25 @@ class AddWalletChatExec(object):
         response: bool = self.add_wallet.wallet_name_valid_and_request_amount(message)
         chat_id: str = message["chat_id"]
         if response == True:
-            Cache.TalkMode.add_wallet_branch.mset({chat_id: 1})
+            Cache.TalkMode.add_wallet_branch.mset({chat_id: 1}), RedisCacheLog.post(chat_id, "add_wallet_branch")
     
     def cache_1_mode(self, message: dict[str, Any]) -> None:
         response: bool = self.add_wallet.wallet_amount_valid_and_request_obs(message)
         chat_id: str = message["chat_id"]
         if response == True:
-            Cache.TalkMode.add_wallet_branch.mset({chat_id: 2})
+            Cache.TalkMode.add_wallet_branch.mset({chat_id: 2}), RedisCacheLog.post(chat_id, "add_wallet_branch")
     
     def cache_2_mode(self, message: dict[str, Any]) -> None:
         response: bool = self.add_wallet.obs_valid_and_request_verify_data(message)
         chat_id: str = message["chat_id"]
         if response == True:
-            Cache.TalkMode.add_wallet_branch.mset({chat_id: 3})
+            Cache.TalkMode.add_wallet_branch.mset({chat_id: 3}), RedisCacheLog.post(chat_id, "add_wallet_branch")
     
     def cache_3_mode(self, message: dict[str, Any]) -> None:
         response: bool = self.add_wallet.verify_data_valid_and_conclusion(message)
         chat_id: str = message["chat_id"]
         if response == True:
-            Cache.TalkMode.add_wallet_branch.delete(chat_id)
+            Cache.TalkMode.add_wallet_branch.delete(chat_id), RedisCacheLog.delete(chat_id, "add_wallet_branch")
     
     def exec_in_cache(self, message: dict[str, Any]) -> None:
         chat_id: str = message["chat_id"]
@@ -69,4 +70,4 @@ class AddWalletChatExec(object):
             self.in_execution.append(chat_id)
             self.add_wallet.open_new_wallet(message)
             self.in_execution.remove(chat_id)
-            Cache.TalkMode.add_wallet_branch.mset({chat_id: 0})
+            Cache.TalkMode.add_wallet_branch.mset({chat_id: 0}), RedisCacheLog.post(chat_id, "add_wallet_branch")

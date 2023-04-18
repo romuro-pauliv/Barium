@@ -15,7 +15,8 @@ from cache.schema.internal_cache import Schema
 from cache.redis_connect import Cache
 from views.client.commands.commands import COMMANDS_LIST
 from database.functions.db_func import POST
-
+from log.terminal.cache.internal.methods import InternalCacheLog
+from log.terminal.cache.redis.methods import RedisCacheLog
 from typing import Any, Union
 # |--------------------------------------------------------------------------------------------------------------------|
 
@@ -76,6 +77,7 @@ class AddWalletChat(object):
         
         if self.condition_validation.stop_response(message) == False:
             Cache.TalkMode.add_wallet_branch.delete(chat_id)
+            RedisCacheLog.delete(chat_id, 'add_wallet_branch')
             return False
         
         if self.text_validation.no_slash(message) == False:
@@ -88,6 +90,7 @@ class AddWalletChat(object):
             return False
         
         self.cache[chat_id] = {Schema.InternalCache.NEW_WALLET[0]: received_message}
+        InternalCacheLog.post(chat_id, "AddWalletChat", self.cache)
         
         msg1_schema: str = random_msg_from_list(response["confirmation"]["open_new_wallet"])
         
@@ -117,8 +120,13 @@ class AddWalletChat(object):
         received_message: str = message["text"]
         
         if self.condition_validation.stop_response(message) == False:
+            
             Cache.TalkMode.add_wallet_branch.delete(chat_id)
+            RedisCacheLog.delete(chat_id, 'add_wallet_branch')
+            
             del self.cache[chat_id]
+            InternalCacheLog.delete(chat_id, "AddWalletChat", self.cache)
+            
             return False
         
         new_value: dict[str, Union[str, float]] = self.value_validation.price(chat_id, received_message)
@@ -126,6 +134,7 @@ class AddWalletChat(object):
             return False
         
         self.cache[chat_id][Schema.InternalCache.NEW_WALLET[1]] = new_value["value"]
+        InternalCacheLog.post(chat_id, "AddWalletChat", self.cache)
         
         msg1_schema: str = random_msg_from_list(response["confirmation"]["amount_in_new_wallet"])
         
@@ -155,14 +164,19 @@ class AddWalletChat(object):
         received_message: str = message["text"]
         
         if self.condition_validation.stop_response(message) == False:
+            
             Cache.TalkMode.add_wallet_branch.delete(chat_id)
+            RedisCacheLog.delete(chat_id, 'add_wallet_branch')
+            
             del self.cache[chat_id]
+            InternalCacheLog.delete(chat_id, "AddWalletChat", self.cache)
             return False
         
         if self.text_validation.count_character(message, 100) == False:
             return False
         
         self.cache[chat_id][Schema.InternalCache.NEW_WALLET[2]] = received_message
+        InternalCacheLog.post(chat_id, "AddWalletChat", self.cache)
         
         msg1_schema: list[str] = random_msg_from_list(response["confirmation"]["verify_data"])
         msg1: str = f"{msg1_schema[0]}{msg1_schema[1]}{self.cache[chat_id][Schema.InternalCache.NEW_WALLET[0]]}\n"
@@ -205,13 +219,18 @@ class AddWalletChat(object):
             self.SendMessage(chat_id, random_msg_from_list(response["info"]["yes_conclusion"]))
             
             POST.add_wallet(chat_id, username, self.cache[chat_id])
+            
             del self.cache[chat_id]
+            InternalCacheLog.delete(chat_id, "AddWalletChat", self.cache)
             
             self.SendMessage(chat_id, random_msg_from_list(response["confirmation"]["yes_conclusion"]))
             return True
         
         elif received_message == self.config_commands[1]:
+            
             del self.cache[chat_id]
+            InternalCacheLog.delete(chat_id, "AddWalletChat", self.cache)
+            
             msg1: str = random_msg_from_list(response["confirmation"]["no_conclusion"])
             self.SendMessage(chat_id, f"{msg1}{COMMANDS_LIST['add_wallet']}")
             return True
