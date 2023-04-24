@@ -12,10 +12,12 @@ from services.tools.tools import random_msg_from_list
 from models.models import TextValidation, ValueValidation, ConditionValidation
 from cache.schema.internal_cache import Schema
 from cache.redis_connect import Cache
+from cache.load.login_db import session
 from views.start.commands.commands import COMMANDS_LIST
 
 from log.terminal.cache.internal.methods import InternalCacheLog
 from log.terminal.cache.redis.methods import RedisCacheLog
+from log.terminal.cache.internal.sessions import InternalSession
 from database.services.open_account import MongoOpenAccount
 
 from typing import Any, Union
@@ -190,7 +192,7 @@ class OpenAccountChat(object):
             InternalCacheLog.delete(chat_id, "OpenAccountChat", self.cache)
             
             Cache.TalkMode.open_account_branch.delete(chat_id), RedisCacheLog.delete(chat_id, "open_account_branch")
-            Cache.TalkMode.log_in_branch.mset({chat_id: "active"}), RedisCacheLog.post(chat_id, "log_in_branch")
+            session.append(chat_id), InternalSession.post(chat_id, session)
             
             self.SendMessage(chat_id, random_msg_from_list(self.response["confirmation"]["yes_conclusion"]))
             

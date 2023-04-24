@@ -22,8 +22,6 @@ class Cache:
         open_account_branch: client.Redis = Redis(HOST, PORT, db=0)
         RedisConnectLog.show(HOST, PORT, "0")
         
-        log_in_branch: client.Redis = Redis(HOST, PORT, db=1)
-        RedisConnectLog.show(HOST, PORT, "1")
         add_wallet_branch: client.Redis = Redis(HOST, PORT, db=2)
         RedisConnectLog.show(HOST, PORT, "2")
         

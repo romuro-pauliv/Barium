@@ -1,30 +1,23 @@
 # +--------------------------------------------------------------------------------------------------------------------|
-# |                                                                                         app.cache.load.login_db.py |
+# |                                                                                 app.log.cache.internal.sessions.py |
 # |                                                                                             Author: Pauliv, Rômulo |
 # |                                                                                          email: romulopauliv@bk.ru |
 # |                                                                                                    encoding: UTF-8 |
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from cache.redis_connect import Cache
-from database.connect import mongo_init
-
-from log.terminal.cache.redis.login_cached import LoginCachedLog
+from colorama import Fore, Style
+from typing import Any
+import sys
 # |--------------------------------------------------------------------------------------------------------------------|
 
-session: list[str] = []
 
-def loading_user_in_cache() -> None:
-    database_list: list[str] = mongo_init.list_database_names()
-    chat_id_list: list[str] = []
-    for db in database_list:
-        LoginCachedLog.read(db)
-        if db[0:5] == "AYLA_":
-            chat_id_list.append(db[5::])
-            LoginCachedLog.active()
-        else:
-            LoginCachedLog.false()
-    
-    for chat_id in chat_id_list:
-        session.append(chat_id)
-        LoginCachedLog.add_in_cache(chat_id)
+class InternalSession(object):
+    @staticmethod
+    def post(chat_id: str, var: Any) -> None:
+        cache_info: str = f"| {Fore.YELLOW}[SESSION]{Style.RESET_ALL}"
+        chat_id_terminal: str = f"{Fore.MAGENTA}@{chat_id}{Style.RESET_ALL}"
+        input_terminal: str = f"[{Fore.LIGHTYELLOW_EX}PST{Style.RESET_ALL}]"    
+        bytes_terminal: str = f"SIZE: [{Fore.YELLOW}{str(sys.getsizeof(var))}B{Style.RESET_ALL}]"
+        
+        print(f"{input_terminal} {chat_id_terminal} {cache_info} {bytes_terminal}")

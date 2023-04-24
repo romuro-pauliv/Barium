@@ -9,7 +9,7 @@
 from typing import Any
 from time import sleep
 from cache.redis_connect import Cache
-from cache.load.login_db import loading_user_in_cache
+from cache.load.login_db import loading_user_in_cache, session
 from core.messages.schema import FIRST_EXEC, LOGIN_EXEC
 from log.terminal.messages import MessagesLog
 from core.tools.threading_mode import run_in_background
@@ -29,7 +29,7 @@ while True:
             
             run_in_background(MessagesLog.received_message, (data["chat_id"], data["text"], ))
             
-            if Cache.TalkMode.log_in_branch.get(str(id_)):
+            if str(id_) in session:
                 if Cache.TalkMode.add_wallet_branch.get(str(id_)):
                     LOGIN_EXEC.add_wallet_command(data)
                     continue

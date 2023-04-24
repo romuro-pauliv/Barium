@@ -9,6 +9,7 @@ from core.tools.threading_mode import run_in_background
 from typing import Any, Callable
 
 from cache.redis_connect import Cache
+from cache.load.login_db import session
 
 # | Start Method |-----------------------------------------------------------------------------------------------------|
 from views.start.start.exec_ import StartChatExec
@@ -48,7 +49,7 @@ class FIRST_EXEC:
     @staticmethod
     def open_account_command(chat_id: int, data: dict[str, Any]) -> None:
         run_in_background(OpenAccountChatExec_.exec_in_cache, (data,))
-        if Cache.TalkMode.log_in_branch.get(chat_id):
+        if chat_id in session:
             Cache.TalkMode.open_account_branch.delete(chat_id)
 
 
