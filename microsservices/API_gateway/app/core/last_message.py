@@ -6,7 +6,6 @@
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from config.paths import TelegramConfig
 from api.api_requests import TelegramApiRequest
 
 from typing import Any, Union
