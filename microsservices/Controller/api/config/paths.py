@@ -1,5 +1,5 @@
 # +--------------------------------------------------------------------------------------------------------------------|
-# |                                                                                                app.config.paths.py |
+# |                                                                                                api.config.paths.py |
 # |                                                                                             Author: Pauliv, Rômulo |
 # |                                                                                          email: romulopauliv@bk.ru |
 # |                                                                                                    encoding: UTF-8 |
@@ -30,13 +30,5 @@ class Tools:
 
 
 class TelegramConfig:
-    telegram_api_data: PosixPath = Path("app", "json", "telegram_api.json")
-    TELEGRAM_API_DATA: dict[str, Any] = Tools.read_json(telegram_api_data)
-    
-class MicrosservicesAPI:
-    controller_route: PosixPath = Path("app", "json", "controller_route.json")
-    CONTROLLER_ROUTE: dict[str, Any] = Tools.read_json(controller_route)
-    
-class ErrorMessages:
-    error_message: PosixPath = Path("app", "json", "error_message.json")
-    ERROR_MESSAGE: dict[str, Any] = Tools.read_json(error_message)
+    ms_routes: PosixPath = Path("api", "json", "ms_routes.json")
+    MS_ROUTES: dict[str, Any] = Tools.read_json(ms_routes)

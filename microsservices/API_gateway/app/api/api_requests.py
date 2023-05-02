@@ -35,3 +35,16 @@ class TelegramApiRequest(object):
         
         response: requests.models.Response = eval(f"requests.{HTTP_method}('{self.uri}{API_method}', params={params})")
         return response.json()
+    
+    def send_message(self, chat_id: str, message: str) -> None:
+        """
+        Send a text message to client for chat_id
+        Args:
+            chat_id (str): talk chat_id
+            message (str): sended message
+        """
+        params: dict[str, str] = {"chat_id": chat_id, "text": message, "parse_mode": "html"}
+        try:
+            self.api_request("/sendMessage", "post", params)
+        except requests.exceptions.ConnectionError:
+            pass
