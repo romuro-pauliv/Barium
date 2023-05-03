@@ -24,7 +24,15 @@ class SendToController(object):
     def post(self, message_data: dict[str, Any]) -> None:
         try:
             requests.post(f"{self.host}:{self.port}{self.dir}", json=message_data)
+            
+            log_schema: list[str] = LogSchema.LOG_REPORT_MSG["controller"]["sent_to_controller"]
+            SendToLog().report(log_schema[0], log_schema[1], message_data["chat_id"])
+            
         except requests.exceptions.ConnectionError:
             system_down_message(message_data["chat_id"])
+            
             log_schema: list[str] = LogSchema.LOG_REPORT_MSG["controller"]["no_connection"]
+            SendToLog().report(log_schema[0], log_schema[1], message_data["chat_id"])
+            
+            log_schema: list[str] = LogSchema.LOG_REPORT_MSG["telegram_api"]["error_message"]
             SendToLog().report(log_schema[0], log_schema[1], message_data["chat_id"])

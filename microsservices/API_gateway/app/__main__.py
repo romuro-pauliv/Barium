@@ -8,6 +8,10 @@
 # | Imports |----------------------------------------------------------------------------------------------------------|
 from core.last_message import Core
 from connections.send_controller import SendToController
+
+from connections.send_log import SendToLog
+from config.paths import LogSchema
+
 import threading
 # |--------------------------------------------------------------------------------------------------------------------|
 
@@ -20,9 +24,11 @@ while True:
             data = last_message[id_]
             data["chat_id"] = str(id_)
             
-            # POST in controller API |---------------------------------------------------------------------------------|
-            post_task: threading.Thread = threading.Thread(target=SendToController().post, args=(data,))
-            post_task.start()
+            # POST in log API |----------------------------------------------------------------------------------------|
+            log_schema: list[str] = LogSchema.LOG_REPORT_MSG["telegram_api"]["received_update"]
+            threading.Thread(target=SendToLog().report, args=(log_schema[0], log_schema[1], str(id_),)).start()
             # |--------------------------------------------------------------------------------------------------------|
             
-            print(data)
+            # POST in controller API |---------------------------------------------------------------------------------|
+            threading.Thread(target=SendToController().post, args=(data,)).start()
+            # |--------------------------------------------------------------------------------------------------------|

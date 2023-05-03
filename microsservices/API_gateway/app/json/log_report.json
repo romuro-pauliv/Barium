@@ -1,5 +1,10 @@
 {
     "controller": {
-        "no_connection": ["No connection with Controller [127.0.0.1:5002/controller/]", "warning"]
+        "no_connection": ["No connection with Controller [127.0.0.1:5000/controller/]", "warning"],
+        "sent_to_controller": ["Sent message data to the Controller [127.0.0.1:5000/controller/]", "info"]
+    },
+    "telegram_api": {
+        "received_update": ["Received a update from http://api.telegram.org/bot", "info"],
+        "error_message": ["Sent an error message to the user", "info"]
     }
 }

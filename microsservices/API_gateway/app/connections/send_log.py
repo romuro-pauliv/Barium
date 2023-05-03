@@ -27,12 +27,15 @@ class SendToLog(object):
             LOG_LEVEL (str): Log level ["debug", "info", "warning", "error", "critical"]
             chat_id (str): chat_id generator of the log report
         """
-        debug_endpoint: str = MicrosservicesAPI.MS_ROUTES["logs"]["ENDPOINTS"][LOG_LEVEL]
         send_json: dict[str] = {
             "report": REPORT,
             "extra": {"microservice": "GATEWAY", "clientip": "LOCAL", "chat_id": chat_id}
         }
+        
+        debug_endpoint: str = MicrosservicesAPI.MS_ROUTES["logs"]["ENDPOINTS"][LOG_LEVEL]
+        request_uri: str = f"{self.host}:{self.port}{self.dir}{debug_endpoint}"
+        
         try:
-            requests.post(f"{self.host}:{self.port}{self.dir}{debug_endpoint}", json=send_json)
+            requests.post(request_uri, json=send_json)
         except requests.exceptions.ConnectionError:
                 pass
