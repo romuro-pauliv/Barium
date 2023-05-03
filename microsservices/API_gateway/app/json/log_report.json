@@ -1,0 +1,5 @@
+{
+    "controller": {
+        "no_connection": ["No connection with Controller [127.0.0.1:5002/controller/]", "warning"]
+    }
+}

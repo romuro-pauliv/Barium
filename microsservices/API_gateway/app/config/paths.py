@@ -34,9 +34,13 @@ class TelegramConfig:
     TELEGRAM_API_DATA: dict[str, Any] = Tools.read_json(telegram_api_data)
     
 class MicrosservicesAPI:
-    controller_route: PosixPath = Path("app", "json", "controller_route.json")
-    CONTROLLER_ROUTE: dict[str, Any] = Tools.read_json(controller_route)
+    ms_routes: PosixPath = Path("app", "json", "ms_routes.json")
+    MS_ROUTES: dict[str, Any] = Tools.read_json(ms_routes)
     
 class ErrorMessages:
     error_message: PosixPath = Path("app", "json", "error_message.json")
     ERROR_MESSAGE: dict[str, Any] = Tools.read_json(error_message)
+
+class LogSchema:
+    log_report_msg: PosixPath = Path("app", "json", "log_report.json")
+    LOG_REPORT_MSG: dict[str, Any] = Tools.read_json(log_report_msg)
