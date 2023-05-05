@@ -10,6 +10,8 @@ from api.database.mongodb_connect import init_db
 from pymongo import MongoClient
 from api.connections.send_log import SendToLog
 from api.config.paths import LogSchema
+
+import threading
 # |--------------------------------------------------------------------------------------------------------------------|
 
 mongo: MongoClient = init_db()
@@ -28,8 +30,22 @@ class Session(object):
         for db in self.database_list:
             if db[0:5] == "AYLA_":
                 self.session.append(db[5::])
-                self.send_to_log.report(self.add_session[0], self.add_session[1], db[5::])
+                
+                # Send to LOG MS in another Thread |-------------------------------------------------------------------|
+                threading.Thread(
+                    target=self.send_to_log.report, args=(
+                        self.add_session[0], self.add_session[1], db[5::],
+                    )
+                ).start()
+                # |----------------------------------------------------------------------------------------------------|
+            
             else:
-                self.send_to_log.report(self.no_identify_session[0], self.no_identify_session[1], db)
-        
+                # Send to LOG MS in another Thread |-------------------------------------------------------------------|
+                threading.Thread(
+                    target=self.send_to_log.report, args=(
+                        self.no_identify_session[0], self.no_identify_session[1], db,
+                    )
+                ).start()
+                # |-----------------------------------------------------------------------------------------------------|
+                
         return self.session

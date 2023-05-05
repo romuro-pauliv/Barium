@@ -1,4 +1,14 @@
 {
-    "starting": "http://127.0.0.1:5001/start/",
-    "client": "http://127.0.0.1:5002/client/"
+    "data_loading": {
+        "HOST": "http://127.0.0.1", "PORT": "5002", "DIR": "/session/"
+    },
+    "logs": {
+        "HOST": "http://127.0.0.1", "PORT": "5001", "DIR": "/log", "ENDPOINTS": {
+            "debug": "/debug",
+            "info": "/info",
+            "warning": "/warning",
+            "error": "/error",
+            "critial": "/critial"
+        }
+    }
 }
