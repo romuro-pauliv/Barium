@@ -36,3 +36,11 @@ class MicrosservicesAPI:
 class LogSchema:
     log_report_msg: PosixPath = Path("api", "json", "log_report.json")
     LOG_REPORT_MSG: dict[str, Any] = Tools.read_json(log_report_msg)
+
+class TelegramConfig:
+    telegram_api_data: PosixPath = Path("api", "json", "telegram_api.json")
+    TELEGRAM_API_DATA: dict[str, Any] = Tools.read_json(telegram_api_data)
+
+class ErrorMessages:
+    error_message: PosixPath = Path("api", "json", "error_message.json")
+    ERROR_MESSAGE: dict[str, Any] = Tools.read_json(error_message)

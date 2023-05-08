@@ -2,5 +2,8 @@
     "connections": {
         "get_session_failed": ["Failed connection with DataLoading [127.0.0.1:5002]", "error", "INTERNAL"],
         "get_session_completed": ["Completed connection with DataLoading [127.0.0.1:5002]", "info", "INTERNAL"]
+    },
+    "telegram_api": {
+        "error_message": ["Sent an error message to the user", "warning"]
     }
 }
