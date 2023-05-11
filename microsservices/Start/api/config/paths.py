@@ -32,3 +32,6 @@ class Tools:
 class MicrosservicesAPI:
     ms_routes: PosixPath = Path("api", "json", "ms_routes.json")
     MS_ROUTES: dict[str, Any] = Tools.read_json(ms_routes)
+    
+    commands: PosixPath = Path("api", "json", "commands.json")
+    COMMANDS: dict[str, Any] = Tools.read_json(commands)

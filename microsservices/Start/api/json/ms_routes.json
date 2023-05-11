@@ -10,5 +10,19 @@
             "error": "/error",
             "critial": "/critial"
         }
+    },
+    "sub_services": {
+        "start": {
+            "HOST": "http://127.0.0.1", "PORT": "5010", "DIR": "/start"
+        },
+        "help": {
+            "HOST": "http://127.0.0.1", "PORT": "5011", "DIR": "/help"
+        },
+        "about_us": {
+            "HOST": "http://127.0.0.1", "PORT": "5012", "DIR": "/about_us"
+        },
+        "open_account": {
+            "HOST": "http://127.0.0.1", "PORT": "5013", "DIR": "/open_account"
+        }
     }
 }

@@ -11,7 +11,7 @@ from typing import Union
 # |--------------------------------------------------------------------------------------------------------------------|
 
 
-def create_app(test_config: Union[bool, None]) -> Flask:
+def create_app(test_config: Union[bool, None] = None) -> Flask:
     app = Flask(__name__, instance_relative_config=True)
     
     app.config.from_mapping()
@@ -24,7 +24,7 @@ def create_app(test_config: Union[bool, None]) -> Flask:
     
     # Blueprints |-----------------------------------------------------------------------------------------------------|
     from .routes.receiver import bp
-        
+    app.register_blueprint(bp, url_prefix="/start")
     # |----------------------------------------------------------------------------------------------------------------|
     
     return app
