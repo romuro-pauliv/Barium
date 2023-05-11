@@ -23,6 +23,9 @@
         },
         "open_account": {
             "HOST": "http://127.0.0.1", "PORT": "5013", "DIR": "/open_account"
+        },
+        "null": {
+            "HOST": "http://127.0.0.1", "PORT": "5020", "DIR": "/null"
         }
     }
 }

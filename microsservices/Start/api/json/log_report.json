@@ -1,0 +1,9 @@
+{
+    "connections": {
+        "ms_message_response": ["Sent message to the ", "info"],
+        "failed_ms_message_response": ["Failed connection with ", "error"]
+    },
+    "telegram_api": {
+        "error_message": ["Sent an error message to the user", "warning"]
+    }
+}
