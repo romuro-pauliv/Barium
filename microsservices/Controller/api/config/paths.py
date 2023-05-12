@@ -31,8 +31,11 @@ class Tools:
 
 class MicrosservicesAPI:
     ms_routes: PosixPath = Path("api", "json", "ms_routes.json")
+    who_am_i: PosixPath = Path("api", "json", "whoami.json")
+    
     MS_ROUTES: dict[str, Any] = Tools.read_json(ms_routes)
-
+    WHO_AM_I: dict[str, str] = Tools.read_json(who_am_i)
+    
 class LogSchema:
     log_report_msg: PosixPath = Path("api", "json", "log_report.json")
     LOG_REPORT_MSG: dict[str, Any] = Tools.read_json(log_report_msg)

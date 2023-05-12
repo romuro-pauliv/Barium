@@ -16,7 +16,9 @@ class SendToLog(object):
         """
         Loading Log route data to use with Log microservice
         """
+        self.who_am_i: dict[str, str] = MicrosservicesAPI.WHO_AM_I
         self.log_route_data: dict[str, str] = MicrosservicesAPI.MS_ROUTES["logs"]
+        
         self.host: str = self.log_route_data["HOST"]
         self.port: str = self.log_route_data["PORT"]
         self.dir: str = self.log_route_data["DIR"]
@@ -31,7 +33,11 @@ class SendToLog(object):
         """
         send_json: dict[str] = {
             "report": REPORT,
-            "extra": {"microservice": "DATALOADING", "clientip": "127.0.0.1:5002", "chat_id": chat_id}
+            "extra": {
+                "microservice": self.who_am_i["NAME"],
+                "clientip": str(self.who_am_i["HOST"] + ":" + self.who_am_i["PORT"]),
+                "chat_id": chat_id
+            }
         }
         
         debug_endpoint: str = self.log_route_data["ENDPOINTS"][LOG_LEVEL]
