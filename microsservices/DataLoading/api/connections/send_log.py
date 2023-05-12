@@ -13,9 +13,13 @@ import requests
 
 class SendToLog(object):
     def __init__(self) -> None:
-        self.host: str = MicrosservicesAPI.MS_ROUTES["logs"]["HOST"]
-        self.port: str = MicrosservicesAPI.MS_ROUTES["logs"]["PORT"]
-        self.dir: str = MicrosservicesAPI.MS_ROUTES["logs"]["DIR"]
+        """
+        Loading Log route data to use with Log microservice
+        """
+        self.log_route_data: dict[str, str] = MicrosservicesAPI.MS_ROUTES["logs"]
+        self.host: str = self.log_route_data["HOST"]
+        self.port: str = self.log_route_data["PORT"]
+        self.dir: str = self.log_route_data["DIR"]
         
     def report(self, REPORT: str, LOG_LEVEL: str, chat_id: str) -> None:
         """
@@ -30,7 +34,7 @@ class SendToLog(object):
             "extra": {"microservice": "DATALOADING", "clientip": "127.0.0.1:5002", "chat_id": chat_id}
         }
         
-        debug_endpoint: str = MicrosservicesAPI.MS_ROUTES["logs"]["ENDPOINTS"][LOG_LEVEL]
+        debug_endpoint: str = self.log_route_data["ENDPOINTS"][LOG_LEVEL]
         request_uri: str = f"{self.host}:{self.port}{self.dir}{debug_endpoint}"
         
         try:

@@ -15,37 +15,43 @@ import threading
 # |--------------------------------------------------------------------------------------------------------------------|
 
 mongo: MongoClient = init_db()
-LogSchema.LOG_REPORT_MSG["mongodb"]["add_chat_id_in_session"]
 
 class Session(object):
     def __init__(self) -> None:
+        """
+        Loading MongoDB database name list and Connection with Log MS
+        """
         self.session: list[str] = []
-        self.database_list: list[str] = mongo.list_database_names()
-        
+        self.database_list: list[str] = mongo.list_database_names()        
         self.send_to_log = SendToLog()
-        self.add_session: list[str] = LogSchema.LOG_REPORT_MSG["mongodb"]["add_chat_id_in_session"]
-        self.no_identify_session: list[str] = LogSchema.LOG_REPORT_MSG["mongodb"]["no_identify_session"]
 
+    def log_report(self, log_data: str, id_: str) -> None:
+        """
+        Resume log message loading and send to LOG microservice
+        Args:
+            master (str): Higher key in LOG_REPORT_MSG .json
+            log_data (str): lower key (log message data) in LOG_REPORT_MSG .json
+            message_data (str): Handled message from Telegram API
+        """
+        log_schema: list[str] = LogSchema.LOG_REPORT_MSG["mongodb"][log_data]
+        threading.Thread(
+            target=self.send_to_log.report,
+            args=(
+                log_schema[0], log_schema[1], id_
+            )
+        ).start()
+    
     def get(self) -> list[str]:
+        """
+        Get a session list from database
+        Returns:
+            list[str]: list with session id's
+        """
         for db in self.database_list:
             if db[0:5] == "AYLA_":
                 self.session.append(db[5::])
-                
-                # Send to LOG MS in another Thread |-------------------------------------------------------------------|
-                threading.Thread(
-                    target=self.send_to_log.report, args=(
-                        self.add_session[0], self.add_session[1], db[5::],
-                    )
-                ).start()
-                # |----------------------------------------------------------------------------------------------------|
-            
+                self.log_report("add_chat_id_in_session", db[5::])            
             else:
-                # Send to LOG MS in another Thread |-------------------------------------------------------------------|
-                threading.Thread(
-                    target=self.send_to_log.report, args=(
-                        self.no_identify_session[0], self.no_identify_session[1], db,
-                    )
-                ).start()
-                # |-----------------------------------------------------------------------------------------------------|
-                
+                self.log_report("no_identify_session", db)
+
         return self.session
