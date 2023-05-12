@@ -46,7 +46,7 @@ class Driver(object):
         """
         log_schema: list[str] = LogSchema.LOG_REPORT_MSG["connections"][log_data]
         log_text: str = f"[{HOST}:{PORT}]"
-        args_ = tuple[str] = (log_schema[0] + log_text, log_schema[1], chat_id)
+        args_: tuple[str] = (log_schema[0] + log_text, log_schema[1], chat_id)
         self.log_thread(args_)
     
     def completed_connection_log(self, HOST: str, PORT: str, chat_id: str) -> None:
