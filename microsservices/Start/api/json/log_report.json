@@ -1,7 +1,8 @@
 {
     "connections": {
         "ms_message_response": ["Sent message to the ", "info"],
-        "failed_ms_message_response": ["Failed connection with ", "error"]
+        "failed_ms_message_response": ["Failed connection with ", "error"],
+        "received_message_from_controller": ["Received message from Controller [127.0.0.1:5000/controller/]", "info"]
     },
     "telegram_api": {
         "error_message": ["Sent an error message to the user", "warning"]

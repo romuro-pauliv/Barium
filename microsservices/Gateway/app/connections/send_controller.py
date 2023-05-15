@@ -43,8 +43,8 @@ class SendToController(object):
             message_data (dict[str, Any]): Handled message from Telegram API
         """
         try:
-            requests.post(f"{self.host}:{self.port}{self.dir}", json=message_data)
             self.log_report("controller", "sent_to_controller", message_data)
+            requests.post(f"{self.host}:{self.port}{self.dir}", json=message_data)
         except requests.exceptions.ConnectionError:
             system_down_message(message_data["chat_id"])
             self.log_report("controller", "no_connection", message_data)
