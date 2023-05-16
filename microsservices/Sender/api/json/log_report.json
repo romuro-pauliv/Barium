@@ -1,0 +1,6 @@
+{
+    "connections": {},
+    "telegram_api": {
+        "error_message": ["Sent an error message to the user", "warning"]
+    }
+}
