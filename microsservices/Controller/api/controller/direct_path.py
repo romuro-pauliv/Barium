@@ -50,9 +50,9 @@ def driver(message: dict[str, str | list]) -> None:
         return None
     
     try:
-        log_report("connections", "start_driver_completed", message)
         requests.post(f"{ms_start['HOST']}:{ms_start['PORT']}{ms_start['DIR']}", json=message)
-    
+        log_report("connections", "start_driver_completed", message)
+        
     except requests.exceptions.ConnectionError:
         log_report("connections", "start_driver_failed", message)
         system_down_message(message["chat_id"])

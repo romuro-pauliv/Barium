@@ -10,7 +10,7 @@ from api.config.paths import MicrosservicesAPI, LogSchema
 from api.connections.send_log import SendToLog
 from api.error.send_to_telegram import system_down_message
 
-from typing import Callable, Any
+from typing import Any
 
 import threading
 import requests
@@ -54,6 +54,10 @@ class Driver(object):
     
     def failed_connection_log(self, HOST: str, PORT: str, chat_id: str) -> None:
         self.log_report(HOST, PORT, "failed_ms_message_response", chat_id)
+    
+    def error_message_log(self, chat_id: str) -> None:
+        log_schema: list[str] = LogSchema.LOG_REPORT_MSG["telegram_api"]["error_message"]
+        self.log_thread((log_schema[0], log_schema[1], chat_id))
         
     def direct_to(self, message: dict[str, str | list]) -> None:
         """
@@ -67,12 +71,12 @@ class Driver(object):
                 
                 try:
                     # Send to specific MS
-                    print(HOST, PORT, DIR)
                     requests.post(f"{HOST}:{PORT}{DIR}", json=message)
                     self.completed_connection_log(HOST, PORT, message["chat_id"])
                     return None
                 except requests.exceptions.ConnectionError:
                     system_down_message(message["chat_id"])
+                    self.error_message_log(message["chat_id"])
                     self.failed_connection_log(HOST, PORT, message["chat_id"])
                     return None
         
@@ -85,6 +89,7 @@ class Driver(object):
             self.completed_connection_log(HOST, PORT, message["chat_id"])
         except requests.exceptions.ConnectionError:
             system_down_message(message["chat_id"])
+            self.error_message_log(message["chat_id"])
             self.failed_connection_log(HOST, PORT, message["chat_id"])
         
         return None
