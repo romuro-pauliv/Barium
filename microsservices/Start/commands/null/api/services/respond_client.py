@@ -20,6 +20,7 @@ class RespondClient(object):
     def __init__(self) -> None:
         self.msg_list: list[str] = Messages.MESSAGES["null"]
         self.sender_route_data: dict[str, str] = MicrosservicesAPI.MS_ROUTES["sender"]
+        self.whoami: dict[str, str] = MicrosservicesAPI.WHO_AM_I
         
         self.HOST: str = self.sender_route_data["HOST"]
         self.PORT: str = self.sender_route_data["PORT"]
@@ -36,7 +37,8 @@ class RespondClient(object):
     def post(self, message: dict[str, str | list]) -> None:
         msg_to_send: dict[str] = {
             "chat_id": message["chat_id"],
-            "message": random_msg_from_list(self.msg_list)
+            "message": random_msg_from_list(self.msg_list),
+            "microservice": [self.whoami["NAME"], str(self.whoami["HOST"] + ":" + self.whoami["PORT"])]
         }
         
         try:

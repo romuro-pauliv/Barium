@@ -1,5 +1,8 @@
 {
-    "connections": {},
+    "connections": {
+        "sent_to_telegram": ["Sent message to http://api.telegram.org/bot", "info"],
+        "received_from_command": ["Received from ", "info"]
+    },
     "telegram_api": {
         "error_message": ["Sent an error message to the user", "warning"]
     }
