@@ -1,0 +1,11 @@
+{
+    "mongodb": {
+        "init_connection": ["Initializing the connection to MongoDB [127.0.0.1:27017]", "info", "INTERNAL"],
+        "connection_completed": ["Connection completed successfully [127.0.0.1:27017]", "info", "INTERNAL"],
+        "add_chat_id_in_session": ["Implemented Session", "info"],
+        "no_identify_session": ["Non-existent session", "info"]
+    },
+    "connections": {
+        "get_controller": ["Get session to controller [127.0.0.1:5000]", "info", "INTERNAL"]
+    }
+}
