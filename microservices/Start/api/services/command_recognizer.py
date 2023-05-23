@@ -60,6 +60,7 @@ class Driver(object):
         self.log_thread((log_schema[0], log_schema[1], chat_id))
         
     def direct_to(self, message: dict[str, str | list]) -> None:
+        print(message)
         """
         Direct the message data to specific microservice based on the given command in the message
         """
