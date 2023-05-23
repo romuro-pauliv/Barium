@@ -69,7 +69,7 @@ class Driver(object):
                 HOST: str = self.sub_services_conn[service_name]["HOST"]
                 PORT: str = self.sub_services_conn[service_name]["PORT"]
                 DIR: str = self.sub_services_conn[service_name]["DIR"]
-                
+                print(HOST, PORT, DIR)
                 try:
                     # Send to specific MS
                     requests.post(f"{HOST}:{PORT}{DIR}", json=message)
