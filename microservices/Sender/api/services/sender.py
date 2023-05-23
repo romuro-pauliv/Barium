@@ -22,6 +22,14 @@ class Sender(object):
         self.sender: Callable[[str, str], None] = self.telegram_api_request.send_message
     
     def log_report(self, master: str, log_data: str, chat_id: str) -> None:
+        """
+        Send a report to LOG MS
+
+        Args:
+            master (str): Upper key in log_report.json
+            log_data (str): Lower key in log_report.json
+            chat_id (str): chat_id from message
+        """
         log_schema: list[str] = LogSchema.LOG_REPORT_MSG[master][log_data]
         
         threading.Thread(

@@ -27,6 +27,13 @@ class RespondClient(object):
         self.DIR: str = self.sender_route_data["DIR"]
     
     def log_report(self, master: str, log_data: str, chat_id: str) -> None:
+        """
+        Send a report to LOG MS
+        Args:
+            master (str): Upper key from log_report.json
+            log_data (str): Lower key from log_report.json
+            chat_id (str): chat_id received message
+        """
         self.log_schema: list[str] = LogSchema.LOG_REPORT_MSG[master][log_data]
         
         threading.Thread(
@@ -35,9 +42,17 @@ class RespondClient(object):
         ).start()
     
     def post(self, message: dict[str, str | list]) -> None:
+        """
+        Send a client message to Sender MS
+        Args:
+            message: Received message with chat_id
+        """
+        
+        random_msg: list[str] = random_msg_from_list(self.msg_list)
+        
         msg_to_send: dict[str] = {
             "chat_id": message["chat_id"],
-            "message": random_msg_from_list(self.msg_list),
+            "message": f"{random_msg[0]}{message['username']}{random_msg[1]}",
             "microservice": [self.whoami["NAME"], str(self.whoami["HOST"] + ":" + self.whoami["PORT"])]
         }
         
