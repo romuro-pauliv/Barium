@@ -1,14 +1,4 @@
 {
-    "data_loading": {
-        "HOST": "http://127.0.0.1",
-        "PORT": "5002",
-        "PATH1": {
-            "path": "/session",
-            "endpoints": {
-                "home": "/"
-            }
-        }
-    },
     "logs": {
         "HOST": "http://127.0.0.1", "PORT": "5001", "DIR": "/log", "ENDPOINTS": {
             "debug": "/debug",

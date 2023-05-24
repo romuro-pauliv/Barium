@@ -24,7 +24,8 @@ class RespondClient(object):
         
         self.HOST: str = self.sender_route_data["HOST"]
         self.PORT: str = self.sender_route_data["PORT"]
-        self.DIR: str = self.sender_route_data["DIR"]
+        self.PATH: str = self.sender_route_data["PATH1"]["path"]
+        self.ENDPOINT: str = self.sender_route_data["PATH1"]["endpoints"]["home"]
     
     def log_report(self, master: str, log_data: str, chat_id: str) -> None:
         """
@@ -57,7 +58,7 @@ class RespondClient(object):
         }
         
         try:
-            requests.post(f"{self.HOST}:{self.PORT}{self.DIR}", json=msg_to_send)
+            requests.post(f"{self.HOST}:{self.PORT}{self.PATH}{self.ENDPOINT}", json=msg_to_send)
             self.log_report("connections", "sent_completed", message["chat_id"])
         except requests.exceptions.ConnectionError:
             self.log_report("connections", "sent_failed", message["chat_id"])

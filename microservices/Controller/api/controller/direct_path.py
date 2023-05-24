@@ -52,7 +52,7 @@ def post_in_microservice(route: dict[str, str], log_data: list[str, str], messag
         requests.post(f"{route['HOST']}:{route['PORT']}{route['PATH1']['path']}{route['PATH1']['endpoints']['home']}", json=message)
         log_report("connections", log_data[0], message)
     except requests.exceptions.ConnectionError:
-        log_report("connection", log_data[1], message)
+        log_report("connections", log_data[1], message)
         system_down_message(message["chat_id"])
         log_report("telegram_api", "error_message", message)
         
