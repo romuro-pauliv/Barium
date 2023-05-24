@@ -17,4 +17,4 @@ PORT: str = os.getenv("REDIS_PORT")
 
 class Cache:
     class TalkMode:
-            open_account_branch: client.Redis = Redis(HOST, PORT, db=0)
+            db0_cache: client.Redis = Redis(HOST, PORT, db=0)

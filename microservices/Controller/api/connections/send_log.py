@@ -20,7 +20,7 @@ class SendToLog(object):
         self.log_route_data: dict[str, str] = MicrosservicesAPI.MS_ROUTES["logs"]
         self.host: str = self.log_route_data["HOST"]
         self.port: str = self.log_route_data["PORT"]
-        self.dir: str = self.log_route_data["DIR"]
+        self.path1: str = self.log_route_data["PATH1"]
         
     def report(self, REPORT: str, LOG_LEVEL: str, chat_id: str) -> None:
         """
@@ -39,7 +39,7 @@ class SendToLog(object):
         }
         
         debug_endpoint: str = self.log_route_data["ENDPOINTS"][LOG_LEVEL]
-        request_uri: str = f"{self.host}:{self.port}{self.dir}{debug_endpoint}"
+        request_uri: str = f"{self.host}:{self.port}{self.path1}{debug_endpoint}"
         
         try:
             requests.post(request_uri, json=send_json)

@@ -23,7 +23,8 @@ class SendToController(object):
         controller_route_data: dict[str, str] = MicrosservicesAPI.MS_ROUTES["controller"]
         self.host: str = controller_route_data["HOST"]
         self.port: str = controller_route_data["PORT"]
-        self.dir: str = controller_route_data["DIR"]
+        self.path1: str = controller_route_data["PATH1"]
+        self.endpoint: str = controller_route_data["ENDPOINTS"]["home"]
     
     def log_report(self, master: str, log_data: str, message_data: str) -> None:
         """
@@ -44,7 +45,7 @@ class SendToController(object):
         """
         try:
             self.log_report("controller", "sent_to_controller", message_data)
-            requests.post(f"{self.host}:{self.port}{self.dir}", json=message_data)
+            requests.post(f"{self.host}:{self.port}{self.path1}{self.endpoint}", json=message_data)
         except requests.exceptions.ConnectionError:
             system_down_message(message_data["chat_id"])
             self.log_report("controller", "no_connection", message_data)

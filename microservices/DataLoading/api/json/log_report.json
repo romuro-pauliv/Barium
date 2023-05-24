@@ -6,6 +6,7 @@
         "no_identify_session": ["Non-existent session", "info"]
     },
     "connections": {
-        "get_controller": ["Get session to controller [127.0.0.1:5000]", "info", "INTERNAL"]
+        "get_controller": ["Get session to controller [127.0.0.1:5000]", "info", "INTERNAL"],
+        "send_cache_to_redis": ["POST cache in REDIS [127.0.0.1:6379]", "info"]
     }
 }

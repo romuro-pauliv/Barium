@@ -1,5 +1,13 @@
 {
     "NAME": "DATALOADING",
     "HOST": "127.0.0.1",
-    "PORT": "5002"
+    "PORT": "5002",
+    "PATHS": {
+        "path1": {
+            "path": "/session", 
+            "endpoints": {
+                "home": "/"
+            }
+        }
+    }
 }

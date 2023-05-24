@@ -22,9 +22,12 @@ class Session(object):
         Loading data loading route data microservice and read log_report from .json
         """
         data_loading_route: dict[str, str] = MicrosservicesAPI.MS_ROUTES["data_loading"]
+        
         self.HOST: str = data_loading_route["HOST"]
         self.PORT: str = data_loading_route["PORT"]
-        self.DIR: str = data_loading_route["DIR"]
+        self.PATH: str = data_loading_route["PATH1"]
+        self.ENDPOINT: str = data_loading_route["ENDPOINTS"]["home"]
+        
         self.sessions: list[str] = []
         
         self.failed: list[str] = LogSchema.LOG_REPORT_MSG["connections"]["get_session_failed"]
@@ -51,7 +54,7 @@ class Session(object):
             bool: True if return correctly
         """
         try:
-            response: requests.models.Response = requests.get(f"{self.HOST}:{self.PORT}{self.DIR}")
+            response: requests.models.Response = requests.get(f"{self.HOST}:{self.PORT}{self.PATH}{self.ENDPOINT}")
         except requests.exceptions.ConnectionError:
             self.log_thread(self.failed)
             return False
