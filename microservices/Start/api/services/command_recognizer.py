@@ -70,7 +70,6 @@ class Driver(object):
                 PORT: str = self.sub_services_conn[service_name]["PORT"]
                 PATH: str = self.sub_services_conn[service_name]["PATH1"]["path"]
                 ENDPOINT: str = self.sub_services_conn[service_name]["PATH1"]["endpoints"]["home"]
-                print(HOST, PORT, PATH, ENDPOINT)
                 try:
                     # Send to specific MS
                     requests.post(f"{HOST}:{PORT}{PATH}{ENDPOINT}", json=message)
@@ -87,7 +86,6 @@ class Driver(object):
         PORT: str = self.sub_services_conn["null"]["PORT"]
         PATH: str = self.sub_services_conn["null"]["PATH1"]["path"]
         ENDPOINT: str = self.sub_services_conn["null"]["PATH1"]["endpoints"]["home"]
-        print(HOST, PORT, PATH, ENDPOINT)
         try:    
             requests.post(f"{HOST}:{PORT}{PATH}{ENDPOINT}", json=message)
             self.completed_connection_log(HOST, PORT, message["chat_id"])
