@@ -60,6 +60,7 @@ class Driver(object):
         self.log_thread((log_schema[0], log_schema[1], chat_id))
         
     def direct_to(self, message: dict[str, str | list]) -> None:
+        print(message)
         """
         Direct the message data to specific microservice based on the given command in the message
         """
@@ -67,11 +68,11 @@ class Driver(object):
             if message["text"] == self.commands[service_name]:
                 HOST: str = self.sub_services_conn[service_name]["HOST"]
                 PORT: str = self.sub_services_conn[service_name]["PORT"]
-                DIR: str = self.sub_services_conn[service_name]["DIR"]
-                
+                PATH: str = self.sub_services_conn[service_name]["PATH1"]["path"]
+                ENDPOINT: str = self.sub_services_conn[service_name]["PATH1"]["endpoints"]["home"]
                 try:
                     # Send to specific MS
-                    requests.post(f"{HOST}:{PORT}{DIR}", json=message)
+                    requests.post(f"{HOST}:{PORT}{PATH}{ENDPOINT}", json=message)
                     self.completed_connection_log(HOST, PORT, message["chat_id"])
                     return None
                 except requests.exceptions.ConnectionError:
@@ -83,9 +84,10 @@ class Driver(object):
         # Send to null MS
         HOST: str = self.sub_services_conn["null"]["HOST"]
         PORT: str = self.sub_services_conn["null"]["PORT"]
-        DIR: str = self.sub_services_conn["null"]["DIR"]
+        PATH: str = self.sub_services_conn["null"]["PATH1"]["path"]
+        ENDPOINT: str = self.sub_services_conn["null"]["PATH1"]["endpoints"]["home"]
         try:    
-            requests.post(f"{HOST}:{PORT}{DIR}", json=message)
+            requests.post(f"{HOST}:{PORT}{PATH}{ENDPOINT}", json=message)
             self.completed_connection_log(HOST, PORT, message["chat_id"])
         except requests.exceptions.ConnectionError:
             system_down_message(message["chat_id"])

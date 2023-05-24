@@ -1,20 +1,16 @@
 # +--------------------------------------------------------------------------------------------------------------------|
-# |                                                                                         api.cache.redis_connect.py |
+# |                                                                         api.services.tools.random_msg_from_list.py |
 # |                                                                                             Author: Pauliv, Rômulo |
 # |                                                                                          email: romulopauliv@bk.ru |
 # |                                                                                                    encoding: UTF-8 |
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from redis import Redis, client
-from dotenv import load_dotenv
-import os
+from random import randint
+from typing import Union
 # |--------------------------------------------------------------------------------------------------------------------|
 
-load_dotenv()
-HOST: str = os.getenv("REDIS_HOST")
-PORT: str = os.getenv("REDIS_PORT")
 
-class Cache:
-    class TalkMode:
-            db0_cache: client.Redis = Redis(HOST, PORT, db=0)
+def random_msg_from_list(msg_list: list[str]) -> Union[str, list[str]]:
+    index: int = randint(0, (len(msg_list)-1))
+    return msg_list[index]

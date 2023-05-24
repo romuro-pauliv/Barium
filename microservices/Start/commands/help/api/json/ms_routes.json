@@ -14,7 +14,7 @@
         "PATH1": {
             "path": "/",
             "endpoints": {
-                "home": ""
+                "home": "/"
             }
         }
     }

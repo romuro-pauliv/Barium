@@ -1,0 +1,10 @@
+{
+    "connections": {
+        "received_from_start_driver": ["Received message from Start Driver [127.0.0.1:5003]", "info"],
+        "sent_completed": ["Sent the message client to Sender [127.0.0.1:5050]", "info"],
+        "sent_failed": ["Connection with Sender failed [127.0.0.1:5050]", "error"]
+    },
+    "telegram_api": {
+        "error_message": ["Sent an error message to the user", "warning"]
+    }
+}

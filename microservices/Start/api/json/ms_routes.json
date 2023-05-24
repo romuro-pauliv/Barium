@@ -1,7 +1,4 @@
 {
-    "data_loading": {
-        "HOST": "http://127.0.0.1", "PORT": "5002", "DIR": "/session/"
-    },
     "logs": {
         "HOST": "http://127.0.0.1", "PORT": "5001", "DIR": "/log", "ENDPOINTS": {
             "debug": "/debug",
@@ -13,19 +10,54 @@
     },
     "sub_services": {
         "start": {
-            "HOST": "http://127.0.0.1", "PORT": "5010", "DIR": "/start"
+            "HOST": "http://127.0.0.1",
+            "PORT": "5010",
+            "PATH1": {
+                "path": "/start",
+                "endpoints": {
+                    "home": "/"
+                }
+            }
         },
         "help": {
-            "HOST": "http://127.0.0.1", "PORT": "5011", "DIR": "/help"
+            "HOST": "http://127.0.0.1",
+            "PORT": "5011",
+            "PATH1": {
+                "path": "/help",
+                "endpoints": {
+                    "home": "/"
+                }
+            }
         },
         "about_us": {
-            "HOST": "http://127.0.0.1", "PORT": "5012", "DIR": "/about_us"
+            "HOST": "http://127.0.0.1",
+            "PORT": "5012",
+            "PATH1": {
+                "path": "/about_us",
+                "endpoints": {
+                    "home": "/"
+                }
+            }
         },
         "open_account": {
-            "HOST": "http://127.0.0.1", "PORT": "5013", "DIR": "/open_account"
+            "HOST": "http://127.0.0.1",
+            "PORT": "5013",
+            "PATH1": {
+                "path": "/open_account",
+                "endpoints": {
+                    "home": "/"
+                }
+            }
         },
         "null": {
-            "HOST": "http://127.0.0.1", "PORT": "5020", "DIR": "/"
+            "HOST": "http://127.0.0.1",
+            "PORT": "5020",
+            "PATH1": {
+                "path": "/",
+                "endpoints": {
+                    "home": ""
+                }
+            }
         }
     }
 }

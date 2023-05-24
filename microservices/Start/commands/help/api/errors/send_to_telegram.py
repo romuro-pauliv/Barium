@@ -1,20 +1,20 @@
 # +--------------------------------------------------------------------------------------------------------------------|
-# |                                                                                         api.cache.redis_connect.py |
+# |                                                                                     api.errors.send_to_telegram.py |
 # |                                                                                             Author: Pauliv, Rômulo |
 # |                                                                                          email: romulopauliv@bk.ru |
 # |                                                                                                    encoding: UTF-8 |
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from redis import Redis, client
-from dotenv import load_dotenv
-import os
+from api.config.paths import ErrorMessages
+from api.api.api_request import TelegramApiRequest
 # |--------------------------------------------------------------------------------------------------------------------|
 
-load_dotenv()
-HOST: str = os.getenv("REDIS_HOST")
-PORT: str = os.getenv("REDIS_PORT")
+def system_down_message(chat_id: str) -> None:
+    """
+    Send a message to the telegram Ayla user that the system is down.
 
-class Cache:
-    class TalkMode:
-            db0_cache: client.Redis = Redis(HOST, PORT, db=0)
+    Args:
+        chat_id (str): chat id from the message that Telegram API generated
+    """
+    TelegramApiRequest().send_message(chat_id, ErrorMessages.ERROR_MESSAGE["message"])
