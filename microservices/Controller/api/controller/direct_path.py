@@ -49,7 +49,7 @@ def post_in_microservice(route: dict[str, str], log_data: list[str, str], messag
         message (dict[str]): Message from Gateway
     """
     try:
-        requests.post(f"{route['HOST']}:{route['PORT']}{route['PATH1']}{route['ENDPOINTS']['home']}", json=message)
+        requests.post(f"{route['HOST']}:{route['PORT']}{route['PATH1']['path']}{route['PATH1']['endpoints']['home']}", json=message)
         log_report("connections", log_data[0], message)
     except requests.exceptions.ConnectionError:
         log_report("connection", log_data[1], message)

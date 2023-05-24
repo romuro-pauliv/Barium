@@ -60,8 +60,8 @@ class RespondClient(object):
             
             try:
                 requests.post(f"{self.HOST}:{self.PORT}{self.DIR}", json=msg_to_send)
-                self.log_report("connections", "send_completed", message["chat_id"])
+                self.log_report("connections", "sent_completed", message["chat_id"])
             except requests.exceptions.ConnectionError:
-                self.log_report("connections", "send_failed", message["chat_id"])
+                self.log_report("connections", "sent_failed", message["chat_id"])
                 system_down_message(message["chat_id"])
                 self.log_report("telegram_api", "error_message", message["chat_id"])

@@ -68,11 +68,12 @@ class Driver(object):
             if message["text"] == self.commands[service_name]:
                 HOST: str = self.sub_services_conn[service_name]["HOST"]
                 PORT: str = self.sub_services_conn[service_name]["PORT"]
-                DIR: str = self.sub_services_conn[service_name]["DIR"]
-                print(HOST, PORT, DIR)
+                PATH: str = self.sub_services_conn[service_name]["PATH1"]["path"]
+                ENDPOINT: str = self.sub_services_conn[service_name]["PATH1"]["endpoints"]["home"]
+                print(HOST, PORT, PATH, ENDPOINT)
                 try:
                     # Send to specific MS
-                    requests.post(f"{HOST}:{PORT}{DIR}", json=message)
+                    requests.post(f"{HOST}:{PORT}{PATH}{ENDPOINT}", json=message)
                     self.completed_connection_log(HOST, PORT, message["chat_id"])
                     return None
                 except requests.exceptions.ConnectionError:
@@ -84,9 +85,11 @@ class Driver(object):
         # Send to null MS
         HOST: str = self.sub_services_conn["null"]["HOST"]
         PORT: str = self.sub_services_conn["null"]["PORT"]
-        DIR: str = self.sub_services_conn["null"]["DIR"]
+        PATH: str = self.sub_services_conn["null"]["PATH1"]["path"]
+        ENDPOINT: str = self.sub_services_conn["null"]["PATH1"]["endpoints"]["home"]
+        print(HOST, PORT, PATH, ENDPOINT)
         try:    
-            requests.post(f"{HOST}:{PORT}{DIR}", json=message)
+            requests.post(f"{HOST}:{PORT}{PATH}{ENDPOINT}", json=message)
             self.completed_connection_log(HOST, PORT, message["chat_id"])
         except requests.exceptions.ConnectionError:
             system_down_message(message["chat_id"])

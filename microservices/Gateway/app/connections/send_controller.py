@@ -23,8 +23,8 @@ class SendToController(object):
         controller_route_data: dict[str, str] = MicrosservicesAPI.MS_ROUTES["controller"]
         self.host: str = controller_route_data["HOST"]
         self.port: str = controller_route_data["PORT"]
-        self.path1: str = controller_route_data["PATH1"]
-        self.endpoint: str = controller_route_data["ENDPOINTS"]["home"]
+        self.path1: str = controller_route_data["PATH1"]["path"]
+        self.endpoint: str = controller_route_data["PATH1"]["endpoints"]["home"]
     
     def log_report(self, master: str, log_data: str, message_data: str) -> None:
         """

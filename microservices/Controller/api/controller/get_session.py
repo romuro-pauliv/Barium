@@ -25,8 +25,8 @@ class Session(object):
         
         self.HOST: str = data_loading_route["HOST"]
         self.PORT: str = data_loading_route["PORT"]
-        self.PATH: str = data_loading_route["PATH1"]
-        self.ENDPOINT: str = data_loading_route["ENDPOINTS"]["home"]
+        self.PATH: str = data_loading_route["PATH1"]["path"]
+        self.ENDPOINT: str = data_loading_route["PATH1"]['endpoints']["home"]
         
         self.sessions: list[str] = []
         

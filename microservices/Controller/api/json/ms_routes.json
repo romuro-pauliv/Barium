@@ -1,12 +1,33 @@
 {
     "data_loading": {
-        "HOST": "http://127.0.0.1", "PORT": "5002", "PATH1": "/session", "ENDPOINTS": {"home": "/"}
+        "HOST": "http://127.0.0.1",
+        "PORT": "5002",
+        "PATH1": {
+            "path": "/session",
+            "endpoints": {
+                "home": "/"
+            }
+        }
     },
     "ms_start": {
-        "HOST": "http://127.0.0.1", "PORT": "5003", "PATH1": "/start", "ENDPOINTS": {"home": "/"}
+        "HOST": "http://127.0.0.1",
+        "PORT": "5003",
+        "PATH1": {
+            "path": "/start",
+            "endpoints": {
+                "home": "/"
+            }
+        }
     },
     "ms_client": {
-        "HOST": "http://127.0.0.1", "PORT": "5004", "PATH1": "/client", "ENDPOINTS": {"home": "/"}
+        "HOST": "http://127.0.0.1",
+        "PORT": "5004",
+        "PATH1": {
+            "path": "/client",
+            "endpoints": {
+                "home": "/"
+            }
+        }
     },
     "logs": {
         "HOST": "http://127.0.0.1", "PORT": "5001", "PATH1": "/log", "ENDPOINTS": {
