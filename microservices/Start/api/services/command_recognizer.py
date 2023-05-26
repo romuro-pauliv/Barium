@@ -7,8 +7,9 @@
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
 from api.config.paths import MicrosservicesAPI, LogSchema
+
 from api.connections.send_log import SendToLog
-from api.error.send_to_telegram import system_down_message
+from api.connections.microservices import direct_to_ms
 
 from typing import Any
 
@@ -65,32 +66,19 @@ class Driver(object):
         """
         for service_name in self.sub_services_conn_name:
             if message["text"] == self.commands[service_name]:
-                HOST: str = self.sub_services_conn[service_name]["HOST"]
-                PORT: str = self.sub_services_conn[service_name]["PORT"]
-                PATH: str = self.sub_services_conn[service_name]["PATH1"]["path"]
-                ENDPOINT: str = self.sub_services_conn[service_name]["PATH1"]["endpoints"]["home"]
-                try:
-                    # Send to specific MS
-                    requests.post(f"{HOST}:{PORT}{PATH}{ENDPOINT}", json=message)
-                    self.completed_connection_log(HOST, PORT, message["chat_id"])
-                    return None
-                except requests.exceptions.ConnectionError:
-                    system_down_message(message["chat_id"])
-                    self.error_message_log(message["chat_id"])
-                    self.failed_connection_log(HOST, PORT, message["chat_id"])
-                    return None
-        
-        # Send to null MS
-        HOST: str = self.sub_services_conn["null"]["HOST"]
-        PORT: str = self.sub_services_conn["null"]["PORT"]
-        PATH: str = self.sub_services_conn["null"]["PATH1"]["path"]
-        ENDPOINT: str = self.sub_services_conn["null"]["PATH1"]["endpoints"]["home"]
-        try:    
-            requests.post(f"{HOST}:{PORT}{PATH}{ENDPOINT}", json=message)
-            self.completed_connection_log(HOST, PORT, message["chat_id"])
-        except requests.exceptions.ConnectionError:
-            system_down_message(message["chat_id"])
-            self.error_message_log(message["chat_id"])
-            self.failed_connection_log(HOST, PORT, message["chat_id"])
-        
-        return None
+                direct_to_ms(
+                    microservice_route_data=self.sub_services_conn,
+                    command=service_name,
+                    info_log=[self.completed_connection_log, self.failed_connection_log],
+                    message=message,
+                    error_msg_to_telegram=self.error_message_log
+                )
+                return None 
+            
+        direct_to_ms(
+            microservice_route_data=self.sub_services_conn,
+            command="null",
+            info_log=[self.completed_connection_log, self.failed_connection_log],
+            message=message,
+            error_msg_to_telegram=self.error_message_log
+        )
