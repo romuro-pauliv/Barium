@@ -15,9 +15,10 @@ from api.controller.get_session import Session
 
 from api.errors.send_to_telegram import system_down_message
 
+from api.connections.microservices import post_in_microservices
 from api.connections.send_log import SendToLog
+
 from api.config.paths import LogSchema, MicrosservicesAPI
-import requests
 # |--------------------------------------------------------------------------------------------------------------------|
 
 # Session Request 
@@ -39,22 +40,6 @@ def log_report(master: str, log_data: str, message: str) -> None:
     """
     log_schema: list[str] = LogSchema.LOG_REPORT_MSG[master][log_data]
     SendToLog().report(log_schema[0], log_schema[1], message["chat_id"])
-
-def post_in_microservice(route: dict[str, str], log_data: list[str, str], message: dict[str]) -> None:
-    """
-    Send the message to specific microservice.
-    Args:
-        route (dict[str, str]): Route in ms_routes.json
-        log_data (list[str, str]): In [0] sucessfully key in log_report.json and [1] failed key in log_report.json
-        message (dict[str]): Message from Gateway
-    """
-    try:
-        requests.post(f"{route['HOST']}:{route['PORT']}{route['PATH1']['path']}{route['PATH1']['endpoints']['home']}", json=message)
-        log_report("connections", log_data[0], message)
-    except requests.exceptions.ConnectionError:
-        log_report("connections", log_data[1], message)
-        system_down_message(message["chat_id"])
-        log_report("telegram_api", "error_message", message)
         
 # | DRIVER |===========================================================================================================|
 def driver(message: dict[str, str | list]) -> None:
@@ -72,4 +57,4 @@ def driver(message: dict[str, str | list]) -> None:
         cache: Union[bool, str] = get_cache(Cache.TalkCache.db0_cache, message["chat_id"])
         if cache != False:
             message["cache"] = cache
-        post_in_microservice(ms_start, ["start_driver_completed", "start_driver_failed"], message)
+        post_in_microservices(ms_start, ["start_driver_completed", "start_driver_failed"], message, log_report)
