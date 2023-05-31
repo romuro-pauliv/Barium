@@ -1,0 +1,16 @@
+{
+    "connections": {
+        "get_session_failed": ["Failed connection with DataLoading [127.0.0.1:5002]", "error", "INTERNAL"],
+        "get_session_completed": ["Completed connection with DataLoading [127.0.0.1:5002]", "info", "INTERNAL"],
+        
+        "start_driver_completed": ["Sent message to the Start Driver [127.0.0.1:5003]", "info"],
+        "start_driver_failed": ["Failed connection with Start Driver [127.0.0.1:5003]", "error"],
+
+        "received_message_data_gateway": ["Received message data from GATEWAY [LOCAL]", "info"],
+
+        "get_cache_in_redis": ["Get cache in REDIS DB(0) [127.0.0.1:6379]", "info"]
+    },
+    "telegram_api": {
+        "error_message": ["Sent an error message to the user", "warning"]
+    }
+}

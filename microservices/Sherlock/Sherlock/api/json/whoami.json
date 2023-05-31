@@ -1,0 +1,13 @@
+{
+    "NAME": "SHERLOCK",
+    "HOST": "127.0.0.1",
+    "PORT": "5001",
+    "PATHS": {
+        "path1": {
+            "path": "/",
+            "endpoints": {
+                "home": ""
+            }
+        }
+    }
+}
