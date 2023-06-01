@@ -19,13 +19,13 @@
             }
         }
     },
-    "ms_client": {
+    "ms_sherlock": {
         "HOST": "http://127.0.0.1",
         "PORT": "5004",
         "PATH1": {
-            "path": "/client",
+            "path": "/",
             "endpoints": {
-                "home": "/"
+                "home": ""
             }
         }
     },

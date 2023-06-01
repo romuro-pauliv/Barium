@@ -1,0 +1,14 @@
+{
+    "connections": {
+        "received_message_start_driver": ["Received message from Start Driver [127.0.0.1:5003]", "info"],
+        
+        "sent_completed": ["Sent the message client to Sender [127.0.0.1:5050]", "info"],
+        "sent_failed": ["Connection with Sender failed [127.0.0.1:5050]", "error"],
+
+        "sent_to_cache_completed": ["Sent chat_id to cache DB0 [127.0.0.1:5002/cache/db0]", "info"],
+        "sent_to_cache_failed": ["Sent chat_id to cache DB0 failed [127.0.0.1:5002/cache/db0", "critial"]
+    },
+    "telegram_api": {
+        "error_message": ["Sent an error message to the user", "warning"]
+    }
+}

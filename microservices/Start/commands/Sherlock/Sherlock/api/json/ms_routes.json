@@ -3,9 +3,9 @@
         "HOST": "http://127.0.0.1",
         "PORT": "5002",
         "PATH1": {
-            "path": "/session",
+            "path": "/cache",
             "endpoints": {
-                "home": "/"
+                "home": "/db0"
             }
         }
     },
@@ -26,6 +26,16 @@
             "warning": "/warning",
             "error": "/error",
             "critial": "/critial"
+        }
+    },
+    "sender": {
+        "HOST": "http://127.0.0.1",
+        "PORT": "5050",
+        "PATH1": {
+            "path": "/",
+            "endpoints": {
+                "home": ""
+            }
         }
     }
 }

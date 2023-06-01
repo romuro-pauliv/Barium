@@ -57,4 +57,5 @@ def driver(message: dict[str, str | list]) -> None:
         cache: Union[bool, str] = get_cache(Cache.TalkCache.db0_cache, message["chat_id"])
         if cache != False:
             message["cache"] = cache
+
         post_in_microservices(ms_start, ["start_driver_completed", "start_driver_failed"], message, log_report)
