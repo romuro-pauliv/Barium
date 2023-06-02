@@ -4,4 +4,4 @@ Server providing Open Source Intelligence (OSINT) services through chat applicat
 
 ---
 
-<img src="https://i.imgur.com/XfJxzoj.png" width="400">
+<img align="center" src="https://i.imgur.com/zFDbEta.png" width="150">
