@@ -27,7 +27,7 @@ def create_app(test_config: Union[bool, None] = None) -> Flask:
     else:
         app.config.from_mapping(test_config)
     
-    # ENDPOINT
+    # HOME ENDPOINT |--------------------------------------------------------------------------------------------------|
     def log_report(chat_id) -> None:
         log_schema: list[str] = LogSchema.LOG_REPORT_MSG["connections"]["received_message_start_driver"]
         threading.Thread(
@@ -48,5 +48,9 @@ def create_app(test_config: Union[bool, None] = None) -> Flask:
         ).start()
         
         return "OK", 202
+    # |----------------------------------------------------------------------------------------------------------------|
+    
+    from .routes.inform_username import bp_inform_username
+    app.register_blueprint(bp_inform_username, url_prefix="/in-cache")
     
     return app

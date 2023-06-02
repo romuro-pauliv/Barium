@@ -27,6 +27,12 @@
             "endpoints": {
                 "home": ""
             }
+        },
+        "PATH2": {
+            "path": "/in-cache",
+            "endpoints": {
+                "home": "/"
+            }
         }
     },
     "logs": {
