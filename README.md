@@ -4,4 +4,4 @@ Server providing Open Source Intelligence (OSINT) services through chat applicat
 
 ---
 
-![https://i.imgur.com/wHTY53P.png](BariumLogotype)
+<img src="https://i.imgur.com/XfJxzoj.png" width="400">
