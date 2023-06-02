@@ -8,6 +8,12 @@
             "endpoints": {
                 "home": "/"
             }
+        },
+        "path2": {
+            "path": "/cache",
+            "endpoints": {
+                "db0": "/db0"
+            }
         }
     }
 }

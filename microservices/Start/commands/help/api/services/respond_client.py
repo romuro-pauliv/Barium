@@ -49,7 +49,7 @@ class RespondClient(object):
             message (dict[str, str  |  list]): Received message with chat_id
         """
         
-        if "cache" in [i for i in message.keys()]:
+        if "cache" in [i for i in message.keys()] and message["cache"] == "HELP_0":
             pass
         else:
             random_msg: str = random_msg_from_list(self.msg_list)
