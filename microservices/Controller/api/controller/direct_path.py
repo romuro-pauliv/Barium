@@ -28,6 +28,7 @@ session_list: list[str] = session.get()
 
 # Connection to start | client Driver
 ms_start: dict[str, dict[str, str]] = MicrosservicesAPI.MS_ROUTES["ms_start"]
+ms_sherlock: dict[str, dict[str, str]] = MicrosservicesAPI.MS_ROUTES["ms_sherlock"]
 
 # Log Report
 def log_report(master: str, log_data: str, message: str) -> None:
@@ -57,5 +58,21 @@ def driver(message: dict[str, str | list]) -> None:
         cache: Union[bool, str] = get_cache(Cache.TalkCache.db0_cache, message["chat_id"])
         if cache != False:
             message["cache"] = cache
-
-        post_in_microservices(ms_start, ["start_driver_completed", "start_driver_failed"], message, log_report)
+            
+            if message["cache"] == "SHERLOCK_0":
+                post_in_microservices(
+                    route=ms_sherlock,
+                    path_="PATH2", endpoint="home",
+                    log_data=["sherlock_completed", "sherlock_failed"],
+                    log_report=log_report,
+                    message=message
+                )
+                return None
+        
+        post_in_microservices(
+            route=ms_start,
+            path_="PATH1", endpoint="home",
+            log_data=["start_driver_completed", "start_driver_failed"],
+            log_report=log_report,
+            message=message
+        )

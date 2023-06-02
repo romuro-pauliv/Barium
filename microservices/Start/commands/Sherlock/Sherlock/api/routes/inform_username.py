@@ -1,30 +1,27 @@
 # +--------------------------------------------------------------------------------------------------------------------|
-# |                                                                                         app.cache.load.login_db.py |
+# |                                                                                             API.routes.receiver.py |
 # |                                                                                             Author: Pauliv, Rômulo |
 # |                                                                                          email: romulopauliv@bk.ru |
 # |                                                                                                    encoding: UTF-8 |
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from cache.redis_connect import Cache
-from database.connect import mongo_init
-
-from log.terminal.cache.redis.login_cached import LoginCachedLog
+import threading
+from flask import Blueprint, request
+from api.config.paths import LogSchema
+from api.connections.send_log import SendToLog
 # |--------------------------------------------------------------------------------------------------------------------|
 
-session: list[str] = []
+bp_inform_username: Blueprint = Blueprint("in-cache", __name__)
 
-def loading_user_in_cache() -> None:
-    database_list: list[str] = mongo_init.list_database_names()
-    chat_id_list: list[str] = []
-    for db in database_list:
-        LoginCachedLog.read(db)
-        if db[0:5] == "AYLA_":
-            chat_id_list.append(db[5::])
-            LoginCachedLog.active()
-        else:
-            LoginCachedLog.false()
-    
-    for chat_id in chat_id_list:
-        session.append(chat_id)
-        LoginCachedLog.add_in_cache(chat_id)
+def log_report(chat_id: str) -> None:
+    log_schema: list[str] = LogSchema.LOG_REPORT_MSG["connections"]["received_message_controller"]
+    threading.Thread(
+        target=SendToLog().report,
+        args=(log_schema[0], log_schema[1], chat_id)
+    ).start()
+
+@bp_inform_username.route("/", methods=["POST"])
+def receiver() -> tuple[str, int]:
+    print("OK")
+    return "OK", 202

@@ -14,6 +14,7 @@ from api.errors.send_to_telegram import system_down_message
 
 def post_in_microservices(
     route: dict[str, str],
+    path_: str, endpoint: str,
     log_data: list[str, str],
     message: dict[str],
     log_report: Callable[[str, str, str], None]) -> None:
@@ -27,7 +28,7 @@ def post_in_microservices(
         log_report (Callable[[str, str, str], None]): log_report function [[master, log_data, message]]
     """
     try:
-        requests.post(f"{route['HOST']}:{route['PORT']}{route['PATH1']['path']}{route['PATH1']['endpoints']['home']}", json=message)
+        requests.post(f"{route['HOST']}:{route['PORT']}{route[path_]['path']}{route[path_]['endpoints'][endpoint]}", json=message)
         log_report("connections", log_data[0], message)
     except requests.exceptions.ConnectionError:
         log_report("connections", log_data[1], message)
