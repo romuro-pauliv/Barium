@@ -53,4 +53,7 @@ def create_app(test_config: Union[bool, None] = None) -> Flask:
     from .routes.inform_username import bp_inform_username
     app.register_blueprint(bp_inform_username, url_prefix="/in-cache")
     
+    from .routes.receiver_data_from_sherlock import bp_receiver_data_from_sherlock
+    app.register_blueprint(bp_receiver_data_from_sherlock, url_prefix="/receiver-sherlock")
+    
     return app

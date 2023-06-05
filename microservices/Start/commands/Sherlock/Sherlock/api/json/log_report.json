@@ -7,7 +7,9 @@
         "sent_failed": ["Connection with Sender failed [127.0.0.1:5050]", "error"],
 
         "sent_to_cache_completed": ["Sent chat_id to cache DB0 [127.0.0.1:5002/cache/db0]", "info"],
-        "sent_to_cache_failed": ["Sent chat_id to cache DB0 failed [127.0.0.1:5002/cache/db0", "critial"]
+        "sent_to_cache_failed": ["Sent chat_id to cache DB0 failed [127.0.0.1:5002/cache/db0", "critial"],
+
+        "received_data_sherlock": ["Received data from Sherlock Client", "info"]
     },
     "telegram_api": {
         "error_message": ["Sent an error message to the user", "warning"]

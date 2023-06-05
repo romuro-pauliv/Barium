@@ -6,6 +6,7 @@ results of queries.
 from result import QueryStatus
 from colorama import Fore, Style
 import webbrowser
+import requests
 
 # Global variable to count the number of results.
 globvar = 0
@@ -211,19 +212,15 @@ class QueryNotifyPrint(QueryNotify):
                   f" {self.result.site_name}: " +
                   Style.RESET_ALL +
                   f"{self.result.site_url_user}")
-            """
-            REQUEST API [BARIUM]
-            """
             
-            print(
-                {
-                    "chat_id": chat_id,
+            json_data: dict[str, str] = {
+                    "chat_id": chat_id[0],
                     "username": self.message,
                     "site": self.result.site_name,
                     "uri": self.result.site_url_user,
-                    
                 }
-            )
+            
+            requests.post("http://127.0.0.1:5004/receiver-sherlock/", json=json_data)
             
             if self.browse:
                 webbrowser.open(self.result.site_url_user, 2)
