@@ -162,7 +162,7 @@ def MultipleUsernames(username):
 
 def sherlock(username, site_data, query_notify,
              tor=False, unique_tor=False,
-             proxy=None, timeout=60):
+             proxy=None, timeout=60, chat_id: str = None):
     """Run Sherlock Analysis.
 
     Checks for existence of username on various social media sites.
@@ -252,7 +252,7 @@ def sherlock(username, site_data, query_notify,
             results_site["url_user"] = ""
             results_site["http_status"] = ""
             results_site["response_text"] = ""
-            query_notify.update(results_site["status"])
+            query_notify.update(results_site["status"], chat_id)
         else:
             # URL of user on site (if it exists)
             results_site["url_user"] = url
@@ -434,7 +434,7 @@ def sherlock(username, site_data, query_notify,
                              status=query_status,
                              query_time=response_time,
                              context=error_context)
-        query_notify.update(result)
+        query_notify.update(result, chat_id)
 
         # Save status of request
         results_site["status"] = result
@@ -553,6 +553,11 @@ def main():
                         action="store",
                         help="One or more usernames to check with social networks. Check similar usernames using {%%} (replace to '_', '-', '.')."
                         )
+    parser.add_argument("--chatid",
+                        nargs="+", metavar="CHATID",
+                        action="store",
+                        help="chat_id from BARIUM")
+    
     parser.add_argument("--browse", "-b",
                         action="store_true", dest="browse", default=False,
                         help="Browse to all results on default browser.")
@@ -682,7 +687,8 @@ def main():
                            tor=args.tor,
                            unique_tor=args.unique_tor,
                            proxy=args.proxy,
-                           timeout=args.timeout)
+                           timeout=args.timeout,
+                           chat_id=args.chatid)
 
         if args.output:
             result_file = args.output

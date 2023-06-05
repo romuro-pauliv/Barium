@@ -1,0 +1,21 @@
+{
+    "logs": {
+        "HOST": "http://127.0.0.1", "PORT": "5001", "DIR": "/log", "ENDPOINTS": {
+            "debug": "/debug",
+            "info": "/info",
+            "warning": "/warning",
+            "error": "/error",
+            "critial": "/critial"
+        }
+    },
+    "sender": {
+        "HOST": "http://127.0.0.1",
+        "PORT": "5050",
+        "PATH1": {
+            "path": "/",
+            "endpoints": {
+                "home": "/"
+            }
+        }
+    }
+}

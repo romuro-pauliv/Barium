@@ -154,7 +154,9 @@ class QueryNotifyPrint(QueryNotify):
         """
 
         title = "Checking username"
-
+        
+        self.message: str = message
+        
         print(Style.BRIGHT + Fore.GREEN + "[" +
               Fore.YELLOW + "*" +
               Fore.GREEN + f"] {title}" +
@@ -179,7 +181,7 @@ class QueryNotifyPrint(QueryNotify):
         globvar += 1
         return globvar
 
-    def update(self, result):
+    def update(self, result, chat_id):
         """Notify Update.
 
         Will print the query result to the standard output.
@@ -210,8 +212,19 @@ class QueryNotifyPrint(QueryNotify):
                   Style.RESET_ALL +
                   f"{self.result.site_url_user}")
             """
-            REQUEST API HIR 
+            REQUEST API [BARIUM]
             """
+            
+            print(
+                {
+                    "chat_id": chat_id,
+                    "username": self.message,
+                    "site": self.result.site_name,
+                    "uri": self.result.site_url_user,
+                    
+                }
+            )
+            
             if self.browse:
                 webbrowser.open(self.result.site_url_user, 2)
 

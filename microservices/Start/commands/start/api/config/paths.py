@@ -47,7 +47,7 @@ class TelegramConfig:
 class ErrorMessages:
     error_message: PosixPath = Path("api", "json", "error_message.json")
     ERROR_MESSAGE: dict[str, Any] = Tools.read_json(error_message)
-
+    
 class Messages:
     messages: PosixPath = Path("api", "json", "messages", "to_client.json")
     MESSAGES: dict[str, Any] = Tools.read_json(messages)

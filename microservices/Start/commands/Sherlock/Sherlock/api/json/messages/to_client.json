@@ -1,0 +1,8 @@
+{
+    "sherlock": [
+        "Sherlock é um algoritmo que caça contas de mídia social por nome de usuário nas redes sociais"
+    ],
+    "request_username": [
+        "Informe um nome de usuário que você deseja caçar!"
+    ]
+}
