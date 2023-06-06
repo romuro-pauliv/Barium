@@ -4,5 +4,11 @@
     ],
     "request_username": [
         "Informe um nome de usuário que você deseja caçar!"
+    ],
+    "init_sherlock": [
+        "Inciando busca pelo username: "
+    ],
+    "finish": [
+        "Aguarde a mensagem de finalização de busca"
     ]
 }

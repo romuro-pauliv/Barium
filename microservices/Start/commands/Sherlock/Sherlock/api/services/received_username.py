@@ -31,10 +31,32 @@ class ReceivedUsername(object):
         ).start()
     
     
-    def modify_cache(self, chat_id: str) -> None:
+    def modify_cache(self, chat_id: str) -> bool:
         return DataLoading.send_cache(
             route=MicrosservicesAPI.MS_ROUTES["data_loading"],
             post_json={"chat_id": chat_id, "cache_value": "SHERLOCK_STANDBY"},
             chat_id=chat_id,
             log_report_function=self.log_report   
         )
+    
+    def send_msg_to_client(self, chat_id: str, username: str) -> None:
+        self.whoami: dict[str, str] = MicrosservicesAPI.WHO_AM_I
+        message_keys: list[str] = ["init_sherlock", "finish"]
+        
+        for n, msg_key in enumerate(message_keys):
+            msg: str = random_msg_from_list(Messages.MESSAGES[msg_key])
+            connect_with_sender(
+                route=MicrosservicesAPI.MS_ROUTES["sender"],
+                post_json={
+                    "chat_id": chat_id,
+                    "message": str(msg + username) if n == 0 else msg,
+                    "microservice": [self.whoami["NAME"], str(self.whoami["HOST"] + ":" + self.whoami["PORT"])]
+                },
+                chat_id=chat_id,
+                log_report_function=self.log_report
+            )
+        time.sleep(0.5)
+    
+    def send(self, chat_id: str, username: str) -> None:
+        if self.modify_cache(chat_id) == True:
+            self.send_msg_to_client(chat_id, username)
