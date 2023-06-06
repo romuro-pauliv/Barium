@@ -1,14 +1,17 @@
 {
     "sherlock": [
-        "Sherlock é um algoritmo que caça contas de mídia social por nome de usuário nas redes sociais"
+        "📡 <b>Sherlock</b>\n\nAlgoritmo que detecta e rastreia perfis em redes sociais por meio de uma busca sistemática, utilizando o nome de usuário como critério"
     ],
     "request_username": [
-        "Informe um nome de usuário que você deseja caçar!"
+        "👤 Forneça um <b>nome de usuário</b> que você deseja rastrear:"
     ],
     "init_sherlock": [
-        "Inciando busca pelo username: "
+        "🔍 Inciando rastreamento por: "
     ],
     "finish": [
-        "Aguarde a mensagem de finalização de busca"
+        "⚠️ Por favor, aguarde a notificação de conclusão da busca ⚠️"
+    ],
+    "finish_completed": [
+        "🟢\n🟢 Rastreamento finalizado\n🟢"
     ]
 }

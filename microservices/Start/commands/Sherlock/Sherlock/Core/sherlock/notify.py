@@ -213,6 +213,7 @@ class QueryNotifyPrint(QueryNotify):
                   Style.RESET_ALL +
                   f"{self.result.site_url_user}")
             
+            # | BARIUM |-----------------------------------------------------------------------------------------------|
             json_data: dict[str, str] = {
                     "chat_id": chat_id[0],
                     "username": self.message,
@@ -221,6 +222,7 @@ class QueryNotifyPrint(QueryNotify):
                 }
             
             requests.post("http://127.0.0.1:5004/receiver-sherlock/", json=json_data)
+            # |--------------------------------------------------------------------------------------------------------|
             
             if self.browse:
                 webbrowser.open(self.result.site_url_user, 2)
@@ -260,7 +262,7 @@ class QueryNotifyPrint(QueryNotify):
 
         return
 
-    def finish(self, message="The processing has been finished."):
+    def finish(self, message="The processing has been finished.", chat_id: str = None):
         """Notify Start.
         Will print the last line to the standard output.
         Keyword Arguments:
@@ -277,6 +279,18 @@ class QueryNotifyPrint(QueryNotify):
               Fore.WHITE + f" {NumberOfResults} " +
               Fore.GREEN + "results" + Style.RESET_ALL
               )
+
+        # | BARIUM |---------------------------------------------------------------------------------------------------|
+        json_data: dict[str, str] = {
+            "chat_id": chat_id[0],
+            "username": False,
+            "site": False,
+            "uri": False
+        }
+            
+        requests.post("http://127.0.0.1:5004/receiver-sherlock/", json=json_data)
+        # |------------------------------------------------------------------------------------------------------------|
+        
 
     def __str__(self):
         """Convert Object To String.

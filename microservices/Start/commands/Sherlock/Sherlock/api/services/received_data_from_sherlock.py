@@ -1,5 +1,5 @@
 # +--------------------------------------------------------------------------------------------------------------------|
-# |                                                                                  api.services.received_username.py |
+# |                                                                        api.services.received_data_from_sherlock.py |
 # |                                                                                             Author: Pauliv, Rômulo |
 # |                                                                                          email: romulopauliv@bk.ru |
 # |                                                                                                    encoding: UTF-8 |
@@ -14,16 +14,15 @@ from api.connections.data_loading import DataLoading
 
 from api.services.tools.random_msg_from_list import random_msg_from_list
 
-import subprocess
 import threading
 import time
 # |--------------------------------------------------------------------------------------------------------------------|
 
 
-class ReceivedUsername(object):
+class ReceivedDataSherlock(object):
     def __init__(self) -> None:
         pass
-
+    
     def log_report(self, master: str, log_data: str, chat_id: str) -> None:
         log_schema: list[str] = LogSchema.LOG_REPORT_MSG[master][log_data]
         threading.Thread(
@@ -31,43 +30,44 @@ class ReceivedUsername(object):
             args=(log_schema[0], log_schema[1], chat_id)
         ).start()
     
-    
-    def modify_cache(self, chat_id: str) -> bool:
-        return DataLoading.send_cache(
-            route=MicrosservicesAPI.MS_ROUTES["data_loading"],
-            post_json={"chat_id": chat_id, "cache_value": "SHERLOCK_STANDBY"},
-            chat_id=chat_id,
-            log_report_function=self.log_report   
-        )
-    
-    def send_msg_to_client(self, chat_id: str, username: str) -> None:
+    def finish_msg(self, data: dict[str, str]) -> None:
         self.whoami: dict[str, str] = MicrosservicesAPI.WHO_AM_I
-        message_keys: list[str] = ["init_sherlock", "finish"]
+                
+        if data["site"] == False and data["uri"] == False:
+            if DataLoading.delete_cache(
+                route=MicrosservicesAPI.MS_ROUTES["data_loading"],
+                post_json={"chat_id": data["chat_id"]},
+                chat_id=data["chat_id"],
+                log_report_function=self.log_report
+              ) == True:
+                
+                connect_with_sender(
+                    route=MicrosservicesAPI.MS_ROUTES["sender"],
+                    post_json={
+                        "chat_id": data["chat_id"],
+                        "message": Messages.MESSAGES["finish_completed"],
+                        "microservice": [self.whoami["NAME"], str(self.whoami["HOST"] + ":" + self.whoami["PORT"])]
+                    },
+                    chat_id=data["chat_id"],
+                    log_report_function=self.log_report
+                )
+                return True
+        return False
         
-        for n, msg_key in enumerate(message_keys):
-            msg: str = random_msg_from_list(Messages.MESSAGES[msg_key])
+    def send(self, data: dict[str, str]) -> None:
+        
+        if self.finish_msg(data) == False:
+        
+            self.whoami: dict[str, str] = MicrosservicesAPI.WHO_AM_I
+            msg: str = str("🌐 " + data["site"] + "\n" + "🔗 "+ data["uri"])
+        
             connect_with_sender(
                 route=MicrosservicesAPI.MS_ROUTES["sender"],
                 post_json={
-                    "chat_id": chat_id,
-                    "message": str(msg + username) if n == 0 else msg,
+                    "chat_id": data["chat_id"],
+                    "message": msg,
                     "microservice": [self.whoami["NAME"], str(self.whoami["HOST"] + ":" + self.whoami["PORT"])]
                 },
-                chat_id=chat_id,
+                chat_id=data["chat_id"],
                 log_report_function=self.log_report
             )
-        time.sleep(0.5)
-    
-    def init_sherlock(self, chat_id: str, username: str) -> None:
-        command = f'cd Core && . venv/bin/activate && python sherlock --chatid="{chat_id}" {username} --nsfw'
-        process = subprocess.Popen(command, shell=True)
-        
-        if process.poll() == None:
-            print("In execution")
-        else:
-            print("Finish")
-    
-    def send(self, chat_id: str, username: str) -> None:
-        if self.modify_cache(chat_id) == True:
-            self.send_msg_to_client(chat_id, username)
-            self.init_sherlock(chat_id, username)

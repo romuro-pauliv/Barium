@@ -26,7 +26,7 @@ def create_app(test_config: Union[bool, None] = None) -> Flask:
     from .routes.get_session import bp
     app.register_blueprint(bp, url_prefix="/session")
     
-    from .routes.post_cache import bp_cache
+    from .routes.cache import bp_cache
     app.register_blueprint(bp_cache, url_prefix="/cache")
     
     return app

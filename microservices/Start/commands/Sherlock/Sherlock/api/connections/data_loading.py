@@ -31,3 +31,21 @@ class DataLoading(object):
             system_down_message(chat_id)
             log_report_function("telegram_api", "error_message", chat_id)
             return False
+    
+    def delete_cache(
+        route: dict[str, str],
+        post_json: dict[str, str],
+        chat_id: str,
+        log_report_function: Callable[[str, str, str], None]
+    ) -> bool:
+        try:
+            requests.delete(
+                url=f"{route['HOST']}:{route['PORT']}{route['PATH1']['path']}{route['PATH1']['endpoints']['home']}", json=post_json
+            )
+            log_report_function("connections", "delete_cache_completed", chat_id)
+            return True
+        except requests.exceptions.ConnectionError:
+            log_report_function("connections", "delete_cache_failed", chat_id)
+            system_down_message(chat_id)
+            log_report_function("telegram_api", "error_message", chat_id)
+            return False

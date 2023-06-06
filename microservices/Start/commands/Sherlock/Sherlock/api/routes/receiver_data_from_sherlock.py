@@ -9,7 +9,10 @@
 import threading
 from flask import Blueprint, request
 from api.config.paths import LogSchema
+
 from api.connections.send_log import SendToLog
+
+from api.services.received_data_from_sherlock import ReceivedDataSherlock
 # |--------------------------------------------------------------------------------------------------------------------|
 
 bp_receiver_data_from_sherlock: Blueprint = Blueprint("receiver_data", __name__)
@@ -23,5 +26,12 @@ def log_report(chat_id: str) -> None:
 
 @bp_receiver_data_from_sherlock.route("/", methods=["POST"])
 def receiver() -> tuple[str, int]:
-    print(request.json)
+    
+    log_report(request.json["chat_id"])
+    
+    threading.Thread(
+        target=ReceivedDataSherlock().send,
+        args=(request.json, )
+    ).start()
+    
     return "OK", 202

@@ -9,6 +9,9 @@
         "sent_to_cache_completed": ["Sent chat_id to cache DB0 [127.0.0.1:5002/cache/db0]", "info"],
         "sent_to_cache_failed": ["Sent chat_id to cache DB0 failed [127.0.0.1:5002/cache/db0", "critial"],
 
+        "delete_cache_completed": ["Delete chat_id in cache DB0 [127.0.0.1:5002/cache/db0]", "info"],
+        "delete_cache_failed": ["Delete chat_id in cache DB0 failed [127.0.0.1:5002/cache/db0]", "critial"],
+
         "received_data_sherlock": ["Received data from Sherlock Client", "info"]
     },
     "telegram_api": {

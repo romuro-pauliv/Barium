@@ -34,3 +34,11 @@ def post_cache() -> tuple[str, int]:
     Cache.TalkMode.db0_cache.mset({chat_id: cache_value})
     
     return "OK", 202
+
+@bp_cache.route("/db0", methods=["DELETE"])
+def delete_cache() -> tuple[str, int]:
+    chat_id: str = request.json["chat_id"]
+    
+    Cache.TalkMode.db0_cache.delete(chat_id)
+    
+    return "OK", 202
