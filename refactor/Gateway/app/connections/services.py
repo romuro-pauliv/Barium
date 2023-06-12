@@ -100,7 +100,7 @@ class Connect(object):
 
     def delete(self, json: Union[dict[str, Any], None] = None) -> Union[requests.models.Response, tuple[str, str]]:
         """
-        Makes an HTTP POST request.
+        Makes an HTTP DELETE request.
         Args:
             json (Union[dict[str, Any], None], optional): The JSON data to be sent in the request. Defaults to None.
         Returns:

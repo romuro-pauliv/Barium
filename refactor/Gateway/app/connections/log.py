@@ -16,7 +16,7 @@ from typing import Union, Any
 class BuildLogJson(object):
     def build_json(self, chat_id: str) -> dict[str, Union[str, dict]]:
         """
-        Builds a base json with your own process information and the customer's chat_id
+        Builds a base json with its own process information and the customer's chat_id
         Args:
             chat_id (str): ID of the conversation with the client
         Returns:

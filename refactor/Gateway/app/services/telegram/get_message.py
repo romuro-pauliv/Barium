@@ -22,7 +22,7 @@ class Core(TelegramRequests):
     def last_message(self) -> Union[dict[str, dict[str, Union[str, list]]], None]:
         """
         Request the latest update from Telegram API and manipulate the data to
-        return 'None' which the update is the same as before update
+        return 'None' which the update is the same as the previous update
         Returns:
             Union[dict[str, dict[str, Union[str, list]]], None]: Return the last update from Telegram API
         """
