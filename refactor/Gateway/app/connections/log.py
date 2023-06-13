@@ -10,7 +10,12 @@ from connections.services import Connect
 
 from resources.data import SERVICES_ROUTES, WHO_AM_I
 
+from pathlib import Path, PosixPath
 from typing import Union, Any
+
+import datetime
+import requests
+import os
 # |--------------------------------------------------------------------------------------------------------------------|
 
 class BuildLogJson(object):
@@ -50,13 +55,28 @@ class BuildLogJson(object):
         if comments != None:
             json_data["report"] += f" - {comments}"
         return json_data
+    
+    def json2log(self, data: dict[str, Any]) -> str:
+        """
+        transforms the json built in str to write to .log
+        Args:
+            data (dict[str, Any]): Complete JSON payload from log_json method
+
+        Returns:
+            str: string with the json information
+        """
+        date: datetime.datetime = datetime.datetime.utcnow()
+        info: dict[str, str] = data["extra"]
+        report: str = data["report"]
+        return f"{date} | {info['microservice']} | {info['clientip']} | {info['chat_id']} | {report}\n"
 
 
-class LogConnect(Connect):
+class LogConnect(Connect, BuildLogJson):
     def __init__(self) -> None:
         """
         Initialize the LogConnect instance.
         """
+        self.path_log: PosixPath = Path("app", "log")
         self.log_route: dict[str, Any] = SERVICES_ROUTES["log"]
         
         self.report_log_parameter: str = self.log_route["report_log"]["route_parameter"]
@@ -64,6 +84,16 @@ class LogConnect(Connect):
         
         super().__init__(host=self.log_route["HOST"], port=self.log_route["PORT"])
     
+    def local_log(self, data: dict[str, Any]) -> None:
+        if not os.path.exists(self.path_log):
+            os.mkdir(self.path_log)
+        
+        data: str = self.json2log(data)
+        
+        log_file_path: Path = self.path_log / "offline.log"
+        with open(log_file_path, "a") as file:
+            file.write(data)
+
     def report(
         self, http_method: str, service_route: str,
         log_level: str, chat_id: str, success: bool, comments: Union[str, None] = None) -> None:
@@ -77,4 +107,8 @@ class LogConnect(Connect):
             success (bool): Whether it was successful or not
         """
         self.set_endpoint(f"{self.report_log_parameter}{self.report_log_endpoints[log_level]}")
-        self.post(BuildLogJson().log_json(http_method, service_route, chat_id, success, comments))
+        
+        json: dict[str, str] = self.log_json(http_method, service_route, chat_id, success, comments)
+        response: Union[requests.models.Response, tuple[str, str]] = self.post(json)
+        
+        self.local_log(json)
