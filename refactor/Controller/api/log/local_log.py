@@ -1,5 +1,5 @@
 # +--------------------------------------------------------------------------------------------------------------------|
-# |                                                                                               app.log.local_log.py |
+# |                                                                                               api.log.local_log.py |
 # |                                                                                             Author: Pauliv, Rômulo |
 # |                                                                                          email: romulopauliv@bk.ru |
 # |                                                                                                    encoding: UTF-8 |
@@ -50,7 +50,7 @@ class LocalLog(BuildLog):
         Args:
             data (dict[str, Any]): json that would be sent to the log service
         """
-        self.log_file_path: PosixPath = Path("app", "log", "files")
+        self.log_file_path: PosixPath = Path("api", "log", "files")
         self.check_dir()
         data: str = self.json2log(data)
         

@@ -1,16 +1,16 @@
 # +--------------------------------------------------------------------------------------------------------------------|
-# |                                                                                             app.connections.log.py |
+# |                                                                                             api.connections.log.py |
 # |                                                                                             Author: Pauliv, Rômulo |
 # |                                                                                          email: romulopauliv@bk.ru |
 # |                                                                                                    encoding: UTF-8 |
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from connections.services import Connect
+from api.connections.services import Connect
 
-from log.local_log import LocalLog
+from api.log.local_log import LocalLog
 
-from resources.data import SERVICES_ROUTES, WHO_AM_I
+from api.resources.data import SERVICES_ROUTES, WHO_AM_I
 
 from typing import Union, Any
 

@@ -1,16 +1,16 @@
 # +--------------------------------------------------------------------------------------------------------------------|
-# |                                                                                              app.resources.data.py |
+# |                                                                                              api.resources.data.py |
 # |                                                                                             Author: Pauliv, Rômulo |
 # |                                                                                          email: romulopauliv@bk.ru |
 # |                                                                                                    encoding: UTF-8 |
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from resources.data_provider import JsonReader
+from api.resources.data_provider import JsonReader
 from typing import Any
 # |--------------------------------------------------------------------------------------------------------------------|
 
-json_reader: JsonReader = JsonReader("app", "json")
+json_reader: JsonReader = JsonReader("api", "json")
 
 # FILES |--------------------------------------------------------------------------------------------------------------|
 TELEGRAM_API: dict[str, Any] = json_reader.file_data("telegram_api.json")

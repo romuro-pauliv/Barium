@@ -1,5 +1,5 @@
 # +--------------------------------------------------------------------------------------------------------------------|
-# |                                                                                      api.controller.get_session.py |
+# |                                                                                    api.connections.data_loading.py |
 # |                                                                                             Author: Pauliv, Rômulo |
 # |                                                                                          email: romulopauliv@bk.ru |
 # |                                                                                                    encoding: UTF-8 |
@@ -17,34 +17,36 @@ import requests
 from typing import Any, Union
 # |--------------------------------------------------------------------------------------------------------------------|
 
+data_loading_rt: dict[str, Any] = SERVICES_ROUTES['data_loading']
 log_connect: LogConnect = LogConnect()
 threads: Threads = Threads()
 
-# | Data Loading Connect |---------------------------------------------------------------------------------------------|
-data_loading_rt: dict[str, Any] = SERVICES_ROUTES['data_loading']
-CONNECT_DATA_LOADING: Connect = Connect(data_loading_rt['HOST'], data_loading_rt['PORT'])
-# | -------------------------------------------------------------------------------------------------------------------|
-
-# | Set endpoint to /session/ |----------------------------------------------------------------------------------------|
-session_route_parameter: str =  data_loading_rt['session']['route_parameter']
-session_endpoint: str = data_loading_rt['session']['endpoints']['home']
-CONNECT_DATA_LOADING.set_endpoint(f"{session_route_parameter}{session_endpoint}")
-# |--------------------------------------------------------------------------------------------------------------------|
-
-uri_to_log: str = f"{data_loading_rt['HOST']}:{data_loading_rt['PORT']}{session_route_parameter}{session_endpoint}"
 
 class Session(object):
+    def __init__(self) -> None:
+        """
+        Initialize Session Connection instance
+        """
+        host: str = data_loading_rt['HOST']
+        port: str = data_loading_rt['PORT']
+        route_parameter: str = data_loading_rt['session']['route_parameter']
+        endpoint: str = data_loading_rt['session']['endpoints']['home']
+        
+        self.connect: Connect = Connect(host, port)
+        self.connect.set_endpoint(f"{route_parameter}{endpoint}")
+        self.full_uri: str = f"{host}:{port}{route_parameter}{endpoint}"
+        
     def get(self) -> Union[list[str], bool]:
         """
         Makes a GET request on the data_loading service and returns the user sessions
         Returns:
             Union[list[str], bool]: Returns the user session or False if it failed to establish the session request
         """
-        response: Union[requests.models.Response, tuple[str, str]] = CONNECT_DATA_LOADING.get()
+        response: Union[requests.models.Response, tuple[str, str]] = self.connect.get()
         
         if not isinstance(response, requests.models.Response):
-            threads.start_thread(log_connect.report, "GET", uri_to_log, "error", 'INTERNAL', False, response[0])
+            threads.start_thread(log_connect.report, "GET", self.full_uri, "error", 'INTERNAL', False, response[0])
             return False
         
-        threads.start_thread(log_connect.report, "GET", uri_to_log, "info", 'INTERNAL', True)
+        threads.start_thread(log_connect.report, "GET", self.full_uri, "info", 'INTERNAL', True)
         return response.json()

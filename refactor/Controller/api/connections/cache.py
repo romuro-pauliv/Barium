@@ -8,7 +8,7 @@
 # | Imports |----------------------------------------------------------------------------------------------------------|
 from typing import Union
 
-from connections.log import LogConnect
+from api.connections.log import LogConnect
 
 from redis import Redis, client
 from dotenv import load_dotenv
@@ -49,8 +49,8 @@ class CacheConnect(object):
         """
         response: Union[None, str] = self.cachedb.get(key)
         if response == None:
-            log_connect.report("GET", self.uri_to_log, "error", 'INTERNAL', False)
+            log_connect.report("GET", self.uri_to_log, "info", 'INTERNAL', True, 'Cache-Free')
             return False
         else:
-            log_connect.report("GET", self.uri_to_log, "error", 'info', True)
+            log_connect.report("GET", self.uri_to_log, "info", 'INTERNAL', True)
             return response.decode('utf-8')

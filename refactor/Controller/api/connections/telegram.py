@@ -1,5 +1,5 @@
 # +--------------------------------------------------------------------------------------------------------------------|
-# |                                                                                        app.connections.telegram.py |
+# |                                                                                        api.connections.telegram.py |
 # |                                                                                             Author: Pauliv, Rômulo |
 # |                                                                                          email: romulopauliv@bk.ru |
 # |                                                                                                    encoding: UTF-8 |
@@ -12,9 +12,9 @@ from dotenv import load_dotenv
 import requests
 import os
 
-from resources.data import TELEGRAM_API
+from api.resources.data import TELEGRAM_API
 
-from connections.log import LogConnect
+from api.connections.log import LogConnect
 # |--------------------------------------------------------------------------------------------------------------------|
 
 load_dotenv()

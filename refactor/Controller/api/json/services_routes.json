@@ -9,6 +9,32 @@
             }
         }
     },
+    "start_service": {
+        "HOST": "http://127.0.0.1",
+        "PORT": "5003",
+        "receiver": {
+            "route_parameter": "/start",
+            "endpoints": {
+                "home": "/"
+            }
+        }
+    },
+    "sherlock_service": {
+        "HOST": "http://127.0.0.1",
+        "PORT": "5004",
+        "receiver": {
+            "route_parameter": "/",
+            "endpoints": {
+                "home": ""
+            }
+        },
+        "in_cache": {
+            "route_parameter": "/in-cache",
+            "endpoints": {
+                "home": "/"
+            }
+        }
+    },
     "log": {
         "HOST": "http://127.0.0.1",
         "PORT": "5001",
