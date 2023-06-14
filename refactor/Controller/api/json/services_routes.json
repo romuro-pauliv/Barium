@@ -1,0 +1,26 @@
+{
+    "data_loading": {
+        "HOST": "http://127.0.0.1",
+        "PORT": "5002",
+        "session": {
+            "route_parameter": "/session",
+            "endpoints": {
+                "home": "/"
+            }
+        }
+    },
+    "log": {
+        "HOST": "http://127.0.0.1",
+        "PORT": "5001",
+        "report_log": {
+            "route_parameter": "/log",
+            "endpoints": {
+                "debug": "/debug",
+                "info": "/info",
+                "warning": "/warning",
+                "error": "/error",
+                "critical": "/critical"
+            }
+        }
+    }
+}
