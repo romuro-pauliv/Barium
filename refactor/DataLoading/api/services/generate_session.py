@@ -10,12 +10,9 @@ from api.connections.database import MongoConnect
 from api.connections.log import LogConnect
 
 from api.resources.data import WHO_AM_I
-
-from api.threads.executable import Threads
 # |--------------------------------------------------------------------------------------------------------------------|
 
 log_connect: LogConnect = LogConnect()
-threads: Threads = Threads()
 
 class GenerateSession(MongoConnect):
     def __init__(self) -> None:
@@ -37,7 +34,7 @@ class GenerateSession(MongoConnect):
             if db[0:5] == "AYLA_":
                 self.session.append(db[5::])
         
-        threads.start_thread(log_connect.report, "GET", self.my_name, "info", "INTERNAL", True, "Generate Session")
+        log_connect.report("GET", self.my_name, "info", "INTERNAL", True, "Generate Session")
         
         return self.session
         

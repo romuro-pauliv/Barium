@@ -10,15 +10,12 @@ from typing import Union
 
 from api.connections.log import LogConnect
 
-from api.threads.executable import Threads
-
 from redis import Redis, client
 from dotenv import load_dotenv
 import os
 # |--------------------------------------------------------------------------------------------------------------------|
 
 log_connect: LogConnect = LogConnect()
-threads: Threads = Threads()
 
 load_dotenv()
 HOST: str = os.getenv("REDIS_HOST")
@@ -52,8 +49,27 @@ class CacheConnect(object):
         """
         response: Union[None, str] = self.cachedb.get(key)
         if response == None:
-            threads.start_thread(log_connect.report, "GET", self.uri_to_log, "info", 'INTERNAL', True, 'Cache-Free')
+            log_connect.report("GET", self.uri_to_log, "info", 'INTERNAL', True, 'Cache-Free')
             return False
         else:
-            threads.start_thread(log_connect.report, "GET", self.uri_to_log, "info", 'INTERNAL', True)
+            log_connect.report("GET", self.uri_to_log, "info", 'INTERNAL', True)
             return response.decode('utf-8')
+    
+    def post(self, key: str, value: str) -> None:
+        """
+        POST cache in Redis
+        Args:
+            key (str): cache key
+            value (str): cache value
+        """
+        log_connect.report("POST", self.uri_to_log, "info", "INTERNAL", True)
+        self.cachedb.mset({key:value})
+    
+    def delete(self, key: str) -> None:
+        """
+        DELETE cache in Redis
+        Args:
+            key (str): Key in Redis Cache
+        """
+        log_connect.report("DELETE", self.uri_to_log, "info", "INTERNAL", True)
+        self.cachedb.delete(key)
