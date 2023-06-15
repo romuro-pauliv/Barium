@@ -15,8 +15,6 @@ from api.connections.services import Connect
 
 from api.resources.data import SERVICES_ROUTES
 
-from api.threads.executable import Threads
-
 from typing import Union
 import requests
 # |--------------------------------------------------------------------------------------------------------------------|
@@ -74,7 +72,6 @@ class Driver(object):
         """
         session: Session = Session()
         self.session: list[str] = session.get()
-        self.threads: Threads = Threads()
         self.log_connect: LogConnect = LogConnect()
         
     def post_data_in(self, host: str, port: str, endpoint: str, json: dict[str, str]) -> None:
@@ -95,11 +92,11 @@ class Driver(object):
         response: Union[requests.models.Response, tuple[str, str]] = connect.post(json)
         
         if not isinstance(response, requests.models.Response):
-            self.threads.start_thread(self.log_connect.report, "POST", full_uri, "error", chat_id, False, response[0])
+            self.log_connect.report("POST", full_uri, "error", chat_id, False, response[0])
             ConnectionError().msg_2_client(chat_id)
             return None
         
-        self.threads.start_thread(self.log_connect.report, "POST", full_uri, "info", chat_id, True)
+        self.log_connect.report("POST", full_uri, "info", chat_id, True)
         
     def drive(self, message: dict[str, str | list]) -> None:
         """

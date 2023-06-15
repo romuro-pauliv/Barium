@@ -16,8 +16,9 @@ from api.threads.executable import Threads
 bp: Blueprint = Blueprint("controller", __name__)
 
 driver: Driver = Driver()
+threads: Threads = Threads()
 
 @bp.route("/", methods=["POST"])
 def receiver() -> tuple[str, int]:
-    Threads().start_thread(driver.drive, request.json)
+    threads.start_thread(driver.drive, request.json)
     return "Accepted", 202

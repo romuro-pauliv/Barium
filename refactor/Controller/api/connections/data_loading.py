@@ -6,8 +6,6 @@
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from api.threads.executable import Threads
-
 from api.resources.data import SERVICES_ROUTES
 
 from api.connections.services import Connect
@@ -19,8 +17,6 @@ from typing import Any, Union
 
 data_loading_rt: dict[str, Any] = SERVICES_ROUTES['data_loading']
 log_connect: LogConnect = LogConnect()
-threads: Threads = Threads()
-
 
 class Session(object):
     def __init__(self) -> None:
@@ -45,8 +41,8 @@ class Session(object):
         response: Union[requests.models.Response, tuple[str, str]] = self.connect.get()
         
         if not isinstance(response, requests.models.Response):
-            threads.start_thread(log_connect.report, "GET", self.full_uri, "error", 'INTERNAL', False, response[0])
+            log_connect.report("GET", self.full_uri, "error", 'INTERNAL', False, response[0])
             return False
         
-        threads.start_thread(log_connect.report, "GET", self.full_uri, "info", 'INTERNAL', True)
+        log_connect.report("GET", self.full_uri, "info", 'INTERNAL', True)
         return response.json()
