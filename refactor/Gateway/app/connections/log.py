@@ -12,7 +12,9 @@ from log.local_log import LocalLog
 
 from resources.data import SERVICES_ROUTES, WHO_AM_I
 
-from typing import Union, Any
+from threads.executable import Threads
+
+from typing import Union, Any, Callable
 
 import requests
 # |--------------------------------------------------------------------------------------------------------------------|
@@ -56,6 +58,8 @@ class BuildLogJson(object):
         return json_data
 
 
+threads: Threads = Threads()
+
 class LogConnect(Connect, BuildLogJson, LocalLog):
     def __init__(self) -> None:
         """
@@ -82,8 +86,14 @@ class LogConnect(Connect, BuildLogJson, LocalLog):
         """
         self.set_endpoint(f"{self.report_log_parameter}{self.report_log_endpoints[log_level]}")
         
-        json: dict[str, str] = self.log_json(http_method, service_route, chat_id, success, comments)
-        response: Union[requests.models.Response, tuple[str, str]] = self.post(json)
+        def exec_(http_method: str, service_route: str, chat_id: str, success: bool, comments: str) -> None:
+            """
+            Generated function to be executed in a separate thread
+            """
+            json: dict[str, str] = self.log_json(http_method, service_route, chat_id, success, comments)
+            response: Union[requests.models.Response, tuple[str, str]] = self.post(json)
         
-        if not isinstance(response, requests.models.Response):
-            self.save(json)
+            if not isinstance(response, requests.models.Response):
+                self.save(json)
+        
+        threads.start_thread(exec_, http_method, service_route, chat_id, success, comments)

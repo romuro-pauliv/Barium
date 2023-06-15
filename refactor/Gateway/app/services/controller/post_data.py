@@ -18,6 +18,8 @@ from typing import Any, Union
 import requests
 # |--------------------------------------------------------------------------------------------------------------------|
 
+log_connect: LogConnect = LogConnect()
+connection_error: ConnectionError = ConnectionError()
 
 class PostController(Connect):
     def __init__(self) -> None:
@@ -40,8 +42,8 @@ class PostController(Connect):
             success (bool): If True reports a log of successful connection. If False, reports a critical error
             chat_id (str): ID of the conversation with the client
         """
-        log_level: str = "info" if success == True else "critical"
-        LogConnect().report("POST", self.uri, log_level, chat_id, success, comments)
+        log_level: str = "info" if success == True else "error"
+        log_connect.report("POST", self.uri, log_level, chat_id, success, comments)
     
     def send(self, data: dict[str, Any]) -> None:
         """
@@ -55,7 +57,7 @@ class PostController(Connect):
         
         if not isinstance(response, requests.models.Response):
             self.log(False, chat_id, response[0])
-            ConnectionError().msg_2_client(chat_id)
+            connection_error.msg_2_client(chat_id)
             return None
         
         self.log(True, chat_id)

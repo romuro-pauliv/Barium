@@ -12,6 +12,8 @@ from connections.telegram import TelegramRequests
 from resources.data import ERROR_TELEGRAM_MESSAGE, TELEGRAM_API, LOG_REPORT
 # |--------------------------------------------------------------------------------------------------------------------|
 
+log_connect: LogConnect = LogConnect()
+
 class ConnectionError(TelegramRequests):
     def __init__(self) -> None:
         """
@@ -26,7 +28,7 @@ class ConnectionError(TelegramRequests):
             chat_id (str): ID of the conversation with the client
         """
         comments: str = LOG_REPORT["connection"]["error_message_to_client"]
-        LogConnect().report("POST", TELEGRAM_API["uri"], "info", chat_id, True, comments)
+        log_connect.report("POST", TELEGRAM_API["uri"], "info", chat_id, True, comments)
     
     def msg_2_client(self, chat_id: str) -> None:
         """

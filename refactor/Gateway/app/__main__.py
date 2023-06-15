@@ -47,7 +47,7 @@ while True:
             data["chat_id"] = str(id_)
 
             # Start a thread to report the message to the log
-            threads.start_thread(log_connect.report, "get", TELEGRAM_API['uri'], 'info', str(id_), True)
+            log_connect.report("get", TELEGRAM_API['uri'], 'info', str(id_), True)
 
             # Start a thread to send the message
             threads.start_thread(post_controller.send, data)
