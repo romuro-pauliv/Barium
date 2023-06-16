@@ -48,7 +48,7 @@
             "HOST": "http://127.0.0.1",
             "PORT": "5004",
             "receiver": {
-                "route_parameter": "",
+                "route_parameter": "/sherlock",
                 "endpoints": {
                     "home": "/"
                 }
