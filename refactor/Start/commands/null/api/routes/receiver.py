@@ -1,27 +1,24 @@
 # +--------------------------------------------------------------------------------------------------------------------|
-# |                                                                                                    api.__init__.py |
+# |                                                                                             API.routes.receiver.py |
 # |                                                                                             Author: Pauliv, Rômulo |
 # |                                                                                          email: romulopauliv@bk.ru |
 # |                                                                                                    encoding: UTF-8 |
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from flask import Flask, request
+from flask import Blueprint, request
 
-from .services.sender import Sender
+from api.services.reply import Reply
 
-from .threads.executable import Threads
+from api.threads.executable import Threads
 # |--------------------------------------------------------------------------------------------------------------------|
 
-sender: Sender = Sender()
+reply: Reply = Reply()
 threads: Threads = Threads()
+bp: Blueprint = Blueprint("null", __name__)
 
-def create_app() -> Flask:
-    app: Flask = Flask(__name__)
-    
-    @app.route("/", methods=["POST"])
-    def receiver() -> tuple[str, int]:
-        threads.start_thread(sender.send, request.json)
-        return "Accepted", 202
-            
-    return app
+
+@bp.route("/", methods=["POST"])
+def receiver() -> tuple[str, str]:
+    threads.start_thread(reply.client_responder, request.json)
+    return "Accepted", 202

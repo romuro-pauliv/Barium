@@ -1,0 +1,9 @@
+{
+    "null": [
+        ["👋 Hey, <b>", "</b>!\n\n Clique em /start para iniciar nossa conversa ou digite /help para descobrir minhas funcionalidades."],
+        ["👋 Hey, <b>", "</b>!\n\n Quando estiver pronto para conversar, basta usar o comando /start ou consultar /help para conhecer todas as opções disponíveis."],
+        ["👋 Hey, <b>", "</b>!\n\n Se quiser começar a interagir comigo, basta digitar /start e estarei aqui para ajudar. Caso precise de informações sobre o que posso fazer, é só usar o comando /help."],
+        ["👋 Hey, <b>", "</b>!\n\n Utilize /start para iniciar nossa conversa ou, se quiser saber mais sobre minhas funcionalidades, digite /help."],
+        ["👋 Hey, <b>", "</b>!\n\n Sou seu assistente virtual e estou aqui para ajudar. Para começar, clique em /start ou confira as opções disponíveis em /help."]
+    ]
+}

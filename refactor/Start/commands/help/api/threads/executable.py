@@ -1,27 +1,26 @@
 # +--------------------------------------------------------------------------------------------------------------------|
-# |                                                                                                    api.__init__.py |
+# |                                                                                          app.threads.executable.py |
 # |                                                                                             Author: Pauliv, Rômulo |
 # |                                                                                          email: romulopauliv@bk.ru |
 # |                                                                                                    encoding: UTF-8 |
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from flask import Flask, request
-
-from .services.sender import Sender
-
-from .threads.executable import Threads
+import threading
+from typing import Callable
 # |--------------------------------------------------------------------------------------------------------------------|
 
-sender: Sender = Sender()
-threads: Threads = Threads()
-
-def create_app() -> Flask:
-    app: Flask = Flask(__name__)
+class Threads(object):
+    def __init__(self) -> None:
+        pass
     
-    @app.route("/", methods=["POST"])
-    def receiver() -> tuple[str, int]:
-        threads.start_thread(sender.send, request.json)
-        return "Accepted", 202
-            
-    return app
+    def start_thread(self, func: Callable, *args, **kwargs) -> None:
+        """
+        Start a new thread to execute the given function with the provided arguments.
+        Args:
+            func (Callable): The function to be executed in the new thread.
+            *args: Variable-length argument list for the function.
+            **kwargs: Arbitrary keyword arguments for the function.
+        """
+        thread = threading.Thread(target=func, args=args, kwargs=kwargs)
+        thread.start()
