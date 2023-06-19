@@ -47,7 +47,7 @@ class ModelUsername(object):
         valid_username: bool = (
             isinstance(username, str) and
             re.match(patterns, username) and
-            not set(username) - set("_.-") and
+            set(username) - set("_.-") and
             username[0] != "-"
         )
         
