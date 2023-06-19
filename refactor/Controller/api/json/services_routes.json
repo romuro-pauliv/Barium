@@ -23,15 +23,15 @@
         "HOST": "http://127.0.0.1",
         "PORT": "5004",
         "receiver": {
-            "route_parameter": "/",
-            "endpoints": {
-                "home": ""
-            }
-        },
-        "in_cache": {
-            "route_parameter": "/in-cache",
+            "route_parameter": "/sherlock",
             "endpoints": {
                 "home": "/"
+            }
+        },
+        "username": {
+            "route_parameter": "/sherlock",
+            "endpoints": {
+                "home": "/username"
             }
         }
     },

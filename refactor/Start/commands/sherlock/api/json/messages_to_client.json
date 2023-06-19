@@ -13,5 +13,8 @@
     ],
     "finish_completed": [
         "🟢 Rastreamento finalizado"
+    ],
+    "username_error": [
+        "🚫 Caracteres não permitidos! Somente são permitidos:\n\n✅ Letras minúsculas e maiúsculas\n✅ Números\n✅ [_], [-] e [.]"
     ]
 }

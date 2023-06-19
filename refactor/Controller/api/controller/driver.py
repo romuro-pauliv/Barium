@@ -60,9 +60,9 @@ class Data(object):
             return f"{route_parameter}{endpoint}"
 
         @staticmethod
-        def endpoint_incache() -> str:
-            route_parameter: str = SERVICES_ROUTES['sherlock_service']['in_cache']['route_parameter']
-            endpoint: str = SERVICES_ROUTES['sherlock_service']['in_cache']['endpoints']['home']
+        def endpoint_username() -> str:
+            route_parameter: str = SERVICES_ROUTES['sherlock_service']['username']['route_parameter']
+            endpoint: str = SERVICES_ROUTES['sherlock_service']['username']['endpoints']['home']
             return f"{route_parameter}{endpoint}"
 
 class Driver(object):
@@ -118,7 +118,7 @@ class Driver(object):
                 if cache == "SHERLOCK_0":
                     self.post_data_in(
                         Data.SherlockService.host(), Data.SherlockService.port(),
-                        Data.SherlockService.endpoint_incache(),message
+                        Data.SherlockService.endpoint_username(), message
                     )
                     return None
 

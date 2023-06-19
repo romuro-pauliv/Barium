@@ -16,4 +16,7 @@ def create_app() -> Flask:
     from .routes.receiver_from_client import bp
     app.register_blueprint(bp, url_prefix="/sherlock")
     
+    from .routes.receiver_from_sherlock import bp_receiver_data_from_sherlock
+    app.register_blueprint(bp_receiver_data_from_sherlock, url_prefix="/receiver-sherlock")
+    
     return app

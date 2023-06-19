@@ -58,3 +58,24 @@ class DataLoadingCacheConnect(object):
         
         log_connect.report("POST", uri_to_log, "info", chat_id, True)
         return True
+    
+    def delete_cache(self, key: str) -> bool:
+        """
+        It makes a DELETE request to the "Data Loading" service. You must use some method to define the route before
+        Args:
+            key (dict[str, Any]): Key data to delete
+        """
+        uri_to_log: str = f"{self.HOST}:{self.PORT}{self.route_parameter}{self.endpoint}"
+        
+        chat_id: str = key
+        json: dict[str, str] = {"chat_id": key}
+        
+        response: Union[requests.models.Response, tuple[str, str]] = self.connect.delete(json)
+        
+        if not isinstance(response, requests.models.Response):
+            log_connect.report("DELETE", uri_to_log, "error", chat_id, False, response[0])
+            connection_error.msg_2_client(chat_id)
+            return False
+        
+        log_connect.report("DELETE", uri_to_log, "info", chat_id, True)
+        return True
