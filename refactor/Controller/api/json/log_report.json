@@ -1,0 +1,5 @@
+{
+    "connection": {
+        "error_message_to_client": "error message to the client"
+    }
+}

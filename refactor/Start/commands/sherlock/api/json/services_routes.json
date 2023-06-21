@@ -1,0 +1,36 @@
+{
+    "log": {
+        "HOST": "http://127.0.0.1",
+        "PORT": "5001",
+        "report_log": {
+            "route_parameter": "/log",
+            "endpoints": {
+                "debug": "/debug",
+                "info": "/info",
+                "warning": "/warning",
+                "error": "/error",
+                "critical": "/critical"
+            }
+        }
+    },
+    "sender": {
+        "HOST": "http://127.0.0.1",
+        "PORT": "5050",
+        "receiver": {
+            "route_parameter": "",
+            "endpoints": {
+                "home": "/"
+            }
+        }
+    },
+    "data_loading": {
+        "HOST": "http://127.0.0.1",
+        "PORT": "5002",
+        "cachedb0": {
+            "route_parameter": "/cache",
+            "endpoints": {
+                "home": "/db0"
+            }
+        }
+    }
+}

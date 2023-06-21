@@ -1,0 +1,20 @@
+{
+    "sherlock": [
+        "📡 <b>Sherlock</b>\n\nAlgoritmo que detecta e rastreia perfis em redes sociais por meio de uma busca sistemática, utilizando o nome de usuário como critério"
+    ],
+    "request_username": [
+        "👤 Forneça um <b>nome de usuário</b> que você deseja rastrear:"
+    ],
+    "init_sherlock": [
+        "🔍 Inciando rastreamento por: "
+    ],
+    "finish": [
+        "⚠️ Por favor, aguarde a notificação de conclusão da busca ⚠️"
+    ],
+    "finish_completed": [
+        "🟢 Rastreamento finalizado"
+    ],
+    "username_error": [
+        "🚫 Caracteres não permitidos! Somente são permitidos:\n\n✅ Letras minúsculas e maiúsculas\n✅ Números\n✅ [_], [-] e [.]"
+    ]
+}
