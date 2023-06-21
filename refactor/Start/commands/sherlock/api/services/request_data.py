@@ -90,11 +90,13 @@ class RequestUsername(DataLoadingCacheConnect):
         
         self.set_cache_db0_route()
         if self.post_cache({"chat_id": chat_id, "cache_value": "SHERLOCK_STANDBY"}) == True:
-            for msg_key in self.messages_keys:
+            for n, msg_key in enumerate(self.messages_keys):
+                
+                msg: str = random_str_from_list(MESSAGES2CLIENT[msg_key])
                 
                 build_json: dict[str, str] = {
                     "chat_id": chat_id,
-                    "message": random_str_from_list(MESSAGES2CLIENT[msg_key]),
+                    "message": str(msg + username) if n == 0 else msg,
                     "microservice": self.whoami
                 }
                 
@@ -102,4 +104,3 @@ class RequestUsername(DataLoadingCacheConnect):
                 time.sleep(0.5)
             
             self.init_sherlock(chat_id, username)
-                

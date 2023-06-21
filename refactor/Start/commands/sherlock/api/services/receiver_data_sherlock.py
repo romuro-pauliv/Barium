@@ -30,7 +30,7 @@ class ReceiverDataSherlock(DataLoadingCacheConnect):
         self.whoami: list[str] = [WHO_AM_I['NAME'], str(WHO_AM_I['HOST'] + ":" + WHO_AM_I['PORT'])]
         self.count_msg_block: dict[str, int] = {}
         self.msg_block: dict[str, int] = {}
-        self.msg_block_size: int = 6
+        self.msg_block_size: int = 7
         
         self.finish_msg: str = MESSAGES2CLIENT['finish_completed'][0]
         
