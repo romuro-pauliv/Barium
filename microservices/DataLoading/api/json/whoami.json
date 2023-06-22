@@ -1,19 +1,5 @@
 {
-    "NAME": "DATALOADING",
-    "HOST": "127.0.0.1",
-    "PORT": "5002",
-    "PATHS": {
-        "path1": {
-            "path": "/session", 
-            "endpoints": {
-                "home": "/"
-            }
-        },
-        "path2": {
-            "path": "/cache",
-            "endpoints": {
-                "db0": "/db0"
-            }
-        }
-    }
+    "NAME": "DATA_LOADING",
+    "HOST": "http://127.0.0.1",
+    "PORT": "5002"
 }

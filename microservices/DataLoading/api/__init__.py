@@ -7,26 +7,15 @@
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
 from flask import Flask
-from typing import Union
-import os
-from dotenv import load_dotenv
 # |--------------------------------------------------------------------------------------------------------------------|
 
-
-def create_app(test_config: Union[bool, None] = None) -> Flask:
-    app = Flask(__name__, instance_relative_config=True)
+def create_app() -> Flask:
+    app: Flask = Flask(__name__)
     
-    app.config.from_mapping()
-    
-    if test_config is None:
-        app.config.from_pyfile("config.py", silent=True)
-    else:
-        app.config.from_mapping(test_config)
-    
-    from .routes.get_session import bp
+    from .routes.session import bp
     app.register_blueprint(bp, url_prefix="/session")
     
-    from .routes.cache import bp_cache
-    app.register_blueprint(bp_cache, url_prefix="/cache")
-    
+    from .routes.cache_db0 import bp_cachedb0
+    app.register_blueprint(bp_cachedb0, url_prefix="/cache")
+        
     return app

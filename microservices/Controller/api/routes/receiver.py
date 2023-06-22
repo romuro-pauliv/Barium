@@ -7,32 +7,18 @@
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
 from flask import Blueprint, request
-from api.controller.direct_path import driver
-from api.connections.send_log import SendToLog
-from api.config.paths import LogSchema
-import threading
+
+from api.controller.driver import Driver
+
+from api.threads.executable import Threads
 # |--------------------------------------------------------------------------------------------------------------------|
 
-bp = Blueprint("controller", __name__)
+bp: Blueprint = Blueprint("controller", __name__)
 
-def log_report(master: str, log_data: str, chat_id: str) -> None:
-    """
-    Resume a connection with SendToLog class to send a log report to Log MS
-    Args:
-        master (str): Higher key in log_report.json
-        log_data (str): Lower key in log_report.json
-        chat_id (str): chat_id from message data
-    """
-    log_schema: list[str] = LogSchema.LOG_REPORT_MSG[master][log_data]
-    threading.Thread(
-        target=SendToLog().report, args=(
-            log_schema[0], log_schema[1], chat_id
-        )
-    ).start()
-
+driver: Driver = Driver()
+threads: Threads = Threads()
 
 @bp.route("/", methods=["POST"])
-def message_receiver() -> tuple[str, int]:    
-    log_report("connections", "received_message_data_gateway", request.json["chat_id"])
-    threading.Thread(target=driver, args=(request.json, )).start()    
-    return "OK", 202
+def receiver() -> tuple[str, int]:
+    threads.start_thread(driver.drive, request.json)
+    return "Accepted", 202

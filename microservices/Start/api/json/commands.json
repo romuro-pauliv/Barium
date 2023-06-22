@@ -1,7 +1,5 @@
 {
     "start": "/start",
     "help": "/ajuda",
-    "open_account": "/abrirConta",
-    "about_us": "/sobreNos",
     "sherlock": "/sherlock"
 }

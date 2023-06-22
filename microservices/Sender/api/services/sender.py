@@ -1,46 +1,37 @@
 # +--------------------------------------------------------------------------------------------------------------------|
-# |                                                                                                    API.__init__.py |
+# |                                                                                             api.services.sender.py |
 # |                                                                                             Author: Pauliv, Rômulo |
 # |                                                                                          email: romulopauliv@bk.ru |
 # |                                                                                                    encoding: UTF-8 |
 # +--------------------------------------------------------------------------------------------------------------------|
 
-# | Imports |----------------------------------------------------------------------------------------------------------+
-from api.config.paths import LogSchema
-from api.connections.send_log import SendToLog
-
-from api.errors.send_to_telegram import system_down_message
-from api.api.api_request import TelegramApiRequest
-
-from typing import Callable
-import threading
+# | Imports |----------------------------------------------------------------------------------------------------------|
+from api.connections.telegram import TelegramRequests
+from api.connections.log import LogConnect
 # |--------------------------------------------------------------------------------------------------------------------|
 
-class Sender(object):
-    def __init__(self) -> None:
-        self.telegram_api_request: TelegramApiRequest = TelegramApiRequest()
-        self.sender: Callable[[str, str], None] = self.telegram_api_request.send_message
-    
-    def log_report(self, master: str, log_data: str, chat_id: str) -> None:
-        """
-        Send a report to LOG MS
+log_connect: LogConnect = LogConnect()
 
-        Args:
-            master (str): Upper key in log_report.json
-            log_data (str): Lower key in log_report.json
-            chat_id (str): chat_id from message
+
+class Sender(TelegramRequests):
+    def __init__(self) -> None:
         """
-        log_schema: list[str] = LogSchema.LOG_REPORT_MSG[master][log_data]
-        
-        threading.Thread(
-            target=SendToLog().report,
-            args=(log_schema[0], log_schema[1], chat_id)
-        ).start()
+        Initialize Sender Instance
+        """
+        super().__init__()
     
     def send(self, message: dict[str, str | list]) -> None:
-        threading.Thread(
-            target=self.sender,
-            args=(message["chat_id"], message["message"])
-        ).start()
-        self.log_report("connections", "sent_to_telegram", message["chat_id"])
+        """
+        Sends the message to the Telegram API
+        Args:
+            message (dict[str, str  |  list]): Message to be sent | keys -> chat_id, message, microservice
+        """
+        chat_id: str = message["chat_id"]
+        message2client: str = message["message"]
+
+        service_name: str = message["microservice"][0]
+        service_host: str = message["microservice"][1]
         
+        log_connect.report("REQUESTED", service_host, "info", chat_id, True, service_name)
+        self.send_message(chat_id, message2client)
+        log_connect.report("POST", self.uri_to_log, "info", chat_id, True)

@@ -6,32 +6,47 @@
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-import requests
-from typing import Callable
+from api.connections.services import Connect
+from api.connections.log import LogConnect
+from api.errors.no_connection import ConnectionError
 
-from api.errors.send_to_telegram import system_down_message
+from api.resources.data import SERVICES_ROUTES
+
+from typing import Any, Union
+import requests
 # |--------------------------------------------------------------------------------------------------------------------|
 
+log_connect: LogConnect = LogConnect()
+connection_error: ConnectionError = ConnectionError()
 
-def connect_with_sender(
-    route: dict[str, str],
-    post_json: dict[str, str],
-    chat_id: str,
-    log_report_function: Callable[[str, str, str], None]
-) -> None:
-    """
-    Establishes a connection with Sender microservice
-    Args:
-        route (dict[str, str]): Route data [HOST, PORT, PATH, ENDPOINT]
-        post_json (dict[str, str]): json to post in Sender (see Sender Microservice documentation)
-        chat_id (str): chat_id from chat
-        log_report_function (Callable[[str, str, str], None]): Log function with connection as LOG microservice
-    """
-    try:
-        requests.post(
-            f"{route['HOST']}:{route['PORT']}{route['PATH']}{route['ENDPOINT']}",json=post_json)
-        log_report_function("connections", "sent_completed", chat_id)
-    except requests.exceptions.ConnectionError:
-        log_report_function("connections", "sent_failed", chat_id)
-        system_down_message(chat_id)
-        log_report_function("telegram_api", "error_message", chat_id)
+
+class SenderConnect(object):
+    def __init__(self) -> None:
+        """
+        Initialize SenderConnect Instance.
+        """
+        route_data: dict[str, Union[str, dict]] = SERVICES_ROUTES['sender']
+        self.HOST: str = route_data['HOST']
+        self.PORT: str = route_data['PORT']
+        self.PATH: str = f"{route_data['receiver']['route_parameter']}{route_data['receiver']['endpoints']['home']}"
+    
+    def send(self, json: dict[str, Any]):
+        """
+        Establishes the connection and sends the specified json file
+        Args:
+            json (dict[str, Any]): file to be sent
+        """
+        connect: Connect = Connect(self.HOST, self.PORT)
+        connect.set_endpoint(self.PATH)
+        
+        chat_id: str = json['chat_id']
+        
+        response: Union[requests.models.Response, tuple[str, str]] = connect.post(json)
+        
+        if not isinstance(response, requests.models.Response):
+            log_connect.report("POST", f"{self.HOST}:{self.PORT}{self.PATH}", "error", chat_id, False, response[0])
+            connection_error.msg_2_client(chat_id)
+            return None
+
+        log_connect.report("POST", f"{self.HOST}:{self.PORT}{self.PATH}", "info", chat_id, True)
+        

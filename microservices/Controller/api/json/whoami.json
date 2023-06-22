@@ -1,13 +1,5 @@
 {
     "NAME": "CONTROLLER",
-    "HOST": "127.0.0.1",
-    "PORT": "5000",
-    "PATHS": {
-        "path1": {
-            "path": "/controller",
-            "endpoints": {
-                "home": "/"
-            }
-        }
-    }
+    "HOST": "http://127.0.0.1",
+    "PORT": "5000"
 }

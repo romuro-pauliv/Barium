@@ -1,5 +1,5 @@
 {
-    "NAME": "HELP COMMAND",
-    "HOST": "127.0.0.1",
+    "NAME": "HELP_COMMAND",
+    "HOST": "http://127.0.0.1",
     "PORT": "5011"
 }

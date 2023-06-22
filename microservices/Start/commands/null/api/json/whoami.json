@@ -1,5 +1,5 @@
 {
-    "NAME": "NULL COMMAND",
-    "HOST": "127.0.0.1",
+    "NAME": "NULL_COMMAND",
+    "HOST": "http://127.0.0.1",
     "PORT": "5020"
 }

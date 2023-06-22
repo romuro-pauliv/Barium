@@ -6,29 +6,51 @@
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from core.last_message import Core
-from connections.send_controller import SendToController
+from resources.data import TELEGRAM_API
 
-from connections.send_log import SendToLog
-from config.paths import LogSchema
+from services.telegram.get_message import Core
+from services.controller.post_data import PostController
 
-import threading
+from connections.log import LogConnect
+
+from threads.executable import Threads
+
+from utils.process_monitor import ProcessMonitor
 # |--------------------------------------------------------------------------------------------------------------------|
 
-core = Core()
+process_monitor: ProcessMonitor = ProcessMonitor()
+
+# Start process monitoring
+process_monitor.init_process_start()
+
+core: Core = Core()
+log_connect: LogConnect = LogConnect()
+post_controller: PostController = PostController()
+threads: Threads = Threads()
+
+# Finish process monitoring
+process_monitor.init_process_finish()
 
 while True:
+    process_monitor.clock_process_start()
+
+    # Get the last received message
     last_message: dict[str, dict[str, str]] = core.last_message()
+
+    # Start process monitoring for the clock process
+    threads.start_thread(process_monitor.clock_process_finish, None, True)
+
     if last_message:
+        # Process each received message
         for id_ in last_message.keys():
-            data = last_message[id_]
+            data: int = last_message[id_]
             data["chat_id"] = str(id_)
-            
-            # POST in log API |----------------------------------------------------------------------------------------|
-            log_schema: list[str] = LogSchema.LOG_REPORT_MSG["telegram_api"]["received_update"]
-            threading.Thread(target=SendToLog().report, args=(log_schema[0], log_schema[1], str(id_),)).start()
-            # |--------------------------------------------------------------------------------------------------------|
-            
-            # POST in controller API |---------------------------------------------------------------------------------|
-            threading.Thread(target=SendToController().post, args=(data,)).start()
-            # |--------------------------------------------------------------------------------------------------------|
+
+            # Start a thread to report the message to the log
+            log_connect.report("get", TELEGRAM_API['uri'], 'info', str(id_), True)
+
+            # Start a thread to send the message
+            threads.start_thread(post_controller.send, data)
+
+            # Start process monitoring for the current message processing
+            threads.start_thread(process_monitor.clock_process_finish, data['username'])

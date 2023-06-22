@@ -1,6 +1,7 @@
 {
     "uri": "https://api.telegram.org/bot",
     "endpoints": {
-        "updates": "/GetUpdates"
+        "updates": "/GetUpdates",
+        "send_message": "/SendMessage"
     }
 }

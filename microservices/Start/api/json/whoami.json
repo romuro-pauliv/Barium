@@ -1,5 +1,5 @@
 {
-    "NAME": "START DRIVER",
-    "HOST": "127.0.0.1",
-    "PORT": "5003"
+    "NAME": "START_DRIVER",
+    "HOST": "http://127.0.0.1",
+    "PORT": "5000"
 }
