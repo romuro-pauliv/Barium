@@ -79,3 +79,35 @@ class DataLoadingCacheConnect(object):
         
         log_connect.report("DELETE", uri_to_log, "info", chat_id, True)
         return True
+
+
+class DataLoadingSherlock(object):
+    def __init__(self) -> None:
+        self.route_data: dict[str, Any] = SERVICES_ROUTES['data_loading']
+        self.HOST: str = self.route_data["HOST"]
+        self.PORT: str = self.route_data["PORT"]
+        
+        self.connect: Connect = Connect(self.HOST, self.PORT)
+    
+    def post_resources_target(self, chat_id: str, target_username: str, sherlock_data: str) -> None:
+        self.route_parameter: str = self.route_data['sherlock']['route_parameter']
+        self.endpoint: str = self.route_data['sherlock']['endpoints']['post-target']
+        self.connect.set_endpoint(f"{self.route_parameter}{self.endpoint}")
+        
+        uri_to_log: str = f"{self.HOST}:{self.PORT}{self.route_parameter}{self.endpoint}"
+        
+        build_json: dict[str, Union[str, dict[str, Any]]] = {
+            "chat_id": chat_id,
+            "target_username": target_username,
+            "sherlock_data": sherlock_data
+        }
+        
+        response: Union[requests.models.Response, tuple[str, int]] = self.connect.post(build_json)
+        
+        if not isinstance(response, requests.models.Response):
+            log_connect.report("POST", uri_to_log, "error", chat_id, False, "non-saved target data")
+            return False
+        
+        log_connect.report("POST", uri_to_log, "info", chat_id, True, "target data saved")
+        return True
+        

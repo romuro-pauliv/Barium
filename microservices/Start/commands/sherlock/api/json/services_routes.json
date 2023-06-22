@@ -31,6 +31,12 @@
             "endpoints": {
                 "home": "/db0"
             }
+        },
+        "sherlock": {
+            "route_parameter": "/sherlock",
+            "endpoints": {
+                "post-target": "/post-target"
+            }
         }
     }
 }
