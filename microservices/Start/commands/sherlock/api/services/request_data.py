@@ -8,6 +8,7 @@
 # | Imports |----------------------------------------------------------------------------------------------------------|
 from api.connections.data_loading import DataLoadingCacheConnect
 from api.connections.sender import SenderConnect
+from api.connections.data_loading import DataLoadingSherlock
 
 from api.resources.data import MESSAGES2CLIENT, WHO_AM_I
 
@@ -22,6 +23,7 @@ import time
 
 sender_connect: SenderConnect = SenderConnect()
 model_username: ModelUsername  = ModelUsername()
+data_loading_sherlock: DataLoadingSherlock = DataLoadingSherlock()
 
 class RequestInitData(DataLoadingCacheConnect):
     def __init__(self) -> None:
@@ -82,11 +84,25 @@ class RequestUsername(DataLoadingCacheConnect):
             message (dict[str, Any]): Message from client
         """
         
+        
         if model_username.allow_chars(message) == False:
             return None
         
         chat_id: str = message["chat_id"]
         username: str = message["text"]
+        
+        target_data: dict[str, Union[bool, str]] = data_loading_sherlock.get_resources_target(chat_id, username)
+        if target_data != False and target_data['result'] == True:
+            
+            build_json: dict[str, str] = {
+                "chat_id": chat_id,
+                "message": target_data['data'],
+                "microservice": self.whoami
+            }
+            self.set_cache_db0_route()    
+            self.delete_cache(chat_id)
+            sender_connect.send(build_json)
+            return None
         
         self.set_cache_db0_route()
         if self.post_cache({"chat_id": chat_id, "cache_value": "SHERLOCK_STANDBY"}) == True:

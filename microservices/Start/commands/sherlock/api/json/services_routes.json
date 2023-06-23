@@ -35,7 +35,8 @@
         "sherlock": {
             "route_parameter": "/sherlock",
             "endpoints": {
-                "post-target": "/post-target"
+                "post-target": "/post-target",
+                "get-target": "/get-target"
             }
         }
     }
