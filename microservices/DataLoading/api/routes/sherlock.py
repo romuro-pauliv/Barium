@@ -25,3 +25,8 @@ bp_sherlock: Blueprint = Blueprint("sherlock", __name__)
 def post_sherlock_target() -> tuple[str, int]:
     threads.start_thread(sherlock.post_username_target, request.json)
     return "Accepted", 202
+
+
+@bp_sherlock.route("/get-target", methods=["GET"])
+def get_sherlock_target() -> tuple[dict[str, str], int]:
+    return sherlock.get_target(request.json), 200

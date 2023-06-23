@@ -26,6 +26,7 @@ class CacheDB(object):
     _Caching instance
     """
     db0: client.Redis = Redis(HOST, PORT, db=0)
+    db1: client.Redis = Redis(HOST, PORT, db=1)
 
 
 class CacheConnect(object):
