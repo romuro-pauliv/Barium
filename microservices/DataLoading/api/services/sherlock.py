@@ -35,6 +35,7 @@ class Sherlock(object):
         self.collection_resources: str = "resources"
         
         self.maxchar_block_in_cache: int = 2000
+        self.cache_ttl: datetime.timedelta = datetime.timedelta(weeks=1)
         
     def schema_to_targets(self) -> None:
         """
@@ -171,6 +172,7 @@ class Sherlock(object):
         
         # Post in cache | ---------------------------------------------------------------------------------------------|
         cache_connect.post(target_username, self.sherlock_data2str(sherlock_data))
+        cache_connect.post_ttl(target_username, self.cache_ttl)
         
         # | Post in instance |-----------------------------------------------------------------------------------------|
         self.targets_list.append(target_username)
@@ -203,6 +205,7 @@ class Sherlock(object):
             data2str: str = self.sherlock_data2str(db_result['data'])
             
             cache_connect.post(target, data2str)
-            return {"result": True, "data": self.maxlen(get_cache, self.maxchar_block_in_cache)}
+            cache_connect.post_ttl(target, self.cache_ttl)
+            return {"result": True, "data": self.maxlen(data2str, self.maxchar_block_in_cache)}
         
         return {"result": False, "data": None}
