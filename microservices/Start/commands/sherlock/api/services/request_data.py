@@ -94,14 +94,17 @@ class RequestUsername(DataLoadingCacheConnect):
         target_data: dict[str, Union[bool, str]] = data_loading_sherlock.get_resources_target(chat_id, username)
         if target_data != False and target_data['result'] == True:
             
-            build_json: dict[str, str] = {
-                "chat_id": chat_id,
-                "message": target_data['data'],
-                "microservice": self.whoami
-            }
             self.set_cache_db0_route()    
             self.delete_cache(chat_id)
-            sender_connect.send(build_json)
+            
+            for msg_block in target_data['data']:
+                build_json: dict[str, str] = {
+                    "chat_id": chat_id,
+                    "message": msg_block,
+                    "microservice": self.whoami
+                }
+                sender_connect.send(build_json)
+                time.sleep(0.5)
             return None
         
         self.set_cache_db0_route()

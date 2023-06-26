@@ -34,6 +34,8 @@ class Sherlock(object):
         self.collection_info: str = "info"
         self.collection_resources: str = "resources"
         
+        self.maxchar_block_in_cache: int = 2000
+        
     def schema_to_targets(self) -> None:
         """
         Creates a document in MongoDB to store the targets already computed
@@ -67,6 +69,48 @@ class Sherlock(object):
                 str_value += MESSAGES2CLIENT["finish_completed"][0]
         
         return str_value
+    
+    def maxlen(self, text: str, maxlen: int) -> list[str]:
+        """
+        Splits a text into sections of maximum length 'maxlen' and returns the sections as a list of strings.
+
+        Args:
+            text (str): The input text to be split into sections.
+            maxlen (int): The maximum length of each section.
+
+        Returns:
+            Union[str, List[str]]: If the text can be split into multiple sections, it returns a list of section strings.
+                               If the text is shorter than 'maxlen', it returns the original text as a single string.
+        """
+
+        text_lines: list[str] = [line for line in text.split("\n") if line.strip()]
+    
+        section_dict: dict[str, str] = {"1": ""}
+        current_section: str = "1"
+    
+        max_lines: int = len(text_lines) - 1
+    
+        def append_data(n: int) -> None:
+            """
+            Appends the data from the current line to the current section.
+
+            Args:
+                n (int): The index of the current line in the text_lines list.
+            """
+            if n == max_lines:
+                section_dict[current_section] += text_lines[n]
+            elif n % 2 == 0:
+                section_dict[current_section] += f"{text_lines[n]}\n{text_lines[n+1]}\n\n"
+    
+        for n, _ in enumerate(text_lines):
+            if len(section_dict[current_section]) < maxlen:
+                append_data(n)
+            else:
+                current_section = str(int(current_section) + 1)
+                section_dict[current_section] = ""
+                append_data(n)
+    
+        return list(section_dict.values())
     
     def update_searched_by(self, chat_id: str, target: str) -> None:
         """
@@ -147,7 +191,7 @@ class Sherlock(object):
         get_cache: Union[bool, str] = cache_connect.get(target)
         if get_cache != False:
             threads.start_thread(self.update_searched_by, chat_id, target)
-            return {"result": True, "data": get_cache}
+            return {"result": True, "data": self.maxlen(get_cache, self.maxchar_block_in_cache)}
         
         # Database try
         if target in self.targets_list:
@@ -159,6 +203,6 @@ class Sherlock(object):
             data2str: str = self.sherlock_data2str(db_result['data'])
             
             cache_connect.post(target, data2str)
-            return {"result": True, "data": data2str}
+            return {"result": True, "data": self.maxlen(get_cache, self.maxchar_block_in_cache)}
         
         return {"result": False, "data": None}
