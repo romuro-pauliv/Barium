@@ -39,6 +39,14 @@ class DataLoadingCacheConnect(object):
         self.endpoint: str = self.route_data['cachedb0']['endpoints']['home']    
         self.connect.set_endpoint(f"{self.route_parameter}{self.endpoint}")
     
+    def set_ttl_cache_db0_route(self) -> None:
+        """
+        Sets the route to /cache/ttl-db0
+        """
+        self.route_parameter: str = self.route_data['cachedb0']['route_parameter']
+        self.endpoint: str = self.route_data['cachedb0']['endpoints']['ttl']    
+        self.connect.set_endpoint(f"{self.route_parameter}{self.endpoint}")
+    
     def post_cache(self, json: dict[str, Any]) -> bool:
         """
         It makes a POST request to the "Data Loading" service. You must use some method to define the route before
@@ -78,6 +86,26 @@ class DataLoadingCacheConnect(object):
             return False
         
         log_connect.report("DELETE", uri_to_log, "info", chat_id, True)
+        return True
+    
+    def ttl_post_cache(self, json: dict[str, Any]) -> bool:
+        """
+        It makes a POST request to the "Data Loading" service. You must use some method to define the route before
+        Args:
+            json (dict[str, Any]): Json containing the ttl caching. | keys -> key, ttl
+        """
+        uri_to_log: str = f"{self.HOST}:{self.PORT}{self.route_parameter}{self.endpoint}"
+        
+        chat_id: str = json["key"]
+        
+        response: Union[requests.models.Response, tuple[str, str]] = self.connect.post(json)
+        
+        if not isinstance(response, requests.models.Response):
+            log_connect.report("POST", uri_to_log, "error", chat_id, False, response[0])
+            connection_error.msg_2_client(chat_id)
+            return False
+        
+        log_connect.report("POST", uri_to_log, "info", chat_id, True, "TTL")
         return True
 
 class DataLoadingSherlock(object):

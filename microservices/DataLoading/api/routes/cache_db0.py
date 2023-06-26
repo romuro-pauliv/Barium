@@ -33,3 +33,13 @@ def delete_cache() -> tuple[str, int]:
     cache_connect.delete(chat_id)
     
     return "Created", 201
+
+
+@bp_cachedb0.route("/ttl-db0", methods=["POST"])
+def ttl_post_cache() -> tuple[str, int]:
+    cache_key: str = request.json['key']
+    ttl_value: int = request.json["ttl"]
+    
+    cache_connect.post_ttl(cache_key, ttl_value)
+    
+    return "Created", 201

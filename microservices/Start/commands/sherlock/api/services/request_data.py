@@ -33,6 +33,7 @@ class RequestInitData(DataLoadingCacheConnect):
         super().__init__()
         self.messages_keys: list[str] = ["sherlock", "request_username"]
         self.whoami: list[str] = [WHO_AM_I['NAME'], str(WHO_AM_I['HOST'] + ":" + WHO_AM_I['PORT'])]
+        self.cache_ttl: int = 600 # (s)
         
     def client_responder(self, message: dict[str, Any]) -> None:
         """
@@ -55,6 +56,9 @@ class RequestInitData(DataLoadingCacheConnect):
                 
                 sender_connect.send(build_json)
                 time.sleep(0.5)
+            
+            self.set_ttl_cache_db0_route()
+            self.ttl_post_cache({"key": chat_id, "ttl": self.cache_ttl})
 
 
 class RequestUsername(DataLoadingCacheConnect):
@@ -65,6 +69,7 @@ class RequestUsername(DataLoadingCacheConnect):
         super().__init__()
         self.whoami: list[str] = [WHO_AM_I['NAME'], str(WHO_AM_I['HOST'] + ":" + WHO_AM_I['PORT'])]
         self.messages_keys: list[str] = ["init_sherlock", "finish"]
+        self.cache_ttl: int = 1800 # (s)
     
     def init_sherlock(self, chat_id: str, username: str) -> None:
         """
@@ -121,5 +126,8 @@ class RequestUsername(DataLoadingCacheConnect):
                 
                 sender_connect.send(build_json)
                 time.sleep(0.5)
+            
+            self.set_ttl_cache_db0_route()
+            self.ttl_post_cache({"key": chat_id, "ttl": self.cache_ttl})
             
             self.init_sherlock(chat_id, username)

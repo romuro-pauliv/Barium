@@ -74,3 +74,13 @@ class CacheConnect(object):
         """
         log_connect.report("DELETE", self.uri_to_log, "info", "INTERNAL", True)
         self.cachedb.delete(key)
+    
+    def post_ttl(self, key: str, ttl: int) -> None:
+        """
+        Sets the TTL (time to live) of a key
+        Args:
+            key (str): caching key
+            ttl (int): time to live in secs
+        """
+        log_connect.report("DEFINE TTL", self.uri_to_log, "info", "INTERNAL", True)
+        self.cachedb.expire(key, ttl)
