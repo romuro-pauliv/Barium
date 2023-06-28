@@ -19,6 +19,8 @@ class Core(TelegramRequests):
         self.update_id: int = 0
         self.cache: dict[str, dict[str, Any]] = {"last_message": {}}
         
+        self.client_data: list[int] = []
+        
     def last_message(self) -> Union[dict[str, dict[str, Union[str, list]]], None]:
         """
         Request the latest update from Telegram API and manipulate the data to
@@ -50,7 +52,12 @@ class Core(TelegramRequests):
                     chat_id: str = data["chat"]["id"]
                     username: str = data["chat"]["first_name"]
                     date: str = data["date"]
-                
+
+                    # | Send client data to data loading |-------------------------------------------------------------|
+                    if chat_id not in self.client_data:
+                        pass
+                    # |------------------------------------------------------------------------------------------------|
+                    
                     # if user send a image, video, gif, etc. -> list[str, bool]
                     try:
                         text: str = data["text"]
