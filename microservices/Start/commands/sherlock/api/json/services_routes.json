@@ -29,7 +29,15 @@
         "cachedb0": {
             "route_parameter": "/cache",
             "endpoints": {
-                "home": "/db0"
+                "home": "/db0",
+                "ttl": "/ttl-db0"
+            }
+        },
+        "sherlock": {
+            "route_parameter": "/sherlock",
+            "endpoints": {
+                "post-target": "/post-target",
+                "get-target": "/get-target"
             }
         }
     }

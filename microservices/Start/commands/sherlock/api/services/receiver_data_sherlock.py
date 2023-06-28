@@ -6,7 +6,7 @@
 # +--------------------------------------------------------------------------------------------------------------------|
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
-from api.connections.data_loading import DataLoadingCacheConnect
+from api.connections.data_loading import DataLoadingCacheConnect, DataLoadingSherlock
 from api.connections.sender import SenderConnect
 from api.connections.log import LogConnect
 from api.threads.executable import Threads
@@ -18,6 +18,7 @@ from typing import Any, Union
 
 log_connect: LogConnect = LogConnect()
 sender_connect: SenderConnect = SenderConnect()
+dataloading_sherlock: DataLoadingSherlock = DataLoadingSherlock()
 threads: Threads = Threads()
 
 class ReceiverDataSherlock(DataLoadingCacheConnect):
@@ -28,11 +29,38 @@ class ReceiverDataSherlock(DataLoadingCacheConnect):
         super().__init__()
         
         self.whoami: list[str] = [WHO_AM_I['NAME'], str(WHO_AM_I['HOST'] + ":" + WHO_AM_I['PORT'])]
+        
         self.count_msg_block: dict[str, int] = {}
         self.msg_block: dict[str, int] = {}
         self.msg_block_size: int = 7
         
+        self.target_data: dict[str, dict[str, Any]] = {}
+        self.target_username: dict[str, str] = {}
+        
         self.finish_msg: str = MESSAGES2CLIENT['finish_completed'][0]
+    
+    def build_target_data(self, data: dict[str, str], dlt: bool = False) -> None:
+        """
+        Stores the target data in variables to send to DataLoading
+        Args:
+            data (dict[str, str]): Data received from bin/sh sherlock
+            dlt (bool, optional): Deletes the data from the variables to free up memory. Defaults to False.
+        """
+        chat_id: str = data["chat_id"]
+        username: str = data["username"]
+        site: str = data['site']
+        uri: str = data['uri']
+        
+        if dlt == True:
+            del self.target_data[chat_id]
+            del self.target_username[chat_id]
+            return None
+        
+        if chat_id not in [i for i in self.target_data.keys()]:
+            self.target_data[chat_id] = {site: uri}
+            self.target_username[chat_id] = username
+        else:
+            self.target_data[chat_id][site] = uri
         
     def build_msg_block(self, data: dict[str, str]) -> Union[bool, dict[str, str]]:
         """
@@ -47,6 +75,7 @@ class ReceiverDataSherlock(DataLoadingCacheConnect):
         chat_id: str = data["chat_id"]
         
         if data['site'] != False and data['uri'] != False:
+            self.build_target_data(data)
             msg_to_build: str = "🌐 " + data["site"] + "\n" + "🔗 "+ data["uri"]
             
             # Checks the existence of the block by the chat_id
@@ -99,7 +128,14 @@ class ReceiverDataSherlock(DataLoadingCacheConnect):
         self.delete_cache(chat_id)
     
     def sherlock_processing(self, data: dict[str, str]) -> None:
+        """
+        It is processed while bin/sh sherlock is active. It has the function of receiving the data, processing it to 
+        send it in message blocks to the user, and also sending it to the DataLoading service for database storage.
+        Args:
+            data (dict[str, str]): Data from bin/sh sherlock
+        """
         chat_id: str = str(data['chat_id'])
+        
         log_connect.report("REQUESTED", "SHERLOCK /BIN/SH", "info", chat_id, True)
         
         if data['site'] != False and data['uri'] != False:
@@ -118,8 +154,15 @@ class ReceiverDataSherlock(DataLoadingCacheConnect):
                 threads.start_thread(sender_connect.send, msg_block)
                 self.cache_signal_finish_sherlock(chat_id)
                 
+                dataloading_sherlock.post_resources_target(
+                    chat_id, self.target_username[chat_id], self.target_data[chat_id])
+                self.build_target_data(data, dlt=True)
+                
             else: # If there is a message block
                 msg_block['message'] += str("\n\n" + self.finish_msg)
                 threads.start_thread(sender_connect.send, msg_block)
                 self.cache_signal_finish_sherlock(chat_id)
                 
+                dataloading_sherlock.post_resources_target(
+                    chat_id, self.target_username[chat_id], self.target_data[chat_id])
+                self.build_target_data(data, dlt=True)

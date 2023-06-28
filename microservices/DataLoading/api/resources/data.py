@@ -21,4 +21,6 @@ SERVICES_ROUTES: dict[str, Any] = json_reader.file_data("services_routes.json")
 LOG_REPORT: dict[str, Any] = json_reader.file_data("log_report.json")
 
 WHO_AM_I: dict[str, Any] = json_reader.file_data("whoami.json")
+
+MESSAGES2CLIENT: dict[str, Any] = json_reader.file_data("messages_to_client.json")
 # |--------------------------------------------------------------------------------------------------------------------|
