@@ -7,10 +7,12 @@
 
 # | Imports |----------------------------------------------------------------------------------------------------------|
 from connections.telegram import TelegramRequests
+from connections.data_loading import ClientDataConnect
 
 from typing import Union, Any
 # |--------------------------------------------------------------------------------------------------------------------|
 
+client_data_connect: ClientDataConnect = ClientDataConnect()
 
 class Core(TelegramRequests):
     def __init__(self) -> None:
@@ -19,7 +21,7 @@ class Core(TelegramRequests):
         self.update_id: int = 0
         self.cache: dict[str, dict[str, Any]] = {"last_message": {}}
         
-        self.client_data: list[int] = []
+        self.client_data_in_db: list[int] = client_data_connect.get_chat_ids()
         
     def last_message(self) -> Union[dict[str, dict[str, Union[str, list]]], None]:
         """
@@ -52,10 +54,11 @@ class Core(TelegramRequests):
                     chat_id: str = data["chat"]["id"]
                     username: str = data["chat"]["first_name"]
                     date: str = data["date"]
-
+                    
                     # | Send client data to data loading |-------------------------------------------------------------|
-                    if chat_id not in self.client_data:
-                        pass
+                    if chat_id not in self.client_data_in_db:
+                        client_data_connect.post_client_data(data['from'])
+                        self.client_data_in_db.append(chat_id)
                     # |------------------------------------------------------------------------------------------------|
                     
                     # if user send a image, video, gif, etc. -> list[str, bool]
